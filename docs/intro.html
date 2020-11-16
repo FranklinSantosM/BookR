@@ -572,13 +572,13 @@ ___ | ___</code></pre>
 <p>El primer parámetro <code>n</code> es el número de valores que queremos generar. Este es un parámetro obligatorio que debemos definir para que la función funcione.</p>
 <p>Por otro lado, podemos ver que algunos de los parámetros tienen valores predeterminados definidos por el signo igual <code>=</code>. Esto significa que si no especificamos explícitamente estos parámetros entre paréntesis, la función tomará los predeterminados. Veamos un ejemplo:</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="intro.html#cb82-1"></a><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">5</span>)</span></code></pre></div>
-<pre><code>## [1] 0.81887607 0.10528225 0.74986475 0.06470409 0.76626740</code></pre>
+<pre><code>## [1] 0.36693844 0.05511589 0.80741035 0.94144293 0.78974277</code></pre>
 <p>La salida es un vector numérico de 5 números. Cada uno de ellos está entre 0 y 1, ya que no cambiamos la configuración predeterminada. Si también cambiamos los parámetros <code>min</code> y <code>max</code>, podríamos personalizar aún más la salida:</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="intro.html#cb84-1"></a><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">min =</span> <span class="dv">8</span>, <span class="dt">max =</span> <span class="dv">9</span>)</span></code></pre></div>
-<pre><code>## [1] 8.448975 8.208031 8.877012 8.179539 8.885234</code></pre>
+<pre><code>## [1] 8.553456 8.806867 8.615311 8.546479 8.115242</code></pre>
 <p>También es posible omitir el nombre de los parámetros y simplemente escribir los valores de entrada de esta manera:</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="intro.html#cb86-1"></a><span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">9</span>)</span></code></pre></div>
-<pre><code>## [1] 8.084106 8.986203 8.483030 8.498334 8.713581</code></pre>
+<pre><code>## [1] 8.740336 8.432559 8.079584 8.769089 8.378977</code></pre>
 <p>Sin embargo, en este caso debemos tener cuidado con el orden de las entradas, ya que cada función tiene un orden predeterminado para los parámetros. Si no nombramos explícitamente los parámetros que estamos configurando, R asumirá que los establecemos en el orden predefinido.</p>
 </div>
 <div id="usar-la-función-sample" class="section level3">
@@ -591,7 +591,7 @@ ___ | ___</code></pre>
 <p>Utilice la función <code>sample()</code> y muestree 5 valores aleatorios de la variable <code>full</code>.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="intro.html#cb88-1"></a>full &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">32</span>, <span class="dv">4</span>, <span class="dv">27</span>, <span class="dv">48</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">27</span>, <span class="dv">7</span>)</span>
 <span id="cb88-2"><a href="intro.html#cb88-2"></a><span class="kw">sample</span>(<span class="dt">x =</span> full, <span class="dt">size =</span> <span class="dv">5</span>)</span></code></pre></div>
-<pre><code>## [1]  1 32  7  2 48</code></pre>
+<pre><code>## [1] 27  7  9  2 48</code></pre>
 </div>
 <div id="utilice-la-función-seq" class="section level3">
 <h3><span class="header-section-number">1.6.4</span> Utilice la función <code>seq()</code></h3>
