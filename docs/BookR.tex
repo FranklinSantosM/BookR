@@ -113,7 +113,7 @@
 
 \title{R en las Ciencias Agropecuarias}
 \author{Franklin Santos}
-\date{2020-11-16}
+\date{2020-11-23}
 
 \begin{document}
 \maketitle
@@ -981,7 +981,7 @@ Por otro lado, podemos ver que algunos de los parámetros tienen valores predete
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.4337197 0.6885302 0.5201926 0.6061776 0.7720222
+## [1] 0.01407181 0.14404123 0.24844460 0.37952383 0.52665827
 \end{verbatim}
 
 La salida es un vector numérico de 5 números. Cada uno de ellos está entre 0 y 1, ya que no cambiamos la configuración predeterminada. Si también cambiamos los parámetros \texttt{min} y \texttt{max}, podríamos personalizar aún más la salida:
@@ -993,7 +993,7 @@ La salida es un vector numérico de 5 números. Cada uno de ellos está entre 0 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 8.714578 8.577404 8.733042 8.200078 8.666114
+## [1] 8.552533 8.135615 8.738690 8.882043 8.554845
 \end{verbatim}
 
 También es posible omitir el nombre de los parámetros y simplemente escribir los valores de entrada de esta manera:
@@ -1005,7 +1005,7 @@ También es posible omitir el nombre de los parámetros y simplemente escribir l
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 8.137431 8.177537 8.721737 8.792739 8.864310
+## [1] 8.287370 8.234165 8.235101 8.896252 8.505392
 \end{verbatim}
 
 Sin embargo, en este caso debemos tener cuidado con el orden de las entradas, ya que cada función tiene un orden predeterminado para los parámetros. Si no nombramos explícitamente los parámetros que estamos configurando, R asumirá que los establecemos en el orden predefinido.
@@ -1033,7 +1033,7 @@ Utilice la función \texttt{sample()} y muestree 5 valores aleatorios de la vari
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  2 27 27  7  7
+## [1]  1  7  9 32 48
 \end{verbatim}
 
 \hypertarget{utilice-la-funciuxf3n-seq}{%
@@ -1216,10 +1216,523 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 
 You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
 
-\hypertarget{literature}{%
-\chapter{Literature}\label{literature}}
+\hypertarget{marcos-de-datos-y-tibbles}{%
+\chapter{Marcos de datos y Tibbles}\label{marcos-de-datos-y-tibbles}}
 
-Here is a review of existing methods.
+Cree estructuras de datos tabulares con marcos de datos y vea cómo se comparan con tibbles. Extraiga vectores de columna de marcos de datos para realizar cálculos. Obtenga información de metadatos como dimensiones. Seleccione las filas superior e inferior para obtener una descripción general rápida.
+
+\hypertarget{construye-un-marco-de-datos-a-partir-de-vectores}{%
+\section{Construye un marco de datos a partir de vectores}\label{construye-un-marco-de-datos-a-partir-de-vectores}}
+
+Los datos tabulares son el formato más común utilizado por los científicos de datos. En R, las tablas se representan mediante marcos de datos. Pueden inspeccionarse imprimiéndolos en la consola.
+
+\begin{itemize}
+\tightlist
+\item
+  Comprender por qué los marcos de datos son importantes
+\item
+  Interpretar la salida de la consola creada por un marco de datos
+\item
+  Cree un nuevo marco de datos usando la función \texttt{data.frame()}
+\item
+  Definir los vectores que se utilizarán para columnas individuales
+\item
+  Especificar los nombres de las columnas del marco de datos
+\end{itemize}
+
+\begin{verbatim}
+data.frame(___ = ___, 
+           ___ = ___, 
+           ...)
+\end{verbatim}
+
+\hypertarget{introducciuxf3n-a-los-marcos-de-datos}{%
+\subsection{Introducción a los marcos de datos}\label{introducciuxf3n-a-los-marcos-de-datos}}
+
+En análisis y estadísticas, los datos tabulares son la estructura de datos más importante. Está presente en muchos formatos comunes como archivos de Excel, valores separados por comas (CSV) o bases de datos. R integra objetos de datos tabulares como ciudadanos de primera clase en el idioma a través de \emph{marcos de datos}. Los marcos de datos permiten a los usuarios leer y manipular fácilmente datos tabulares dentro del lenguaje R.
+
+Echemos un vistazo a un objeto de marco de datos llamado \texttt{Davis}, del paquete \textbf{carData}, que incluye medidas de altura y peso para 200 hombres y mujeres:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{ (Davis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 200 x 5
+##    sex   weight height repwt repht
+##    <fct>  <int>  <int> <int> <int>
+##  1 M         77    182    77   180
+##  2 F         58    161    51   159
+##  3 F         53    161    54   158
+##  4 M         68    177    70   175
+##  5 F         59    157    59   155
+##  6 M         76    170    76   165
+##  7 M         76    167    77   165
+##  8 M         69    186    73   180
+##  9 M         71    178    71   175
+## 10 M         65    171    64   170
+## # ... with 190 more rows
+\end{verbatim}
+
+De la salida impresa, podemos ver que el marco de datos abarca más de 200 \textbf{filas} y 5 \textbf{columnas}. En el ejemplo anterior, cada fila contiene datos de una persona a través de \textbf{atributos}, que corresponden a las columnas \texttt{sex}, \texttt{weight}, \texttt{height}, \texttt{repwt} (peso reportado) y \texttt{repht} (altura reportado).
+
+Por ejemplo, la primera fila de la tabla especifica un hombre que pesa \texttt{77} kg y tiene una altura de \texttt{182} cm. Los pesos reportados están muy cerca de \texttt{77} kg y \texttt{180} cm, respectivamente.
+
+Las filas en un marco de datos se identifican además por los \emph{nombres de fila} a la izquierda, que son simplemente los números de fila por defecto. En el caso del conjunto de datos de \texttt{Davis} anterior, los nombres de las filas van de 1 a 200.
+
+\hypertarget{crear-marcos-de-datos}{%
+\subsection{Crear marcos de datos}\label{crear-marcos-de-datos}}
+
+\begin{verbatim}
+data.frame(___ = ___, 
+           ___ = ___, 
+           ...)
+\end{verbatim}
+
+Los marcos de datos contienen datos tabulares en varias columnas o \emph{atributos}. Cada columna está representada por un vector de diferentes \emph{tipos de datos} como números o caracteres. La función \texttt{data.frame()} admite la construcción de objetos de marco de datos combinando diferentes vectores en una tabla. Para formar una tabla, se requiere que los vectores tengan la misma longitud. Un marco de datos también puede verse como una colección de vectores conectados entre sí para formar una tabla.
+
+Creemos nuestro primer marco de datos con cuatro personas diferentes, incluidos sus identificadores, nombres e indicadores si son mujeres o no. Cada uno de estos atributos es creado por un vector diferente de diferentes tipos de datos (numéricos, de caracteres y lógicos). Los atributos finalmente se combinan en una tabla usando la función \texttt{data.frame()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data.frame}\NormalTok{(}
+  \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+  \KeywordTok{c}\NormalTok{(}\StringTok{"Louisa"}\NormalTok{, }\StringTok{"Jonathan"}\NormalTok{, }\StringTok{"Luigi"}\NormalTok{, }\StringTok{"Rachel"}\NormalTok{),}
+  \KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   c.1..2..3..4. c..Louisa....Jonathan....Luigi....Rachel..
+## 1             1                                     Louisa
+## 2             2                                   Jonathan
+## 3             3                                      Luigi
+## 4             4                                     Rachel
+##   c.TRUE..FALSE..FALSE..TRUE.
+## 1                        TRUE
+## 2                       FALSE
+## 3                       FALSE
+## 4                        TRUE
+\end{verbatim}
+
+El marco de datos resultante almacena los valores de cada vector en una columna diferente. Tiene cuatro filas y tres columnas. Sin embargo, los nombres de las columnas impresas en la primera línea parecen incluir los valores de las columnas separados por puntos, lo cual es un esquema de nombres muy extraño.
+
+Los nombres de columna se pueden incluir en la construcción de \texttt{data.frame()} como nombres de argumentos que preceden a los valores de los vectores de columna. Para mejorar el nombre de la columna del marco de datos anterior, podemos escribir
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data.frame}\NormalTok{(}
+  \DataTypeTok{id =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+  \DataTypeTok{name =} \KeywordTok{c}\NormalTok{(}\StringTok{"Louisa"}\NormalTok{, }\StringTok{"Jonathan"}\NormalTok{, }\StringTok{"Luigi"}\NormalTok{, }\StringTok{"Rachel"}\NormalTok{),}
+  \DataTypeTok{female =} \KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   id     name female
+## 1  1   Louisa   TRUE
+## 2  2 Jonathan  FALSE
+## 3  3    Luigi  FALSE
+## 4  4   Rachel   TRUE
+\end{verbatim}
+
+El marco de datos resultante incluye los nombres de columna necesarios para ver el significado real de las diferentes columnas.
+
+\hypertarget{crea-y-convierte-tibbles}{%
+\section{Crea y convierte tibbles}\label{crea-y-convierte-tibbles}}
+
+Tibbles son la reimaginación moderna de marcos de datos y comparten muchos puntos en común con sus antepasados. La diferencia más visible es cómo se imprime el contenido de tibble en la consola. Tibbles son parte del tidyverse y se utilizan por su comportamiento más consistente en comparación con los marcos de datos.
+
+\begin{itemize}
+\tightlist
+\item
+  Conozca la diferencia entre \emph{marcos de datos} y \emph{tibbles}
+\item
+  Crear \emph{tibbles} a partir de vectores
+\item
+  Convertir \emph{marcos de datos} en tibbles
+\end{itemize}
+
+\begin{verbatim}
+tibble(___ = ___, 
+       ___ = ___, 
+       ...)
+as_tibble(___)
+\end{verbatim}
+
+\hypertarget{introducciuxf3n-a-tibbles}{%
+\subsection{Introducción a Tibbles}\label{introducciuxf3n-a-tibbles}}
+
+\begin{quote}
+Una reinvención moderna del marco de datos
+\url{https://tibble.tidyverse.org}
+\end{quote}
+
+Tibbles son en muchos aspectos similares a los marcos de datos. De hecho, se \emph{heredan} de los marcos de datos, lo que significa que todas las funciones y características disponibles para los marcos de datos también funcionan para tibbles. Por tanto, cuando hablamos de \emph{marcos de datos} también nos referimos a \emph{tibbles}.
+
+Además de todo lo que ofrece un marco de datos, los tibbles tienen un comportamiento más consistente con una mejor usabilidad en muchos casos. Lo más importante es que cuando se imprime un objeto tibble en la consola, muestra automáticamente solo las primeras 10 filas y condensa columnas adicionales. Por el contrario, un marco de datos llena toda la pantalla de la consola con valores que pueden generar confusión. Echemos un vistazo al conjunto de datos \texttt{gapminder} del paquete \textbf{gapminder}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gapminder}\OperatorTok{::}\NormalTok{gapminder}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,704 x 6
+##    country     continent  year lifeExp      pop gdpPercap
+##    <fct>       <fct>     <int>   <dbl>    <int>     <dbl>
+##  1 Afghanistan Asia       1952    28.8  8425333      779.
+##  2 Afghanistan Asia       1957    30.3  9240934      821.
+##  3 Afghanistan Asia       1962    32.0 10267083      853.
+##  4 Afghanistan Asia       1967    34.0 11537966      836.
+##  5 Afghanistan Asia       1972    36.1 13079460      740.
+##  6 Afghanistan Asia       1977    38.4 14880372      786.
+##  7 Afghanistan Asia       1982    39.9 12881816      978.
+##  8 Afghanistan Asia       1987    40.8 13867957      852.
+##  9 Afghanistan Asia       1992    41.7 16317921      649.
+## 10 Afghanistan Asia       1997    41.8 22227415      635.
+## # ... with 1,694 more rows
+\end{verbatim}
+
+Inmediatamente vemos que el conjunto de datos \texttt{gapminder} es un tibble que consta de 1,704 filas y 6 columnas en la línea superior. En la segunda línea podemos ver los nombres de las columnas y sus correspondientes \emph{tipos de datos} directamente debajo.
+
+Por ejemplo, la columna \texttt{country} tiene el tipo \texttt{\textless{}fct\textgreater{}} (que es la abreviatura de ``factor''), \texttt{year} es un número entero \texttt{\textless{}int\textgreater{}} y la esperanza de vida \texttt{lifeExp} es un \texttt{\textless{}dbl\textgreater{}}, un número decimal.
+
+\hypertarget{creando-tibbles}{%
+\subsection{Creando Tibbles}\label{creando-tibbles}}
+
+\begin{verbatim}
+tibble(___ = ___, 
+       ___ = ___, 
+       ...)
+as_tibble(___)
+\end{verbatim}
+
+La creación de tibbles funciona exactamente igual que para los marcos de datos. Podemos usar la función \texttt{tibble()} del paquete \textbf{tibble} para crear un nuevo objeto tabular.
+
+Por ejemplo, un tibble que contenga datos de cuatro personas diferentes y tres columnas se puede crear así:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tibble)}
+\KeywordTok{tibble}\NormalTok{(}
+  \DataTypeTok{id =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+  \DataTypeTok{name =} \KeywordTok{c}\NormalTok{(}\StringTok{"Louisa"}\NormalTok{, }\StringTok{"Jonathan"}\NormalTok{, }\StringTok{"Luigi"}\NormalTok{, }\StringTok{"Rachel"}\NormalTok{),}
+  \DataTypeTok{female =} \KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 3
+##      id name     female
+##   <dbl> <chr>    <lgl> 
+## 1     1 Louisa   TRUE  
+## 2     2 Jonathan FALSE 
+## 3     3 Luigi    FALSE 
+## 4     4 Rachel   TRUE
+\end{verbatim}
+
+\hypertarget{conversiuxf3n-de-marcos-de-datos-a-tibbles}{%
+\subsection{Conversión de marcos de datos a Tibbles}\label{conversiuxf3n-de-marcos-de-datos-a-tibbles}}
+
+Si prefiere tibbles a marcos de datos por sus características adicionales, también se pueden convertir a partir de marcos de datos existentes con la función \texttt{as\_tibble()}.
+
+Por ejemplo, el marco de datos de \texttt{Davis} del paquete \textbf{carData} se puede convertir a un tibble así:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{as_tibble}\NormalTok{(Davis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 200 x 5
+##    sex   weight height repwt repht
+##    <fct>  <int>  <int> <int> <int>
+##  1 M         77    182    77   180
+##  2 F         58    161    51   159
+##  3 F         53    161    54   158
+##  4 M         68    177    70   175
+##  5 F         59    157    59   155
+##  6 M         76    170    76   165
+##  7 M         76    167    77   165
+##  8 M         69    186    73   180
+##  9 M         71    178    71   175
+## 10 M         65    171    64   170
+## # ... with 190 more rows
+\end{verbatim}
+
+\hypertarget{extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando}{%
+\section{Extraiga o reemplace columnas en un marco de datos usando \$}\label{extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando}}
+
+Las columnas de un marco de datos se pueden extraer y manipular fácilmente con el operador \texttt{\$}. Incluso se pueden agregar nuevas columnas asignando un vector.
+
+\begin{itemize}
+\tightlist
+\item
+  Extraiga columnas de un marco de datos con \texttt{\$}.
+\item
+  Reemplazar valores de columnas existentes en un marco de datos.
+\item
+  Agregue nuevas columnas a un marco de datos.
+\end{itemize}
+
+\begin{verbatim}
+___$___
+___$___  <- ___
+\end{verbatim}
+
+\hypertarget{extraer-columnas-con}{%
+\subsection{Extraer columnas con \$}\label{extraer-columnas-con}}
+
+Los marcos de datos son tablas que resultan de la combinación de vectores de columna. Los usuarios pueden interactuar con los marcos de datos a través de numerosos operadores para extraer, agregar o recombinar valores. Para extraer columnas individuales de un marco de datos, R ofrece un operador muy específico: el dólar \texttt{\$}. Devuelve el vector de columna como lo indica su nombre basado en un marco de datos que precede a \texttt{\$}.
+
+Para ver el operador \texttt{\$} en acción, extraigamos la población \texttt{pop} (en 1,000) de diferentes estados de los EE. UU. Según el conjunto de datos de los estados (de 1992) en el paquete \textbf{carData}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{carData}\OperatorTok{::}\NormalTok{States}\OperatorTok{$}\NormalTok{pop}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  4041   550  3665  2351 29760  3294  3287   666   607 12938  6478  1108
+## [13]  1007 11431  5544  2777  2478  3685  4220  1228  4781  6016  9295  4375
+## [25]  2573  5117   799  1578  1202  1109  7730  1515 17990  6629   639 10847
+## [37]  3146  2842 11882  1003  3487   696  4877 16987  1723   563  6187  4867
+## [49]  1793  4892   454
+\end{verbatim}
+
+El comando extrae la columna de población como vector del marco de datos. A partir de este vector podemos calcular la \texttt{sum()} de la población total como:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(States}\OperatorTok{$}\NormalTok{pop)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 248709
+\end{verbatim}
+
+De manera similar, el salario promedio (en \$1,000) de los maestros se puede calcular como la \texttt{mean()} de la columna \texttt{pay}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(States}\OperatorTok{$}\NormalTok{pay)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 30.94118
+\end{verbatim}
+
+\hypertarget{determinar-el-tamauxf1o-de-un-marco-de-datos}{%
+\section{Determinar el tamaño de un marco de datos}\label{determinar-el-tamauxf1o-de-un-marco-de-datos}}
+
+El tamaño de un marco de datos, como el número de filas o columnas, a menudo es necesario y se puede determinar de varias formas.
+
+\begin{itemize}
+\tightlist
+\item
+  Obtener el número de filas de un marco de datos
+\item
+  Obtener el número de columnas de un marco de datos
+\item
+  Obtener dimensiones de un marco de datos
+\end{itemize}
+
+\begin{verbatim}
+nrow(___)
+ncol(___)
+dim(___)
+length(___)
+\end{verbatim}
+
+\hypertarget{dimensiones-del-marco-de-datos}{%
+\subsection{Dimensiones del marco de datos}\label{dimensiones-del-marco-de-datos}}
+
+El número de filas y columnas en un marco de datos se puede adivinar a través de la salida impresa del marco de datos. Sin embargo, es mucho más fácil obtener esta información directamente a través de funciones. Además, es posible que desee utilizar esta información en algunas partes del código.
+
+Los marcos de datos tienen dos dimensiones. El número de filas se considera la primera dimensión. Por lo general, define el número de observaciones en un conjunto de datos. Para obtener el número de filas del marco de datos de \texttt{Davis} en el conjunto de datos \textbf{carData}, use la función \texttt{nrow()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{nrow}\NormalTok{(Davis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 200
+\end{verbatim}
+
+De manera similar, el número de columnas o \emph{atributos} del marco de datos se puede recuperar con \texttt{ncol()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ncol}\NormalTok{(Davis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\hypertarget{recuperar-las-dimensiones-del-marco-de-datos}{%
+\subsection{Recuperar las dimensiones del marco de datos}\label{recuperar-las-dimensiones-del-marco-de-datos}}
+
+Para recuperar el tamaño de todas las dimensiones de un marco de datos a la vez, puede usar la función \texttt{dim()}. \texttt{dim()} devuelve un vector con dos elementos, el primer elemento es el número de filas y el segundo elemento el número de columnas.
+
+Por ejemplo, las dimensiones del conjunto de datos de \texttt{Davis} se pueden recuperar como:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(Davis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 200   5
+\end{verbatim}
+
+Además de los marcos de datos, \texttt{dim()} también se puede utilizar para otros objetos R multidimensionales, como matrices. Sin embargo, cuando se usa con vectores \texttt{dim} solo devuelve \texttt{NULL}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+En cambio, la longitud de un vector se determina mediante \texttt{length()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+En el caso de un marco de datos, \texttt{length()} devuelve su número de columnas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(Davis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\hypertarget{seleccionar-la-primera-o-la-uxfaltima-fila-de-un-marco-de-datos}{%
+\section{Seleccionar la primera o la última fila de un marco de datos}\label{seleccionar-la-primera-o-la-uxfaltima-fila-de-un-marco-de-datos}}
+
+A menudo no necesitamos mirar todo el contenido de un marco de datos en la consola. En cambio, solo algunas partes son suficientes, como la parte superior o inferior recuperada a través de las funciones \texttt{head()} y \texttt{tail()}.
+
+\begin{itemize}
+\tightlist
+\item
+  Seleccionar la parte superior de un marco de datos
+\item
+  Seleccione la parte inferior de un marco de datos
+\item
+  Especifique el número de líneas a seleccionar mediante el parámetro n
+\end{itemize}
+
+\begin{verbatim}
+head(___, n = ___)
+tail(___, n = ___)
+\end{verbatim}
+
+\hypertarget{seleccionar-la-parte-superior-de-un-marco-de-datos}{%
+\subsection{Seleccionar la parte superior de un marco de datos}\label{seleccionar-la-parte-superior-de-un-marco-de-datos}}
+
+Los marcos de datos pueden abarcar una gran cantidad de filas y columnas. Según la salida impresa en la consola, puede ser difícil obtener una impresión inicial de los datos dentro del marco de datos. Este problema no es tanto un problema para tibbles que tienen una mejor salida de consola. Además, puede ser útil recuperar fácilmente las primeras filas en un comando sin indexación ni paquetes adicionales.
+
+El conjunto de datos \texttt{TitanicSurvival} contiene datos de 1309 pasajeros representados como filas. Una simple impresión del conjunto de datos imprimiría a todos los pasajeros, llenando toda la consola. En cambio, la función \texttt{head()} muestra solo las primeras 10 filas de un marco de datos, incluidos los nombres de sus columnas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(TitanicSurvival)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                 survived    sex     age passengerClass
+## Allen, Miss. Elisabeth Walton        yes female 29.0000            1st
+## Allison, Master. Hudson Trevor       yes   male  0.9167            1st
+## Allison, Miss. Helen Loraine          no female  2.0000            1st
+## Allison, Mr. Hudson Joshua Crei       no   male 30.0000            1st
+## Allison, Mrs. Hudson J C (Bessi       no female 25.0000            1st
+## Anderson, Mr. Harry                  yes   male 48.0000            1st
+\end{verbatim}
+
+El número de columnas se puede ajustar mediante el parámetro \texttt{n}. Para extraer solo las primeras tres filas del conjunto de datos, puede escribir:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(TitanicSurvival, }\DataTypeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                survived    sex     age passengerClass
+## Allen, Miss. Elisabeth Walton       yes female 29.0000            1st
+## Allison, Master. Hudson Trevor      yes   male  0.9167            1st
+## Allison, Miss. Helen Loraine         no female  2.0000            1st
+\end{verbatim}
+
+\hypertarget{seleccionar-la-parte-inferior-de-un-marco-de-datos}{%
+\subsection{Seleccionar la parte inferior de un marco de datos}\label{seleccionar-la-parte-inferior-de-un-marco-de-datos}}
+
+La función \texttt{tail()} se puede utilizar para seleccionar las filas inferiores de un marco de datos. Similar a la función \texttt{head()}, también acepta un parámetro \texttt{n} para especificar el número de filas que se devolverán.
+
+Por ejemplo, para seleccionar las últimas cinco filas del conjunto de datos \texttt{TitanicSurvival}, puede escribir:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tail}\NormalTok{(TitanicSurvival, }\DataTypeTok{n =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                           survived    sex  age passengerClass
+## Zabour, Miss. Hileni            no female 14.5            3rd
+## Zabour, Miss. Thamine           no female   NA            3rd
+## Zakarian, Mr. Mapriededer       no   male 26.5            3rd
+## Zakarian, Mr. Ortin             no   male 27.0            3rd
+## Zimmerman, Mr. Leo              no   male 29.0            3rd
+\end{verbatim}
+
+Las funciones de cabeza y cola también se pueden combinar para seleccionar un fragmento del conjunto de datos del medio. Para seleccionar las primeras cinco filas de las 500 filas inferiores, puede escribir:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{tail}\NormalTok{(TitanicSurvival, }\DataTypeTok{n =} \DecValTok{500}\NormalTok{), }\DataTypeTok{n =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                 survived    sex age passengerClass
+## Ford, Mr. Edward Watson               no   male  18            3rd
+## Ford, Mr. William Neal                no   male  16            3rd
+## Ford, Mrs. Edward (Margaret Ann       no female  48            3rd
+## Fox, Mr. Patrick                      no   male  NA            3rd
+## Franklin, Mr. Charles (Charles        no   male  NA            3rd
+\end{verbatim}
 
 \hypertarget{methods}{%
 \chapter{Methods}\label{methods}}
