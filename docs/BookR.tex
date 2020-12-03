@@ -113,7 +113,7 @@
 
 \title{R en las Ciencias Agropecuarias}
 \author{Franklin Santos}
-\date{2020-11-23}
+\date{2020-12-03}
 
 \begin{document}
 \maketitle
@@ -981,7 +981,7 @@ Por otro lado, podemos ver que algunos de los parámetros tienen valores predete
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.01407181 0.14404123 0.24844460 0.37952383 0.52665827
+## [1] 0.1505970 0.9940860 0.6664535 0.8860263 0.4617516
 \end{verbatim}
 
 La salida es un vector numérico de 5 números. Cada uno de ellos está entre 0 y 1, ya que no cambiamos la configuración predeterminada. Si también cambiamos los parámetros \texttt{min} y \texttt{max}, podríamos personalizar aún más la salida:
@@ -993,7 +993,7 @@ La salida es un vector numérico de 5 números. Cada uno de ellos está entre 0 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 8.552533 8.135615 8.738690 8.882043 8.554845
+## [1] 8.971256 8.797856 8.717703 8.591625 8.168009
 \end{verbatim}
 
 También es posible omitir el nombre de los parámetros y simplemente escribir los valores de entrada de esta manera:
@@ -1005,7 +1005,7 @@ También es posible omitir el nombre de los parámetros y simplemente escribir l
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 8.287370 8.234165 8.235101 8.896252 8.505392
+## [1] 8.744800 8.201082 8.712732 8.910819 8.885754
 \end{verbatim}
 
 Sin embargo, en este caso debemos tener cuidado con el orden de las entradas, ya que cada función tiene un orden predeterminado para los parámetros. Si no nombramos explícitamente los parámetros que estamos configurando, R asumirá que los establecemos en el orden predefinido.
@@ -1033,7 +1033,7 @@ Utilice la función \texttt{sample()} y muestree 5 valores aleatorios de la vari
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  1  7  9 32 48
+## [1] 48  1  9  4 32
 \end{verbatim}
 
 \hypertarget{utilice-la-funciuxf3n-seq}{%
@@ -1734,10 +1734,968 @@ Las funciones de cabeza y cola también se pueden combinar para seleccionar un f
 ## Franklin, Mr. Charles (Charles        no   male  NA            3rd
 \end{verbatim}
 
-\hypertarget{methods}{%
-\chapter{Methods}\label{methods}}
+\hypertarget{transformaciuxf3n-de-datos-con-dplyr}{%
+\chapter{Transformación de datos con dplyr}\label{transformaciuxf3n-de-datos-con-dplyr}}
 
-We describe our methods in this chapter.
+Utilice verbos \texttt{dplyr} básicos para filtrar filas, seleccionar columnas y ordenar/organizar conjuntos de datos en combinación con el operador pipe \texttt{\%\textgreater{}\%}.
+
+\hypertarget{introducciuxf3n-a-dplyr}{%
+\section{Introducción a dplyr}\label{introducciuxf3n-a-dplyr}}
+
+\textbf{dplyr} facilita el proceso de transformación de datos al proporcionar un marco enriquecido para manipular marcos de datos. Las funciones de \textbf{dplyr} se pueden concatenar a potentes canalizaciones de transformación para \emph{seleccionar}, \emph{filtrar}, \emph{ordenar}, \emph{unir} y \emph{agregar} datos.
+
+\begin{itemize}
+\tightlist
+\item
+  Descubra lo que hace \textbf{dplyr}
+\item
+  Obtenga una descripción general de Seleccionar, Filtrar y Ordenar
+\item
+  Descubra qué son las uniones, agregaciones y canalizaciones
+\end{itemize}
+
+\hypertarget{quuxe9-es-dplyr}{%
+\subsection{¿Qué es dplyr?}\label{quuxe9-es-dplyr}}
+
+\begin{quote}
+Existe la broma de que el 80 \% de la ciencia de datos está limpiando los datos y el 20 \% se queja de limpiar los datos.
+--- Anthony Goldbloom, fundador y CEO de Kaggle
+\end{quote}
+
+Tener datos \emph{limpios} en cualquier proyecto de Data Science es muy importante, porque los resultados solo son tan buenos como los datos correctos. La limpieza de datos también es la parte que generalmente consume la mayor parte del tiempo y causa los mayores dolores para los científicos de datos. R ya ofrece un amplio conjunto de herramientas y funciones para manipular marcos de datos. Sin embargo, debido a su larga historia, el conjunto de herramientas base R disponible está fragmentado y es difícil de usar para nuevos usuarios.
+
+El paquete \textbf{dplyr} facilita el proceso de transformación de datos a través de una colección consistente de funciones. Estas funciones admiten diferentes transformaciones en marcos de datos, que incluyen
+
+\begin{itemize}
+\tightlist
+\item
+  filtrar filas
+\item
+  seleccionar columnas
+\item
+  ordenar datos
+\item
+  agregar datos
+\end{itemize}
+
+Múltiples marcos de datos también se pueden unir mediante valores de atributo comunes.
+
+La coherencia de las funciones de \textbf{dplyr} mejora la usabilidad y permite al usuario conectar transformaciones para formar \emph{canalizaciones de datos}. Estas canalizaciones también se pueden ver como un lenguaje de consulta de alto nivel, como p.~Ej. el lenguaje SQL para consultas de bases de datos. Además, incluso es posible traducir las canalizaciones de datos creadas a otros back-end, incluidas las bases de datos.
+
+\hypertarget{marco-de-funciones}{%
+\subsection{Marco de funciones}\label{marco-de-funciones}}
+
+Cada función de transformación de datos en \textbf{dplyr} acepta un marco de datos como su primer parámetro de entrada y devuelve el marco de datos transformado como salida. Un plano para una función \textbf{dplyr} típica se ve así:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{transformed <-}\StringTok{ }\KeywordTok{dplyr_function}\NormalTok{(my_data_frame, }
+\NormalTok{                              param_one, }
+\NormalTok{                              param_two, }
+\NormalTok{                              ...)}
+\end{Highlighting}
+\end{Shaded}
+
+La función \texttt{dplyr\_function} se puede personalizar aún más a través de argumentos adicionales (\texttt{param\_one}, \texttt{param\_two}) colocados después del primer parámetro de marco de datos (\texttt{my\_data\_frame}).
+
+El poder real de \textbf{dplyr} viene con el operador pipe \texttt{\%\textgreater{}\%} que permite a los usuarios concatenar funciones de \textbf{dplyr} a pipe de datos. Pipe inyecta el marco de datos resultante del cálculo anterior como primer argumento del siguiente. Una transformación de datos que consta de tres funciones se parece a:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dplyr_function_three}\NormalTok{(}
+  \KeywordTok{dplyr_function_two}\NormalTok{(}
+    \KeywordTok{dplyr_function_one}\NormalTok{(input_data_frame)))}
+\end{Highlighting}
+\end{Shaded}
+
+pero con \texttt{pipe} se puede escribir de la siguiente manera:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{input_data_frame }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{dplyr_function_one}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{dplyr_function_two}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{dplyr_function_three}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+El orden de lectura diferente de las funciones de transformación de datos en el orden de transformación real, hace que las canalizaciones sean más fáciles de leer que las llamadas a funciones anidadas.
+
+\hypertarget{seleccionar-columnas-de-un-marco-de-datos}{%
+\section{Seleccionar columnas de un marco de datos}\label{seleccionar-columnas-de-un-marco-de-datos}}
+
+Para seleccionar sólo un conjunto específico de columnas de marcos de datos interesantes, \textbf{dplyr} ofrece la función \texttt{select()} para extraer columnas por nombres, índices y rangos. Incluso puede renombrar las columnas extraídas con \texttt{select()}.
+
+\begin{itemize}
+\tightlist
+\item
+  Aprenda a usar la función \texttt{select()}
+\item
+  Seleccionar las columnas de un marco de datos por nombre o índice
+\item
+  Renombrar las columnas de un marco de datos
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{select}\NormalTok{(my_data_frame, column_one, column_two, ...)}
+\KeywordTok{select}\NormalTok{(my_data_frame, }\DataTypeTok{new_column_name =}\NormalTok{ current_column, ...)}
+\KeywordTok{select}\NormalTok{(my_data_frame, column_start}\OperatorTok{:}\NormalTok{column_end)}
+\KeywordTok{select}\NormalTok{(my_data_frame, index_one, index_two, ...)}
+\KeywordTok{select}\NormalTok{(my_data_frame, index_start}\OperatorTok{:}\NormalTok{index_end)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{seleccionando-por-nombre}{%
+\subsection{Seleccionando por nombre}\label{seleccionando-por-nombre}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{select}\NormalTok{(my_data_frame, column_one, column_two, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+En este capítulo veremos el conjunto de datos \texttt{pres\_results} del paquete \textbf{politicaldata}. Contiene datos sobre las elecciones presidenciales de EE.UU. desde 1976, convertidas en un Tibble para una mejor impresión.
+
+\begin{verbatim}
+## # A tibble: 561 x 6
+##     year state total_votes   dem   rep   other
+##    <dbl> <chr>       <dbl> <dbl> <dbl>   <dbl>
+##  1  1976 AK         123574 0.357 0.579 0.0549 
+##  2  1976 AL        1182850 0.557 0.426 0.0163 
+##  3  1976 AR         767535 0.650 0.349 0.00134
+##  4  1976 AZ         742719 0.398 0.564 0.0383 
+##  5  1976 CA        7803770 0.480 0.497 0.0230 
+##  6  1976 CO        1081440 0.426 0.540 0.0336 
+##  7  1976 CT        1386355 0.467 0.519 0.0138 
+##  8  1976 DC         168830 0.816 0.165 0.0169 
+##  9  1976 DE         235642 0.520 0.466 0.0144 
+## 10  1976 FL        3150631 0.519 0.466 0.0143 
+## # ... with 551 more rows
+\end{verbatim}
+
+Para este ejemplo, veremos el número total de votos en diferentes estados en diferentes elecciones. Como solo estamos interesados en la cantidad de personas que votaron, nos gustaría crear una versión personalizada del marco de datos \texttt{pres\_results} que solo contenga las columnas \texttt{year}, \texttt{state} y \texttt{total\_votes}. Para dicho filtrado, podemos usar la función \texttt{select()} del paquete \textbf{dplyr}.
+
+La función \texttt{select()} toma un marco de datos como parámetro de entrada y nos permite decidir cuál de las columnas queremos mantener. El resultado de la función es un marco de datos con todas las filas, pero que contiene solo las columnas que seleccionamos explícitamente.
+
+Podemos reducir nuestro conjunto de datos a solo \texttt{year}, \texttt{state} y \texttt{total\_votes} de la siguiente manera:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{select}\NormalTok{(pres_results, year, state, total_votes)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 561 x 3
+##     year state total_votes
+##    <dbl> <chr>       <dbl>
+##  1  1976 AK         123574
+##  2  1976 AL        1182850
+##  3  1976 AR         767535
+##  4  1976 AZ         742719
+##  5  1976 CA        7803770
+##  6  1976 CO        1081440
+##  7  1976 CT        1386355
+##  8  1976 DC         168830
+##  9  1976 DE         235642
+## 10  1976 FL        3150631
+## # ... with 551 more rows
+\end{verbatim}
+
+Como primer parámetro pasamos el marco de datos \texttt{pres\_results}, como parámetros restantes pasamos las columnas que queremos mantener para \texttt{select()}.
+
+Además de mantener las columnas que queremos, la función \texttt{select()} también las mantiene en el mismo orden que especificamos en los parámetros de la función.
+
+Si cambiamos el orden de los parámetros cuando llamamos a la función, las columnas de la salida cambian en consecuencia:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{select}\NormalTok{(pres_results, total_votes, year, state)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 561 x 3
+##    total_votes  year state
+##          <dbl> <dbl> <chr>
+##  1      123574  1976 AK   
+##  2     1182850  1976 AL   
+##  3      767535  1976 AR   
+##  4      742719  1976 AZ   
+##  5     7803770  1976 CA   
+##  6     1081440  1976 CO   
+##  7     1386355  1976 CT   
+##  8      168830  1976 DC   
+##  9      235642  1976 DE   
+## 10     3150631  1976 FL   
+## # ... with 551 more rows
+\end{verbatim}
+
+\hypertarget{renombrar-nombres-de-columnas}{%
+\subsection{Renombrar nombres de columnas}\label{renombrar-nombres-de-columnas}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{select}\NormalTok{(my_data_frame, }\DataTypeTok{new_column_name =}\NormalTok{ current_column, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+Además de definir las columnas que queremos conservar, también podemos cambiarles el nombre. Para hacer esto, necesitamos establecer el nuevo nombre de columna dentro de la función \texttt{select()} usando el comando
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{new_column_name =}\StringTok{ }\NormalTok{current_column}
+\end{Highlighting}
+\end{Shaded}
+
+En el siguiente ejemplo, seleccionamos las columnas \texttt{year}, \texttt{state} y \texttt{total\_votes} pero cambiamos el nombre de la columna \texttt{year} a \texttt{Election} en la salida:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{select}\NormalTok{(pres_results, }\DataTypeTok{Election =}\NormalTok{ year, state, total_votes)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 561 x 3
+##    Election state total_votes
+##       <dbl> <chr>       <dbl>
+##  1     1976 AK         123574
+##  2     1976 AL        1182850
+##  3     1976 AR         767535
+##  4     1976 AZ         742719
+##  5     1976 CA        7803770
+##  6     1976 CO        1081440
+##  7     1976 CT        1386355
+##  8     1976 DC         168830
+##  9     1976 DE         235642
+## 10     1976 FL        3150631
+## # ... with 551 more rows
+\end{verbatim}
+
+\hypertarget{selecciuxf3n-por-rango-de-nombre}{%
+\subsection{Selección por rango de nombre}\label{selecciuxf3n-por-rango-de-nombre}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{select}\NormalTok{(my_data_frame, column_start}\OperatorTok{:}\NormalTok{column_end)}
+\end{Highlighting}
+\end{Shaded}
+
+Cuando usamos la función \texttt{select()} y definimos las columnas que queremos mantener, \textbf{dplyr} en realidad no usa el nombre de las columnas sino el índice de las columnas en el marco de datos. Esto significa que, cuando definimos las primeras tres columnas del marco de datos \texttt{pres\_results}, \texttt{year}, \texttt{state} y \texttt{total\_votes}, \textbf{dplyr} convierte estos nombres en los valores de índice \texttt{1}, \texttt{2} y \texttt{3}. Por lo tanto, también podemos usar el nombre de las columnas, aplicar el operador \texttt{:} y definir rangos de columnas, que queremos mantener:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{select}\NormalTok{(pres_results, year}\OperatorTok{:}\NormalTok{total_votes)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 561 x 3
+##     year state total_votes
+##    <dbl> <chr>       <dbl>
+##  1  1976 AK         123574
+##  2  1976 AL        1182850
+##  3  1976 AR         767535
+##  4  1976 AZ         742719
+##  5  1976 CA        7803770
+##  6  1976 CO        1081440
+##  7  1976 CT        1386355
+##  8  1976 DC         168830
+##  9  1976 DE         235642
+## 10  1976 FL        3150631
+## # ... with 551 more rows
+\end{verbatim}
+
+Lo que hace \texttt{year:total\_votes}, se puede traducir a \texttt{1:3}, que es simplemente crear un vector de valores numéricos del 1 al 3. Luego, la función \texttt{select()} toma el marco de datos \texttt{pres\_results} y genera un subconjunto del mismo, manteniendo solo Las primeras tres columnas.
+
+\hypertarget{select-por-uxedndices}{%
+\subsection{Select() por índices}\label{select-por-uxedndices}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{select}\NormalTok{(my_data_frame, index_one, index_two, ...)}
+\KeywordTok{select}\NormalTok{(my_data_frame, index_start}\OperatorTok{:}\NormalTok{index_end)}
+\end{Highlighting}
+\end{Shaded}
+
+La función \texttt{select()} también se puede usar con índices de columna. En lugar de usar nombres, debemos especificar las columnas que queremos seleccionar por sus índices. En comparación con otros lenguajes de programación, la indexación en R comienza con \emph{uno} en lugar de \emph{cero}. Para seleccionar la primera, cuarta y quinta columna del conjunto de datos \texttt{pres\_results} podemos escribir
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{select}\NormalTok{(pres_results, }\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 561 x 3
+##     year   dem   rep
+##    <dbl> <dbl> <dbl>
+##  1  1976 0.357 0.579
+##  2  1976 0.557 0.426
+##  3  1976 0.650 0.349
+##  4  1976 0.398 0.564
+##  5  1976 0.480 0.497
+##  6  1976 0.426 0.540
+##  7  1976 0.467 0.519
+##  8  1976 0.816 0.165
+##  9  1976 0.520 0.466
+## 10  1976 0.519 0.466
+## # ... with 551 more rows
+\end{verbatim}
+
+De manera similar a la definición de rangos de columnas usando sus nombres, podemos definir rangos (o vectores) de valores de índice en su lugar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{select}\NormalTok{(pres_results, }\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 561 x 3
+##     year state total_votes
+##    <dbl> <chr>       <dbl>
+##  1  1976 AK         123574
+##  2  1976 AL        1182850
+##  3  1976 AR         767535
+##  4  1976 AZ         742719
+##  5  1976 CA        7803770
+##  6  1976 CO        1081440
+##  7  1976 CT        1386355
+##  8  1976 DC         168830
+##  9  1976 DE         235642
+## 10  1976 FL        3150631
+## # ... with 551 more rows
+\end{verbatim}
+
+\hypertarget{filtrar-filas-de-marcos-de-datos}{%
+\section{Filtrar filas de marcos de datos}\label{filtrar-filas-de-marcos-de-datos}}
+
+A menudo queremos operar sólo en un subconjunto específico de filas de un marco de datos. La función \textbf{dplyr} \texttt{filter()} proporciona una forma flexible de extraer las filas de interés en base a múltiples condiciones.
+
+\begin{itemize}
+\tightlist
+\item
+  Utilice la función \texttt{filter()} para ordenar las filas de un marco de datos que cumplan una condición específica
+\item
+  Filtrar un cuadro de datos por múltiples condiciones
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{filter}\NormalTok{(my_data_frame, condition)}
+\KeywordTok{filter}\NormalTok{(my_data_frame, condition_one, condition_two, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{funciuxf3n-filter}{%
+\subsection{Función filter()}\label{funciuxf3n-filter}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{filter}\NormalTok{(my_data_frame, condition)}
+\end{Highlighting}
+\end{Shaded}
+
+La función \texttt{filter()} toma un marco de datos y una o más expresiones de filtrado como parámetros de entrada. Procesa el marco de datos y mantiene solo las filas que cumplen con las expresiones de filtrado definidas. Estas expresiones pueden verse como reglas para la evaluación y el mantenimiento de filas. En la mayoría de los casos, se basan en operadores relacionales. Como ejemplo, podríamos filtrar el marco de datos \texttt{pres\_results} y mantener solo las filas, donde la variable de \texttt{state} es igual a \texttt{"CA"} (California):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{filter}\NormalTok{(pres_results, state }\OperatorTok{==}\StringTok{ "CA"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 11 x 6
+##     year state total_votes   dem   rep  other
+##    <dbl> <chr>       <dbl> <dbl> <dbl>  <dbl>
+##  1  1976 CA        7803770 0.480 0.497 0.0230
+##  2  1980 CA        8582938 0.359 0.527 0.114 
+##  3  1984 CA        9505041 0.413 0.575 0.0122
+##  4  1988 CA        9887065 0.476 0.511 0.0131
+##  5  1992 CA       11131721 0.460 0.326 0.213 
+##  6  1996 CA       10019469 0.511 0.382 0.107 
+##  7  2000 CA       10965822 0.534 0.417 0.0490
+##  8  2004 CA       12421353 0.543 0.444 0.0117
+##  9  2008 CA       13561900 0.610 0.370 0.0188
+## 10  2012 CA       13038547 0.602 0.371 0.0246
+## 11  2016 CA       14181595 0.617 0.316 0.0581
+\end{verbatim}
+
+En el resultado, podemos comparar los resultados de las elecciones en California para diferentes años.
+
+Como otro ejemplo, podríamos filtrar el marco de datos \texttt{pres\_results} y mantener solo aquellas filas, donde la variable \texttt{dem} (porcentaje de votos para el Partido Demócrata) es mayor que 0.85:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{filter}\NormalTok{(pres_results, dem }\OperatorTok{>}\StringTok{ }\FloatTok{0.85}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 6
+##    year state total_votes   dem    rep   other
+##   <dbl> <chr>       <dbl> <dbl>  <dbl>   <dbl>
+## 1  1984 DC         211288 0.854 0.137  0.00886
+## 2  1996 DC         185726 0.852 0.0934 0.0513 
+## 3  2000 DC         201894 0.852 0.0895 0.0563 
+## 4  2004 DC         227586 0.892 0.0934 0.0125 
+## 5  2008 DC         265853 0.925 0.0653 0.00582
+## 6  2012 DC         293764 0.909 0.0728 0.0155 
+## 7  2016 DC         312575 0.905 0.0407 0.0335
+\end{verbatim}
+
+En el resultado podemos ver para cada año electoral los estados donde el Partido Demócrata obtuvo más del 85\% de los votos. Según los resultados, podríamos decir que el Partido Demócrata tiene una base sólida de votantes en el Distrito de Columbia (conocido como Washington, D.C.).
+
+\hypertarget{muxfaltiples-expresiones-de-filtro}{%
+\subsection{Múltiples expresiones de filtro}\label{muxfaltiples-expresiones-de-filtro}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{filter}\NormalTok{(my_data_frame, condition_one, condition_two, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+La función \texttt{filter()} también puede tomar múltiples reglas de filtrado como entrada. Estos pueden verse como una combinación de reglas con el operador \texttt{\&}. Para que una fila se incluya en la salida, todas las reglas de filtrado deben cumplirse. En el siguiente ejemplo, filtramos el marco de datos \texttt{pres\_results} para todas las filas donde la variable \texttt{state} es igual a \texttt{"CA"} y la variable de \texttt{year} es igual a 2016:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{filter}\NormalTok{(pres_results, state }\OperatorTok{==}\StringTok{ "CA"}\NormalTok{, year}\OperatorTok{==}\DecValTok{2016}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 6
+##    year state total_votes   dem   rep  other
+##   <dbl> <chr>       <dbl> <dbl> <dbl>  <dbl>
+## 1  2016 CA       14181595 0.617 0.316 0.0581
+\end{verbatim}
+
+Obtenemos una sola fila como salida, que contiene los resultados de las elecciones presidenciales de 2016 en los Estados Unidos para el estado de California.
+
+\textbf{Ejercicio: Usar filter() con múltiples reglas}
+El conjunto de datos del \texttt{gapminder} contiene datos económicos y demográficos sobre diversos países desde 1952. Filtra el tibble e inspecciona qué países tenían una esperanza de vida de más de 80 años en el año 2007. Los paquetes necesarios ya están cargados.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Utiliza la función \texttt{filter()} en el tibble de gapminder.
+\item
+  Filtra todas las filas en las que la variable \texttt{year} es igual a 2007 y la esperanza de vida \texttt{lifeExp} es mayor de 80!
+\end{enumerate}
+
+Solución
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{filter}\NormalTok{(gapminder, year}\OperatorTok{==}\DecValTok{2007}\NormalTok{, lifeExp }\OperatorTok{>}\StringTok{ }\DecValTok{80}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 13 x 6
+##    country          continent  year lifeExp       pop gdpPercap
+##    <fct>            <fct>     <int>   <dbl>     <int>     <dbl>
+##  1 Australia        Oceania    2007    81.2  20434176    34435.
+##  2 Canada           Americas   2007    80.7  33390141    36319.
+##  3 France           Europe     2007    80.7  61083916    30470.
+##  4 Hong Kong, China Asia       2007    82.2   6980412    39725.
+##  5 Iceland          Europe     2007    81.8    301931    36181.
+##  6 Israel           Asia       2007    80.7   6426679    25523.
+##  7 Italy            Europe     2007    80.5  58147733    28570.
+##  8 Japan            Asia       2007    82.6 127467972    31656.
+##  9 New Zealand      Oceania    2007    80.2   4115771    25185.
+## 10 Norway           Europe     2007    80.2   4627926    49357.
+## 11 Spain            Europe     2007    80.9  40448191    28821.
+## 12 Sweden           Europe     2007    80.9   9031088    33860.
+## 13 Switzerland      Europe     2007    81.7   7554661    37506.
+\end{verbatim}
+
+\textbf{Ejercicio}
+El conjunto de datos del \texttt{gapminder} contiene datos económicos y demográficos sobre diversos países desde 1952. Filtra el tibble de \texttt{gapminder} e inspecciona qué países tenían una población de más de 1.000.000.000 en el año 2007! Los paquetes necesarios ya están cargados.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Utiliza la función \texttt{filter()} en el tibble \texttt{gapminder}.
+\item
+  Filtra todas las filas donde la variable \texttt{year} es igual a 2007 y la población \texttt{pop} es mayor de 1000000000!
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{filter}\NormalTok{(gapminder, year}\OperatorTok{==}\DecValTok{2007}\NormalTok{, pop }\OperatorTok{>}\StringTok{ }\DecValTok{1000000000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 6
+##   country continent  year lifeExp        pop gdpPercap
+##   <fct>   <fct>     <int>   <dbl>      <int>     <dbl>
+## 1 China   Asia       2007    73.0 1318683096     4959.
+## 2 India   Asia       2007    64.7 1110396331     2452.
+\end{verbatim}
+
+\hypertarget{ordenar-marcos-de-datos-por-columnas}{%
+\section{Ordenar marcos de datos por columnas}\label{ordenar-marcos-de-datos-por-columnas}}
+
+Para seleccionar las áreas de interés en un marco de datos, a menudo es necesario ordenarlas por columnas específicas. La función \textbf{dplyr} \texttt{arrange()} permite ordenar los marcos de datos por múltiples columnas en orden ascendente y descendente.
+
+\begin{itemize}
+\tightlist
+\item
+  Utilice la función \texttt{arrange()} para ordenar los marcos de datos.
+\item
+  Ordene los marcos de datos por múltiples columnas usando \texttt{arrange()}.
+\end{itemize}
+
+\begin{verbatim}
+arrange(my_data_frame, column_one)
+arrange(my_data_frame, column_one, column_two, ...)
+\end{verbatim}
+
+\hypertarget{la-funciuxf3n-arrange-con-una-sola-columna}{%
+\subsection{La función arrange() con una sola columna}\label{la-funciuxf3n-arrange-con-una-sola-columna}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{arrange}\NormalTok{(my_data_frame, column_one)}
+\end{Highlighting}
+\end{Shaded}
+
+La función \texttt{arrange()} ordena las filas de un marco de datos. Toma un marco de datos o un tibble como primer parámetro y los nombres de las columnas en función de los cuales las filas deben ordenarse como parámetros adicionales. Supongamos que queremos responder la pregunta: \emph{¿Qué estados tuvieron el mayor porcentaje de votantes republicanos en las elecciones presidenciales de 2016 en los Estados Unidos?} Para responder a esta pregunta, en el siguiente ejemplo usamos el marco de datos \texttt{pres\_results\_2016}, que contiene información solo para las elecciones presidenciales de EE.UU. de 2016. Nuestra función \texttt{arrange()} en el marco de datos \texttt{rep} basado en la columna (votos republicanos en porcentaje):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pres_results_}\DecValTok{2016}\NormalTok{ <-}\StringTok{ }\NormalTok{pres_results }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year}\OperatorTok{==}\DecValTok{2016}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{arrange}\NormalTok{(pres_results_}\DecValTok{2016}\NormalTok{, rep)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 51 x 6
+##     year state total_votes   dem    rep  other
+##    <dbl> <chr>       <dbl> <dbl>  <dbl>  <dbl>
+##  1  2016 DC         312575 0.905 0.0407 0.0335
+##  2  2016 HI         437664 0.610 0.294  0.0958
+##  3  2016 VT         320467 0.557 0.298  0.0737
+##  4  2016 CA       14181595 0.617 0.316  0.0581
+##  5  2016 MA        3378821 0.591 0.323  0.0858
+##  6  2016 MD        2781446 0.603 0.339  0.0415
+##  7  2016 NY        7802084 0.584 0.361  0.0530
+##  8  2016 WA        3317019 0.525 0.368  0.0738
+##  9  2016 IL        5536424 0.558 0.388  0.0517
+## 10  2016 RI         464144 0.544 0.389  0.0466
+## # ... with 41 more rows
+\end{verbatim}
+
+Como puede ver en la salida, el marco de datos se ordena en orden ascendente según la columna \texttt{rep}. Sin embargo, preferiríamos tener los resultados en orden descendente, para que podamos ver instantáneamente \texttt{state} con el mayor porcentaje de repeticiones. Para ordenar una columna en orden descendente, todo lo que tenemos que hacer es aplicar la función \texttt{desc()} en la columna dada dentro de la función \texttt{arrange()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{arrange}\NormalTok{(pres_results_}\DecValTok{2016}\NormalTok{, }\KeywordTok{desc}\NormalTok{(rep))}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 51 x 6
+##     year state total_votes   dem   rep  other
+##    <dbl> <chr>       <dbl> <dbl> <dbl>  <dbl>
+##  1  2016 WV         713051 0.265 0.686 0.0489
+##  2  2016 WY         258788 0.216 0.674 0.0830
+##  3  2016 OK        1452992 0.289 0.653 0.0575
+##  4  2016 ND         344360 0.272 0.630 0.0971
+##  5  2016 KY        1924149 0.327 0.625 0.0476
+##  6  2016 AL        2123372 0.344 0.621 0.0254
+##  7  2016 SD         370093 0.317 0.615 0.0673
+##  8  2016 TN        2508027 0.347 0.607 0.0401
+##  9  2016 AR        1130635 0.337 0.606 0.0577
+## 10  2016 ID         690255 0.275 0.593 0.132 
+## # ... with 41 more rows
+\end{verbatim}
+
+La organización no solo es posible en valores numéricos, sino también en valores de caracteres. En ese caso, \textbf{dplyr} ordena las filas en orden alfabético. Podemos organizar columnas de caracteres como las numéricas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{arrange}\NormalTok{(pres_results_}\DecValTok{2016}\NormalTok{, state)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 51 x 6
+##     year state total_votes   dem    rep  other
+##    <dbl> <chr>       <dbl> <dbl>  <dbl>  <dbl>
+##  1  2016 AK         318608 0.366 0.513  0.0928
+##  2  2016 AL        2123372 0.344 0.621  0.0254
+##  3  2016 AR        1130635 0.337 0.606  0.0577
+##  4  2016 AZ        2573165 0.451 0.487  0.0547
+##  5  2016 CA       14181595 0.617 0.316  0.0581
+##  6  2016 CO        2780220 0.482 0.433  0.0859
+##  7  2016 CT        1644920 0.546 0.409  0.0435
+##  8  2016 DC         312575 0.905 0.0407 0.0335
+##  9  2016 DE         441590 0.534 0.419  0.0472
+## 10  2016 FL        9420039 0.478 0.490  0.0315
+## # ... with 41 more rows
+\end{verbatim}
+
+\hypertarget{la-funciuxf3n-arrange-con-muxfaltiples-columnas}{%
+\subsection{La función arrange() con múltiples columnas}\label{la-funciuxf3n-arrange-con-muxfaltiples-columnas}}
+
+También podemos usar la función \texttt{arrange()} en varias columnas. En este caso, el orden de las columnas en los parámetros de la función establece una jerarquía de ordenamiento. La función comienza ordenando las filas en función de la primera columna definida en los parámetros. En caso de que haya varias filas con el mismo valor, la función decide el orden en función de la segunda columna definida en los parámetros. Si todavía hay varias filas con los mismos valores, la función decide en función de la tercera columna definida en los parámetros (si está definida) y así sucesivamente.
+
+En el siguiente ejemplo, utilizamos el marco de datos \texttt{pres\_results\_subset}, que contiene los resultados de las elecciones solo para los estados: \texttt{"TX"} (Texas), \texttt{"UT"} (Utah) y \texttt{"FL"} (Florida). Primero ordenamos el marco de datos en orden descendente según la columna de year. Luego, agregamos un segundo nivel y ordenamos el marco de datos basado en la columna \texttt{dem}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pres_results_subset <-}\StringTok{ }\NormalTok{pres_results }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"TX"}\NormalTok{,}
+                      \StringTok{"UT"}\NormalTok{,}
+                      \StringTok{"FL"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\KeywordTok{arrange}\NormalTok{(pres_results_subset, year, dem)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 33 x 6
+##     year state total_votes   dem   rep    other
+##    <dbl> <chr>       <dbl> <dbl> <dbl>    <dbl>
+##  1  1976 UT         541218 0.336 0.624 0.0392  
+##  2  1976 TX        4071884 0.511 0.480 0.00817 
+##  3  1976 FL        3150631 0.519 0.466 0.0143  
+##  4  1980 UT         604152 0.206 0.728 0.0665  
+##  5  1980 FL        3686927 0.385 0.555 0.0597  
+##  6  1980 TX        4541636 0.414 0.553 0.0329  
+##  7  1984 UT         629656 0.247 0.745 0.00823 
+##  8  1984 FL        4180051 0.347 0.653 0.000212
+##  9  1984 TX        5397571 0.361 0.636 0.00275 
+## 10  1988 UT         647008 0.320 0.662 0.0173  
+## # ... with 23 more rows
+\end{verbatim}
+
+Como puede ver en la salida, el marco de datos se ordena en general en función de la columna \texttt{year}. Sin embargo, cuando el valor de \texttt{year} es el mismo, el orden de las filas lo decide la columna \texttt{dem}.
+
+\hypertarget{crear-una-tuberuxeda-de-transformaciuxf3n-de-datos}{%
+\section{Crear una tubería de transformación de datos}\label{crear-una-tuberuxeda-de-transformaciuxf3n-de-datos}}
+
+Todas las funciones de transformación de datos en \textbf{dplyr} pueden ser conectadas a través del operador de tubería (pipe) \texttt{\%\textgreater{}\%} para crear poderosas y a la vez expresivas tuberías de transformación de datos.
+
+\begin{itemize}
+\tightlist
+\item
+  Utilice el operador pipe \texttt{\%\textgreater{}\%} para combinar múltiples funciones \textbf{dplyr} en una tubería
+\end{itemize}
+
+\begin{verbatim}
+my_data_frame %>%
+  filter(___) %>%
+  select(___) %>%
+  arrange(___)
+\end{verbatim}
+
+\hypertarget{usando-el-operador}{%
+\subsection{Usando el operador \%\textgreater\%}\label{usando-el-operador}}
+
+El operador pipe \texttt{\%\textgreater{}\%} es una parte especial del universo \texttt{tidyverse}. Se utiliza para combinar múltiples funciones y ejecutarlas una tras otra. En esta configuración, la entrada de cada función es la salida de la función anterior. Imagine que tenemos el marco de datos \texttt{pres\_results} y queremos crear un marco de datos más pequeño y transparente para responder a la pregunta: \emph{¿En qué estados fue el partido democrático la opción más popular en las elecciones presidenciales de 2016 en los Estados Unidos?} Para lograr esta tarea, deberíamos seguir los siguientes pasos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{filter()} el marco de datos para las filas, donde la variable \texttt{year} es igual a 2016
+\item
+  \texttt{select()} las dos variables \texttt{state} y \texttt{dem}, ya que no estamos interesados en el resto de las columnas.
+\item
+  \texttt{arrange()} el marco de datos filtrado y seleccionado en función de la columna \texttt{dem} de forma descendente.
+\end{enumerate}
+
+Los pasos y funciones descritos anteriormente deben ejecutarse uno tras otro, donde la entrada de cada función es la salida del paso anterior. Aplicando las cosas que aprendió hasta ahora, puede realizar esta tarea siguiendo los siguientes pasos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(pres_results, year}\OperatorTok{==}\DecValTok{2016}\NormalTok{)}
+\NormalTok{result <-}\StringTok{ }\KeywordTok{select}\NormalTok{(result, state, dem)}
+\NormalTok{result <-}\StringTok{ }\KeywordTok{arrange}\NormalTok{(result, }\KeywordTok{desc}\NormalTok{(dem))}
+\KeywordTok{tibble}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 51 x 2
+##    state   dem
+##    <chr> <dbl>
+##  1 DC    0.905
+##  2 CA    0.617
+##  3 HI    0.610
+##  4 MD    0.603
+##  5 MA    0.591
+##  6 NY    0.584
+##  7 IL    0.558
+##  8 VT    0.557
+##  9 NJ    0.555
+## 10 CT    0.546
+## # ... with 41 more rows
+\end{verbatim}
+
+La primera función toma el marco de datos \texttt{pres\_results}, lo filtra de acuerdo con la descripción de la tarea y lo asigna a la variable \texttt{result}. Luego, cada función posterior toma la variable \texttt{result} como entrada y la sobrescribe con su propia salida.
+
+El operador \texttt{\%\textgreater{}\%} proporciona una forma práctica de combinar los pasos anteriores en aparentemente un paso. Toma un marco de datos como entrada inicial. Luego, aplica una lista de funciones y pasa la salida de cada función para la entrada de la siguiente función. La misma tarea que la anterior se puede lograr usando el operador de tubería \texttt{\%\textgreater{}\%} de esta manera:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}
+\NormalTok{pres_results }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year}\OperatorTok{==}\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(state, dem, rep) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(dem))}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 51 x 3
+##    state   dem    rep
+##    <chr> <dbl>  <dbl>
+##  1 DC    0.905 0.0407
+##  2 CA    0.617 0.316 
+##  3 HI    0.610 0.294 
+##  4 MD    0.603 0.339 
+##  5 MA    0.591 0.323 
+##  6 NY    0.584 0.361 
+##  7 IL    0.558 0.388 
+##  8 VT    0.557 0.298 
+##  9 NJ    0.555 0.414 
+## 10 CT    0.546 0.409 
+## # ... with 41 more rows
+\end{verbatim}
+
+Podemos interpretar el código de la siguiente manera:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Definimos el conjunto de datos original como punto de partida.
+\item
+  El uso del operador \texttt{\%\textgreater{}\%} justo después del marco de datos le dice a \textbf{dplyr}, que viene una función, que toma el marco de datos previamente definido como entrada.
+\item
+  Usamos cada función como de costumbre, pero omite el primer parámetro. La entrada del marco de datos se proporciona automáticamente por la salida del paso anterior.
+\item
+  Mientras agreguemos el operador \texttt{\%\textgreater{}\%} después de un paso, \textbf{dplyr} esperará un paso adicional.
+\item
+  En nuestro ejemplo, la tubería se cierra con una función \texttt{arrange()}. Obtiene la versión filtrada y seleccionada del marco de datos \texttt{pres\_results} como entrada y la ordena en función de la columna \texttt{dem} de forma descendente. Finalmente, devuelve la salida.
+\end{enumerate}
+
+Una diferencia entre los dos enfoques es que el operador \texttt{\%\textgreater{}\%} no guarda permanentemente los resultados intermedios o finales. Para guardar el marco de datos resultante, debemos asignar la salida a una variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result <-}\StringTok{ }\NormalTok{pres_results }\OperatorTok{%<>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year}\OperatorTok{==}\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(state, dem) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(dem))}
+\KeywordTok{tibble}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 51 x 2
+##    state   dem
+##    <chr> <dbl>
+##  1 DC    0.905
+##  2 CA    0.617
+##  3 HI    0.610
+##  4 MD    0.603
+##  5 MA    0.591
+##  6 NY    0.584
+##  7 IL    0.558
+##  8 VT    0.557
+##  9 NJ    0.555
+## 10 CT    0.546
+## # ... with 41 more rows
+\end{verbatim}
+
+\hypertarget{ejercicios}{%
+\subsection{Ejercicios:}\label{ejercicios}}
+
+\textbf{Esperanza de vida austriaca}
+
+Utiliza el operador \texttt{\%\textgreater{}\%} en el conjunto de datos de \texttt{gapminder} y crea un simple marco de datos para responder a la siguiente pregunta: \emph{¿Cómo ha cambiado la esperanza de vida en Austria en las últimas décadas?} Los paquetes necesarios ya están cargados.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Defina el marco de datos de \texttt{gapminder} como el marco de datos de base
+\item
+  Filtra sólo las filas en las que la columna \texttt{country} es igual a \texttt{Austria} mediante la tubería \texttt{gapminder} a la función \texttt{filter()}.
+\item
+  Selecciona sólo las columnas: \texttt{year} y \texttt{lifeExp} del resultado filtrado.
+\item
+  Ordena los resultados en base a la columna \texttt{year} en función de las columnas seleccionadas.
+\end{enumerate}
+
+\textbf{Solución:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gapminder }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(country }\OperatorTok{==}\StringTok{ "Austria"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(year, lifeExp) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 12 x 2
+##     year lifeExp
+##    <int>   <dbl>
+##  1  1952    66.8
+##  2  1957    67.5
+##  3  1962    69.5
+##  4  1967    70.1
+##  5  1972    70.6
+##  6  1977    72.2
+##  7  1982    73.2
+##  8  1987    74.9
+##  9  1992    76.0
+## 10  1997    77.5
+## 11  2002    79.0
+## 12  2007    79.8
+\end{verbatim}
+
+\textbf{PIB europeo per cápita}
+
+Utiliza el operador \texttt{\%\textgreater{}\%} en el conjunto de datos de \texttt{gapminder} y crea un simple tibble para responder a la siguiente pregunta: \emph{¿Qué país europeo tuvo el mayor PIB per cápita en 2007?} Los paquetes requeridos ya están cargados.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Defina el tibble de \texttt{gapminder} como la entrada
+\item
+  Filtra sólo las filas donde la columna \texttt{year} es igual a \texttt{2007}
+\item
+  Usar una segunda capa de filtro y mantener sólo las filas donde la columna del continente es igual a \texttt{Europe}
+\item
+  Seleccione sólo las columnas: \texttt{country} y \texttt{gdpPercap}
+\item
+  Ordena los resultados basados en la columna \texttt{gdpPercap} de forma descendente
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gapminder }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2007}\NormalTok{, continent }\OperatorTok{==}\StringTok{ "Europe"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(country, gdpPercap) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(gdpPercap))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 30 x 2
+##    country     gdpPercap
+##    <fct>           <dbl>
+##  1 Norway         49357.
+##  2 Ireland        40676.
+##  3 Switzerland    37506.
+##  4 Netherlands    36798.
+##  5 Iceland        36181.
+##  6 Austria        36126.
+##  7 Denmark        35278.
+##  8 Sweden         33860.
+##  9 Belgium        33693.
+## 10 Finland        33207.
+## # ... with 20 more rows
+\end{verbatim}
+
+\textbf{Población de las Américas}
+
+Utiliza el operador \texttt{\%\textgreater{}\%} en el conjunto de datos de \texttt{gapminder} y crea un simple tibble para responder a la siguiente pregunta: \emph{¿Qué país del continente americano tenía la mayor población en 2007?}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Defina el tibble de \texttt{gapminder} como la entrada
+\item
+  Filtra sólo las filas donde la columna \texttt{year} es igual a \texttt{2007}
+\item
+  Utilice una segunda capa de filtro y mantenga sólo las filas donde la columna del \texttt{continent} es igual a \texttt{Americas}
+\item
+  Seleccione sólo las columnas: \texttt{country} y \texttt{pop}
+\item
+  Arregla los resultados basados en la columna \texttt{pop} de forma descendente
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gapminder }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2007}\NormalTok{, continent }\OperatorTok{==}\StringTok{ "Americas"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(country, pop) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(pop))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 25 x 2
+##    country             pop
+##    <fct>             <int>
+##  1 United States 301139947
+##  2 Brazil        190010647
+##  3 Mexico        108700891
+##  4 Colombia       44227550
+##  5 Argentina      40301927
+##  6 Canada         33390141
+##  7 Peru           28674757
+##  8 Venezuela      26084662
+##  9 Chile          16284741
+## 10 Ecuador        13755680
+## # ... with 15 more rows
+\end{verbatim}
 
 \hypertarget{introducciuxf3n-a-machine-learning}{%
 \chapter{Introducción a Machine Learning}\label{introducciuxf3n-a-machine-learning}}

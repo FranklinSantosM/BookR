@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Transformación de datos con dplyr | R en las Ciencias Agropecuarias</title>
+  <meta name="description" content="En este libro encontrarás una compilación de paquetes estadísticos aplicadas a las ciencias agropecuarias. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Transformación de datos con dplyr | R en las Ciencias Agropecuarias" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="cover.jpg" />
+  <meta property="og:description" content="En este libro encontrarás una compilación de paquetes estadísticos aplicadas a las ciencias agropecuarias. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Transformación de datos con dplyr | R en las Ciencias Agropecuarias" />
+  <meta name="twitter:site" content="@FranklinSantosM" />
+  <meta name="twitter:description" content="En este libro encontrarás una compilación de paquetes estadísticos aplicadas a las ciencias agropecuarias. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:image" content="cover.jpg" />
+
+<meta name="author" content="Franklin Santos" />
+
+
+<meta name="date" content="2020-12-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="marcos-de-datos-y-tibbles.html"/>
+<link rel="next" href="introducción-a-machine-learning.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Ciencias Agropecuarias</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R básico</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introducción-a-r"><i class="fa fa-check"></i><b>1.1</b> Introducción a R</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#por-qué-usar-r"><i class="fa fa-check"></i><b>1.1.1</b> ¿Por qué usar R?</a></li>
+<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#r-en-buena-compañía"><i class="fa fa-check"></i><b>1.1.2</b> R en buena compañía</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#bloques-de-construcción"><i class="fa fa-check"></i><b>1.2</b> Bloques de construcción</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#combinar-valores-en-un-vector"><i class="fa fa-check"></i><b>1.3</b> Combinar valores en un vector</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#introducción-a-los-vectores"><i class="fa fa-check"></i><b>1.3.1</b> Introducción a los vectores</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#tipos-de-vectores"><i class="fa fa-check"></i><b>1.3.2</b> Tipos de vectores</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#creando-una-secuencia-de-números"><i class="fa fa-check"></i><b>1.3.3</b> Creando una secuencia de números</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro.html"><a href="intro.html#concatenando-valores-numéricos-a-un-vector"><i class="fa fa-check"></i><b>1.3.4</b> Concatenando valores numéricos a un vector</a></li>
+<li class="chapter" data-level="1.3.5" data-path="intro.html"><a href="intro.html#creando-vectores-de-caracteres"><i class="fa fa-check"></i><b>1.3.5</b> Creando vectores de caracteres</a></li>
+<li class="chapter" data-level="1.3.6" data-path="intro.html"><a href="intro.html#creando-vectores-lógicos"><i class="fa fa-check"></i><b>1.3.6</b> Creando vectores lógicos</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#crea-variables-a-través-de-asignaciones"><i class="fa fa-check"></i><b>1.4</b> Crea variables a través de asignaciones</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#asignando-variables"><i class="fa fa-check"></i><b>1.4.1</b> Asignando variables</a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#reglas-de-nomenclatura"><i class="fa fa-check"></i><b>1.4.2</b> Reglas de nomenclatura</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#utilice-operadores-básicos"><i class="fa fa-check"></i><b>1.5</b> Utilice operadores básicos</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#usando-r-como-calculadora-de-bolsillo"><i class="fa fa-check"></i><b>1.5.1</b> Usando R como calculadora de bolsillo</a></li>
+<li class="chapter" data-level="1.5.2" data-path="intro.html"><a href="intro.html#aplicación-de-operadoras-aritméticas-en-vectores"><i class="fa fa-check"></i><b>1.5.2</b> Aplicación de operadoras aritméticas en vectores</a></li>
+<li class="chapter" data-level="1.5.3" data-path="intro.html"><a href="intro.html#usar-operadores-relacionales"><i class="fa fa-check"></i><b>1.5.3</b> Usar operadores relacionales</a></li>
+<li class="chapter" data-level="1.5.4" data-path="intro.html"><a href="intro.html#usando-operadores-lógicos"><i class="fa fa-check"></i><b>1.5.4</b> Usando operadores lógicos</a></li>
+<li class="chapter" data-level="1.5.5" data-path="intro.html"><a href="intro.html#usando-el-operador-in"><i class="fa fa-check"></i><b>1.5.5</b> Usando el operador %in%</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#llamar-al-código-r-existente-a-través-de-funciones"><i class="fa fa-check"></i><b>1.6</b> Llamar al código R existente a través de funciones</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="intro.html"><a href="intro.html#introducción-a-las-funciones."><i class="fa fa-check"></i><b>1.6.1</b> Introducción a las funciones.</a></li>
+<li class="chapter" data-level="1.6.2" data-path="intro.html"><a href="intro.html#personalización-de-funciones-a-través-de-parámetros"><i class="fa fa-check"></i><b>1.6.2</b> Personalización de funciones a través de parámetros</a></li>
+<li class="chapter" data-level="1.6.3" data-path="intro.html"><a href="intro.html#usar-la-función-sample"><i class="fa fa-check"></i><b>1.6.3</b> Usar la función <code>sample()</code></a></li>
+<li class="chapter" data-level="1.6.4" data-path="intro.html"><a href="intro.html#utilice-la-función-seq"><i class="fa fa-check"></i><b>1.6.4</b> Utilice la función <code>seq()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#utilice-funciones-y-datos-existentes-a-través-de-paquetes"><i class="fa fa-check"></i><b>1.7</b> Utilice funciones y datos existentes a través de paquetes</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="intro.html"><a href="intro.html#introducción-a-paquetes"><i class="fa fa-check"></i><b>1.7.1</b> Introducción a paquetes</a></li>
+<li class="chapter" data-level="1.7.2" data-path="intro.html"><a href="intro.html#llamar-un-paquete"><i class="fa fa-check"></i><b>1.7.2</b> Llamar un paquete</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#formato-de-introducción"><i class="fa fa-check"></i><b>1.8</b> Formato de introducción</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html"><i class="fa fa-check"></i><b>2</b> Marcos de datos y Tibbles</a><ul>
+<li class="chapter" data-level="2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#construye-un-marco-de-datos-a-partir-de-vectores"><i class="fa fa-check"></i><b>2.1</b> Construye un marco de datos a partir de vectores</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#introducción-a-los-marcos-de-datos"><i class="fa fa-check"></i><b>2.1.1</b> Introducción a los marcos de datos</a></li>
+<li class="chapter" data-level="2.1.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crear-marcos-de-datos"><i class="fa fa-check"></i><b>2.1.2</b> Crear marcos de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crea-y-convierte-tibbles"><i class="fa fa-check"></i><b>2.2</b> Crea y convierte tibbles</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#introducción-a-tibbles"><i class="fa fa-check"></i><b>2.2.1</b> Introducción a Tibbles</a></li>
+<li class="chapter" data-level="2.2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#creando-tibbles"><i class="fa fa-check"></i><b>2.2.2</b> Creando Tibbles</a></li>
+<li class="chapter" data-level="2.2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#conversión-de-marcos-de-datos-a-tibbles"><i class="fa fa-check"></i><b>2.2.3</b> Conversión de marcos de datos a Tibbles</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando"><i class="fa fa-check"></i><b>2.3</b> Extraiga o reemplace columnas en un marco de datos usando $</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraer-columnas-con"><i class="fa fa-check"></i><b>2.3.1</b> Extraer columnas con $</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#determinar-el-tamaño-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.4</b> Determinar el tamaño de un marco de datos</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#dimensiones-del-marco-de-datos"><i class="fa fa-check"></i><b>2.4.1</b> Dimensiones del marco de datos</a></li>
+<li class="chapter" data-level="2.4.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#recuperar-las-dimensiones-del-marco-de-datos"><i class="fa fa-check"></i><b>2.4.2</b> Recuperar las dimensiones del marco de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-primera-o-la-última-fila-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5</b> Seleccionar la primera o la última fila de un marco de datos</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-parte-superior-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5.1</b> Seleccionar la parte superior de un marco de datos</a></li>
+<li class="chapter" data-level="2.5.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-parte-inferior-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5.2</b> Seleccionar la parte inferior de un marco de datos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformación de datos con dplyr</a><ul>
+<li class="chapter" data-level="3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#introducción-a-dplyr"><i class="fa fa-check"></i><b>3.1</b> Introducción a dplyr</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#qué-es-dplyr"><i class="fa fa-check"></i><b>3.1.1</b> ¿Qué es dplyr?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#marco-de-funciones"><i class="fa fa-check"></i><b>3.1.2</b> Marco de funciones</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionar-columnas-de-un-marco-de-datos"><i class="fa fa-check"></i><b>3.2</b> Seleccionar columnas de un marco de datos</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionando-por-nombre"><i class="fa fa-check"></i><b>3.2.1</b> Seleccionando por nombre</a></li>
+<li class="chapter" data-level="3.2.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#renombrar-nombres-de-columnas"><i class="fa fa-check"></i><b>3.2.2</b> Renombrar nombres de columnas</a></li>
+<li class="chapter" data-level="3.2.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#selección-por-rango-de-nombre"><i class="fa fa-check"></i><b>3.2.3</b> Selección por rango de nombre</a></li>
+<li class="chapter" data-level="3.2.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#select-por-índices"><i class="fa fa-check"></i><b>3.2.4</b> Select() por índices</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#filtrar-filas-de-marcos-de-datos"><i class="fa fa-check"></i><b>3.3</b> Filtrar filas de marcos de datos</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#función-filter"><i class="fa fa-check"></i><b>3.3.1</b> Función filter()</a></li>
+<li class="chapter" data-level="3.3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#múltiples-expresiones-de-filtro"><i class="fa fa-check"></i><b>3.3.2</b> Múltiples expresiones de filtro</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ordenar-marcos-de-datos-por-columnas"><i class="fa fa-check"></i><b>3.4</b> Ordenar marcos de datos por columnas</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#la-función-arrange-con-una-sola-columna"><i class="fa fa-check"></i><b>3.4.1</b> La función arrange() con una sola columna</a></li>
+<li class="chapter" data-level="3.4.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#la-función-arrange-con-múltiples-columnas"><i class="fa fa-check"></i><b>3.4.2</b> La función arrange() con múltiples columnas</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#crear-una-tubería-de-transformación-de-datos"><i class="fa fa-check"></i><b>3.5</b> Crear una tubería de transformación de datos</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#usando-el-operador"><i class="fa fa-check"></i><b>3.5.1</b> Usando el operador %&gt;%</a></li>
+<li class="chapter" data-level="3.5.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ejercicios"><i class="fa fa-check"></i><b>3.5.2</b> Ejercicios:</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html"><i class="fa fa-check"></i><b>4</b> Introducción a Machine Learning</a><ul>
+<li class="chapter" data-level="4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#inteligencia-artificial"><i class="fa fa-check"></i><b>4.1</b> Inteligencia artificial</a></li>
+<li class="chapter" data-level="4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#machine-learning-aprendizaje-automático"><i class="fa fa-check"></i><b>4.2</b> Machine Learning (Aprendizaje automático)</a></li>
+<li class="chapter" data-level="4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-profundo-deep-learning"><i class="fa fa-check"></i><b>4.3</b> Aprendizaje profundo (Deep Learning)</a></li>
+<li class="chapter" data-level="4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#casos-de-uso-populares"><i class="fa fa-check"></i><b>4.4</b> Casos de uso populares</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-motores-de-búsqueda-y-sistemas-de-recomendación"><i class="fa fa-check"></i><b>4.4.1</b> Caso de uso: motores de búsqueda y sistemas de recomendación</a></li>
+<li class="chapter" data-level="4.4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-traducción-automática"><i class="fa fa-check"></i><b>4.4.2</b> Caso de uso: traducción automática</a></li>
+<li class="chapter" data-level="4.4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-identificación-de-música-y-reconocimiento-de-voz"><i class="fa fa-check"></i><b>4.4.3</b> Caso de uso: identificación de música y reconocimiento de voz</a></li>
+<li class="chapter" data-level="4.4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-coches-autónomos"><i class="fa fa-check"></i><b>4.4.4</b> Caso de uso: coches autónomos</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#técnicas-de-machine-learning"><i class="fa fa-check"></i><b>4.5</b> Técnicas de Machine Learning</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado"><i class="fa fa-check"></i><b>4.5.1</b> Aprendizaje supervisado</a></li>
+<li class="chapter" data-level="4.5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-objetivo"><i class="fa fa-check"></i><b>4.5.2</b> Aprendizaje supervisado: objetivo</a></li>
+<li class="chapter" data-level="4.5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-no-supervisado"><i class="fa fa-check"></i><b>4.5.3</b> Aprendizaje no supervisado</a></li>
+<li class="chapter" data-level="4.5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-reforzado"><i class="fa fa-check"></i><b>4.5.4</b> Aprendizaje reforzado</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-con-regresión-y-clasificación"><i class="fa fa-check"></i><b>4.6</b> Aprendizaje supervisado con regresión y clasificación</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-datos-de-entrada"><i class="fa fa-check"></i><b>4.6.1</b> Aprendizaje supervisado: datos de entrada</a></li>
+<li class="chapter" data-level="4.6.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#predictores"><i class="fa fa-check"></i><b>4.6.2</b> Predictores</a></li>
+<li class="chapter" data-level="4.6.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#variable-de-resultado"><i class="fa fa-check"></i><b>4.6.3</b> Variable de resultado</a></li>
+<li class="chapter" data-level="4.6.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#regresión-vs.-clasificación"><i class="fa fa-check"></i><b>4.6.4</b> Regresión vs. clasificación</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R en las Ciencias Agropecuarias</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="transformación-de-datos-con-dplyr" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Transformación de datos con dplyr</h1>
+<p>Utilice verbos <code>dplyr</code> básicos para filtrar filas, seleccionar columnas y ordenar/organizar conjuntos de datos en combinación con el operador pipe <code>%&gt;%</code>.</p>
+<div id="introducción-a-dplyr" class="section level2">
+<h2><span class="header-section-number">3.1</span> Introducción a dplyr</h2>
+<p><strong>dplyr</strong> facilita el proceso de transformación de datos al proporcionar un marco enriquecido para manipular marcos de datos. Las funciones de <strong>dplyr</strong> se pueden concatenar a potentes canalizaciones de transformación para <em>seleccionar</em>, <em>filtrar</em>, <em>ordenar</em>, <em>unir</em> y <em>agregar</em> datos.</p>
+<ul>
+<li>Descubra lo que hace <strong>dplyr</strong></li>
+<li>Obtenga una descripción general de Seleccionar, Filtrar y Ordenar</li>
+<li>Descubra qué son las uniones, agregaciones y canalizaciones</li>
+</ul>
+<div id="qué-es-dplyr" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> ¿Qué es dplyr?</h3>
+<blockquote>
+<p>Existe la broma de que el 80 % de la ciencia de datos está limpiando los datos y el 20 % se queja de limpiar los datos.
+— Anthony Goldbloom, fundador y CEO de Kaggle</p>
+</blockquote>
+<p>Tener datos <em>limpios</em> en cualquier proyecto de Data Science es muy importante, porque los resultados solo son tan buenos como los datos correctos. La limpieza de datos también es la parte que generalmente consume la mayor parte del tiempo y causa los mayores dolores para los científicos de datos. R ya ofrece un amplio conjunto de herramientas y funciones para manipular marcos de datos. Sin embargo, debido a su larga historia, el conjunto de herramientas base R disponible está fragmentado y es difícil de usar para nuevos usuarios.</p>
+<p>El paquete <strong>dplyr</strong> facilita el proceso de transformación de datos a través de una colección consistente de funciones. Estas funciones admiten diferentes transformaciones en marcos de datos, que incluyen</p>
+<ul>
+<li>filtrar filas</li>
+<li>seleccionar columnas</li>
+<li>ordenar datos</li>
+<li>agregar datos</li>
+</ul>
+<p>Múltiples marcos de datos también se pueden unir mediante valores de atributo comunes.</p>
+<p>La coherencia de las funciones de <strong>dplyr</strong> mejora la usabilidad y permite al usuario conectar transformaciones para formar <em>canalizaciones de datos</em>. Estas canalizaciones también se pueden ver como un lenguaje de consulta de alto nivel, como p. Ej. el lenguaje SQL para consultas de bases de datos. Además, incluso es posible traducir las canalizaciones de datos creadas a otros back-end, incluidas las bases de datos.</p>
+</div>
+<div id="marco-de-funciones" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Marco de funciones</h3>
+<p>Cada función de transformación de datos en <strong>dplyr</strong> acepta un marco de datos como su primer parámetro de entrada y devuelve el marco de datos transformado como salida. Un plano para una función <strong>dplyr</strong> típica se ve así:</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="transformación-de-datos-con-dplyr.html#cb147-1"></a>transformed &lt;-<span class="st"> </span><span class="kw">dplyr_function</span>(my_data_frame, </span>
+<span id="cb147-2"><a href="transformación-de-datos-con-dplyr.html#cb147-2"></a>                              param_one, </span>
+<span id="cb147-3"><a href="transformación-de-datos-con-dplyr.html#cb147-3"></a>                              param_two, </span>
+<span id="cb147-4"><a href="transformación-de-datos-con-dplyr.html#cb147-4"></a>                              ...)</span></code></pre></div>
+<p>La función <code>dplyr_function</code> se puede personalizar aún más a través de argumentos adicionales (<code>param_one</code>, <code>param_two</code>) colocados después del primer parámetro de marco de datos (<code>my_data_frame</code>).</p>
+<p>El poder real de <strong>dplyr</strong> viene con el operador pipe <code>%&gt;%</code> que permite a los usuarios concatenar funciones de <strong>dplyr</strong> a pipe de datos. Pipe inyecta el marco de datos resultante del cálculo anterior como primer argumento del siguiente. Una transformación de datos que consta de tres funciones se parece a:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="transformación-de-datos-con-dplyr.html#cb148-1"></a><span class="kw">dplyr_function_three</span>(</span>
+<span id="cb148-2"><a href="transformación-de-datos-con-dplyr.html#cb148-2"></a>  <span class="kw">dplyr_function_two</span>(</span>
+<span id="cb148-3"><a href="transformación-de-datos-con-dplyr.html#cb148-3"></a>    <span class="kw">dplyr_function_one</span>(input_data_frame)))</span></code></pre></div>
+<p>pero con <code>pipe</code> se puede escribir de la siguiente manera:</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="transformación-de-datos-con-dplyr.html#cb149-1"></a>input_data_frame <span class="op">%&gt;%</span></span>
+<span id="cb149-2"><a href="transformación-de-datos-con-dplyr.html#cb149-2"></a><span class="st">  </span><span class="kw">dplyr_function_one</span>() <span class="op">%&gt;%</span></span>
+<span id="cb149-3"><a href="transformación-de-datos-con-dplyr.html#cb149-3"></a><span class="st">  </span><span class="kw">dplyr_function_two</span>() <span class="op">%&gt;%</span></span>
+<span id="cb149-4"><a href="transformación-de-datos-con-dplyr.html#cb149-4"></a><span class="st">  </span><span class="kw">dplyr_function_three</span>()</span></code></pre></div>
+<p>El orden de lectura diferente de las funciones de transformación de datos en el orden de transformación real, hace que las canalizaciones sean más fáciles de leer que las llamadas a funciones anidadas.</p>
+</div>
+</div>
+<div id="seleccionar-columnas-de-un-marco-de-datos" class="section level2">
+<h2><span class="header-section-number">3.2</span> Seleccionar columnas de un marco de datos</h2>
+<p>Para seleccionar sólo un conjunto específico de columnas de marcos de datos interesantes, <strong>dplyr</strong> ofrece la función <code>select()</code> para extraer columnas por nombres, índices y rangos. Incluso puede renombrar las columnas extraídas con <code>select()</code>.</p>
+<ul>
+<li>Aprenda a usar la función <code>select()</code></li>
+<li>Seleccionar las columnas de un marco de datos por nombre o índice</li>
+<li>Renombrar las columnas de un marco de datos</li>
+</ul>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="transformación-de-datos-con-dplyr.html#cb150-1"></a><span class="kw">select</span>(my_data_frame, column_one, column_two, ...)</span>
+<span id="cb150-2"><a href="transformación-de-datos-con-dplyr.html#cb150-2"></a><span class="kw">select</span>(my_data_frame, <span class="dt">new_column_name =</span> current_column, ...)</span>
+<span id="cb150-3"><a href="transformación-de-datos-con-dplyr.html#cb150-3"></a><span class="kw">select</span>(my_data_frame, column_start<span class="op">:</span>column_end)</span>
+<span id="cb150-4"><a href="transformación-de-datos-con-dplyr.html#cb150-4"></a><span class="kw">select</span>(my_data_frame, index_one, index_two, ...)</span>
+<span id="cb150-5"><a href="transformación-de-datos-con-dplyr.html#cb150-5"></a><span class="kw">select</span>(my_data_frame, index_start<span class="op">:</span>index_end)</span></code></pre></div>
+<div id="seleccionando-por-nombre" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Seleccionando por nombre</h3>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="transformación-de-datos-con-dplyr.html#cb151-1"></a><span class="kw">select</span>(my_data_frame, column_one, column_two, ...)</span></code></pre></div>
+<p>En este capítulo veremos el conjunto de datos <code>pres_results</code> del paquete <strong>politicaldata</strong>. Contiene datos sobre las elecciones presidenciales de EE.UU. desde 1976, convertidas en un Tibble para una mejor impresión.</p>
+<pre><code>## # A tibble: 561 x 6
+##     year state total_votes   dem   rep   other
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+##  1  1976 AK         123574 0.357 0.579 0.0549 
+##  2  1976 AL        1182850 0.557 0.426 0.0163 
+##  3  1976 AR         767535 0.650 0.349 0.00134
+##  4  1976 AZ         742719 0.398 0.564 0.0383 
+##  5  1976 CA        7803770 0.480 0.497 0.0230 
+##  6  1976 CO        1081440 0.426 0.540 0.0336 
+##  7  1976 CT        1386355 0.467 0.519 0.0138 
+##  8  1976 DC         168830 0.816 0.165 0.0169 
+##  9  1976 DE         235642 0.520 0.466 0.0144 
+## 10  1976 FL        3150631 0.519 0.466 0.0143 
+## # … with 551 more rows</code></pre>
+<p>Para este ejemplo, veremos el número total de votos en diferentes estados en diferentes elecciones. Como solo estamos interesados en la cantidad de personas que votaron, nos gustaría crear una versión personalizada del marco de datos <code>pres_results</code> que solo contenga las columnas <code>year</code>, <code>state</code> y <code>total_votes</code>. Para dicho filtrado, podemos usar la función <code>select()</code> del paquete <strong>dplyr</strong>.</p>
+<p>La función <code>select()</code> toma un marco de datos como parámetro de entrada y nos permite decidir cuál de las columnas queremos mantener. El resultado de la función es un marco de datos con todas las filas, pero que contiene solo las columnas que seleccionamos explícitamente.</p>
+<p>Podemos reducir nuestro conjunto de datos a solo <code>year</code>, <code>state</code> y <code>total_votes</code> de la siguiente manera:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="transformación-de-datos-con-dplyr.html#cb153-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb153-2"><a href="transformación-de-datos-con-dplyr.html#cb153-2"></a><span class="kw">select</span>(pres_results, year, state, total_votes)</span>
+<span id="cb153-3"><a href="transformación-de-datos-con-dplyr.html#cb153-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 561 x 3
+##     year state total_votes
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1  1976 AK         123574
+##  2  1976 AL        1182850
+##  3  1976 AR         767535
+##  4  1976 AZ         742719
+##  5  1976 CA        7803770
+##  6  1976 CO        1081440
+##  7  1976 CT        1386355
+##  8  1976 DC         168830
+##  9  1976 DE         235642
+## 10  1976 FL        3150631
+## # … with 551 more rows</code></pre>
+<p>Como primer parámetro pasamos el marco de datos <code>pres_results</code>, como parámetros restantes pasamos las columnas que queremos mantener para <code>select()</code>.</p>
+<p>Además de mantener las columnas que queremos, la función <code>select()</code> también las mantiene en el mismo orden que especificamos en los parámetros de la función.</p>
+<p>Si cambiamos el orden de los parámetros cuando llamamos a la función, las columnas de la salida cambian en consecuencia:</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="transformación-de-datos-con-dplyr.html#cb155-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb155-2"><a href="transformación-de-datos-con-dplyr.html#cb155-2"></a><span class="kw">select</span>(pres_results, total_votes, year, state)</span>
+<span id="cb155-3"><a href="transformación-de-datos-con-dplyr.html#cb155-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 561 x 3
+##    total_votes  year state
+##          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+##  1      123574  1976 AK   
+##  2     1182850  1976 AL   
+##  3      767535  1976 AR   
+##  4      742719  1976 AZ   
+##  5     7803770  1976 CA   
+##  6     1081440  1976 CO   
+##  7     1386355  1976 CT   
+##  8      168830  1976 DC   
+##  9      235642  1976 DE   
+## 10     3150631  1976 FL   
+## # … with 551 more rows</code></pre>
+</div>
+<div id="renombrar-nombres-de-columnas" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Renombrar nombres de columnas</h3>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="transformación-de-datos-con-dplyr.html#cb157-1"></a><span class="kw">select</span>(my_data_frame, <span class="dt">new_column_name =</span> current_column, ...)</span></code></pre></div>
+<p>Además de definir las columnas que queremos conservar, también podemos cambiarles el nombre. Para hacer esto, necesitamos establecer el nuevo nombre de columna dentro de la función <code>select()</code> usando el comando</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="transformación-de-datos-con-dplyr.html#cb158-1"></a>new_column_name =<span class="st"> </span>current_column</span></code></pre></div>
+<p>En el siguiente ejemplo, seleccionamos las columnas <code>year</code>, <code>state</code> y <code>total_votes</code> pero cambiamos el nombre de la columna <code>year</code> a <code>Election</code> en la salida:</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="transformación-de-datos-con-dplyr.html#cb159-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb159-2"><a href="transformación-de-datos-con-dplyr.html#cb159-2"></a><span class="kw">select</span>(pres_results, <span class="dt">Election =</span> year, state, total_votes)</span>
+<span id="cb159-3"><a href="transformación-de-datos-con-dplyr.html#cb159-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 561 x 3
+##    Election state total_votes
+##       &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1     1976 AK         123574
+##  2     1976 AL        1182850
+##  3     1976 AR         767535
+##  4     1976 AZ         742719
+##  5     1976 CA        7803770
+##  6     1976 CO        1081440
+##  7     1976 CT        1386355
+##  8     1976 DC         168830
+##  9     1976 DE         235642
+## 10     1976 FL        3150631
+## # … with 551 more rows</code></pre>
+</div>
+<div id="selección-por-rango-de-nombre" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Selección por rango de nombre</h3>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="transformación-de-datos-con-dplyr.html#cb161-1"></a><span class="kw">select</span>(my_data_frame, column_start<span class="op">:</span>column_end)</span></code></pre></div>
+<p>Cuando usamos la función <code>select()</code> y definimos las columnas que queremos mantener, <strong>dplyr</strong> en realidad no usa el nombre de las columnas sino el índice de las columnas en el marco de datos. Esto significa que, cuando definimos las primeras tres columnas del marco de datos <code>pres_results</code>, <code>year</code>, <code>state</code> y <code>total_votes</code>, <strong>dplyr</strong> convierte estos nombres en los valores de índice <code>1</code>, <code>2</code> y <code>3</code>. Por lo tanto, también podemos usar el nombre de las columnas, aplicar el operador <code>:</code> y definir rangos de columnas, que queremos mantener:</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="transformación-de-datos-con-dplyr.html#cb162-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb162-2"><a href="transformación-de-datos-con-dplyr.html#cb162-2"></a><span class="kw">select</span>(pres_results, year<span class="op">:</span>total_votes)</span>
+<span id="cb162-3"><a href="transformación-de-datos-con-dplyr.html#cb162-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 561 x 3
+##     year state total_votes
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1  1976 AK         123574
+##  2  1976 AL        1182850
+##  3  1976 AR         767535
+##  4  1976 AZ         742719
+##  5  1976 CA        7803770
+##  6  1976 CO        1081440
+##  7  1976 CT        1386355
+##  8  1976 DC         168830
+##  9  1976 DE         235642
+## 10  1976 FL        3150631
+## # … with 551 more rows</code></pre>
+<p>Lo que hace <code>year:total_votes</code>, se puede traducir a <code>1:3</code>, que es simplemente crear un vector de valores numéricos del 1 al 3. Luego, la función <code>select()</code> toma el marco de datos <code>pres_results</code> y genera un subconjunto del mismo, manteniendo solo Las primeras tres columnas.</p>
+</div>
+<div id="select-por-índices" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> Select() por índices</h3>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="transformación-de-datos-con-dplyr.html#cb164-1"></a><span class="kw">select</span>(my_data_frame, index_one, index_two, ...)</span>
+<span id="cb164-2"><a href="transformación-de-datos-con-dplyr.html#cb164-2"></a><span class="kw">select</span>(my_data_frame, index_start<span class="op">:</span>index_end)</span></code></pre></div>
+<p>La función <code>select()</code> también se puede usar con índices de columna. En lugar de usar nombres, debemos especificar las columnas que queremos seleccionar por sus índices. En comparación con otros lenguajes de programación, la indexación en R comienza con <em>uno</em> en lugar de <em>cero</em>. Para seleccionar la primera, cuarta y quinta columna del conjunto de datos <code>pres_results</code> podemos escribir</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="transformación-de-datos-con-dplyr.html#cb165-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb165-2"><a href="transformación-de-datos-con-dplyr.html#cb165-2"></a><span class="kw">select</span>(pres_results, <span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb165-3"><a href="transformación-de-datos-con-dplyr.html#cb165-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 561 x 3
+##     year   dem   rep
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  1976 0.357 0.579
+##  2  1976 0.557 0.426
+##  3  1976 0.650 0.349
+##  4  1976 0.398 0.564
+##  5  1976 0.480 0.497
+##  6  1976 0.426 0.540
+##  7  1976 0.467 0.519
+##  8  1976 0.816 0.165
+##  9  1976 0.520 0.466
+## 10  1976 0.519 0.466
+## # … with 551 more rows</code></pre>
+<p>De manera similar a la definición de rangos de columnas usando sus nombres, podemos definir rangos (o vectores) de valores de índice en su lugar:</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="transformación-de-datos-con-dplyr.html#cb167-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb167-2"><a href="transformación-de-datos-con-dplyr.html#cb167-2"></a><span class="kw">select</span>(pres_results, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</span>
+<span id="cb167-3"><a href="transformación-de-datos-con-dplyr.html#cb167-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 561 x 3
+##     year state total_votes
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1  1976 AK         123574
+##  2  1976 AL        1182850
+##  3  1976 AR         767535
+##  4  1976 AZ         742719
+##  5  1976 CA        7803770
+##  6  1976 CO        1081440
+##  7  1976 CT        1386355
+##  8  1976 DC         168830
+##  9  1976 DE         235642
+## 10  1976 FL        3150631
+## # … with 551 more rows</code></pre>
+</div>
+</div>
+<div id="filtrar-filas-de-marcos-de-datos" class="section level2">
+<h2><span class="header-section-number">3.3</span> Filtrar filas de marcos de datos</h2>
+<p>A menudo queremos operar sólo en un subconjunto específico de filas de un marco de datos. La función <strong>dplyr</strong> <code>filter()</code> proporciona una forma flexible de extraer las filas de interés en base a múltiples condiciones.</p>
+<ul>
+<li>Utilice la función <code>filter()</code> para ordenar las filas de un marco de datos que cumplan una condición específica</li>
+<li>Filtrar un cuadro de datos por múltiples condiciones</li>
+</ul>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="transformación-de-datos-con-dplyr.html#cb169-1"></a><span class="kw">filter</span>(my_data_frame, condition)</span>
+<span id="cb169-2"><a href="transformación-de-datos-con-dplyr.html#cb169-2"></a><span class="kw">filter</span>(my_data_frame, condition_one, condition_two, ...)</span></code></pre></div>
+<div id="función-filter" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Función filter()</h3>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="transformación-de-datos-con-dplyr.html#cb170-1"></a><span class="kw">filter</span>(my_data_frame, condition)</span></code></pre></div>
+<p>La función <code>filter()</code> toma un marco de datos y una o más expresiones de filtrado como parámetros de entrada. Procesa el marco de datos y mantiene solo las filas que cumplen con las expresiones de filtrado definidas. Estas expresiones pueden verse como reglas para la evaluación y el mantenimiento de filas. En la mayoría de los casos, se basan en operadores relacionales. Como ejemplo, podríamos filtrar el marco de datos <code>pres_results</code> y mantener solo las filas, donde la variable de <code>state</code> es igual a <code>"CA"</code> (California):</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="transformación-de-datos-con-dplyr.html#cb171-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb171-2"><a href="transformación-de-datos-con-dplyr.html#cb171-2"></a><span class="kw">filter</span>(pres_results, state <span class="op">==</span><span class="st"> &quot;CA&quot;</span>)</span>
+<span id="cb171-3"><a href="transformación-de-datos-con-dplyr.html#cb171-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 6
+##     year state total_votes   dem   rep  other
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1  1976 CA        7803770 0.480 0.497 0.0230
+##  2  1980 CA        8582938 0.359 0.527 0.114 
+##  3  1984 CA        9505041 0.413 0.575 0.0122
+##  4  1988 CA        9887065 0.476 0.511 0.0131
+##  5  1992 CA       11131721 0.460 0.326 0.213 
+##  6  1996 CA       10019469 0.511 0.382 0.107 
+##  7  2000 CA       10965822 0.534 0.417 0.0490
+##  8  2004 CA       12421353 0.543 0.444 0.0117
+##  9  2008 CA       13561900 0.610 0.370 0.0188
+## 10  2012 CA       13038547 0.602 0.371 0.0246
+## 11  2016 CA       14181595 0.617 0.316 0.0581</code></pre>
+<p>En el resultado, podemos comparar los resultados de las elecciones en California para diferentes años.</p>
+<p>Como otro ejemplo, podríamos filtrar el marco de datos <code>pres_results</code> y mantener solo aquellas filas, donde la variable <code>dem</code> (porcentaje de votos para el Partido Demócrata) es mayor que 0.85:</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="transformación-de-datos-con-dplyr.html#cb173-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb173-2"><a href="transformación-de-datos-con-dplyr.html#cb173-2"></a><span class="kw">filter</span>(pres_results, dem <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.85</span>)</span>
+<span id="cb173-3"><a href="transformación-de-datos-con-dplyr.html#cb173-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 7 x 6
+##    year state total_votes   dem    rep   other
+##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1  1984 DC         211288 0.854 0.137  0.00886
+## 2  1996 DC         185726 0.852 0.0934 0.0513 
+## 3  2000 DC         201894 0.852 0.0895 0.0563 
+## 4  2004 DC         227586 0.892 0.0934 0.0125 
+## 5  2008 DC         265853 0.925 0.0653 0.00582
+## 6  2012 DC         293764 0.909 0.0728 0.0155 
+## 7  2016 DC         312575 0.905 0.0407 0.0335</code></pre>
+<p>En el resultado podemos ver para cada año electoral los estados donde el Partido Demócrata obtuvo más del 85% de los votos. Según los resultados, podríamos decir que el Partido Demócrata tiene una base sólida de votantes en el Distrito de Columbia (conocido como Washington, D.C.).</p>
+</div>
+<div id="múltiples-expresiones-de-filtro" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Múltiples expresiones de filtro</h3>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="transformación-de-datos-con-dplyr.html#cb175-1"></a><span class="kw">filter</span>(my_data_frame, condition_one, condition_two, ...)</span></code></pre></div>
+<p>La función <code>filter()</code> también puede tomar múltiples reglas de filtrado como entrada. Estos pueden verse como una combinación de reglas con el operador <code>&amp;</code>. Para que una fila se incluya en la salida, todas las reglas de filtrado deben cumplirse. En el siguiente ejemplo, filtramos el marco de datos <code>pres_results</code> para todas las filas donde la variable <code>state</code> es igual a <code>"CA"</code> y la variable de <code>year</code> es igual a 2016:</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="transformación-de-datos-con-dplyr.html#cb176-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb176-2"><a href="transformación-de-datos-con-dplyr.html#cb176-2"></a><span class="kw">filter</span>(pres_results, state <span class="op">==</span><span class="st"> &quot;CA&quot;</span>, year<span class="op">==</span><span class="dv">2016</span>)</span>
+<span id="cb176-3"><a href="transformación-de-datos-con-dplyr.html#cb176-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 6
+##    year state total_votes   dem   rep  other
+##   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1  2016 CA       14181595 0.617 0.316 0.0581</code></pre>
+<p>Obtenemos una sola fila como salida, que contiene los resultados de las elecciones presidenciales de 2016 en los Estados Unidos para el estado de California.</p>
+<p><strong>Ejercicio: Usar filter() con múltiples reglas</strong>
+El conjunto de datos del <code>gapminder</code> contiene datos económicos y demográficos sobre diversos países desde 1952. Filtra el tibble e inspecciona qué países tenían una esperanza de vida de más de 80 años en el año 2007. Los paquetes necesarios ya están cargados.</p>
+<ol style="list-style-type: decimal">
+<li>Utiliza la función <code>filter()</code> en el tibble de gapminder.</li>
+<li>Filtra todas las filas en las que la variable <code>year</code> es igual a 2007 y la esperanza de vida <code>lifeExp</code> es mayor de 80!</li>
+</ol>
+<p>Solución</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="transformación-de-datos-con-dplyr.html#cb178-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb178-2"><a href="transformación-de-datos-con-dplyr.html#cb178-2"></a><span class="kw">filter</span>(gapminder, year<span class="op">==</span><span class="dv">2007</span>, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)</span>
+<span id="cb178-3"><a href="transformación-de-datos-con-dplyr.html#cb178-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 13 x 6
+##    country          continent  year lifeExp       pop gdpPercap
+##    &lt;fct&gt;            &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1 Australia        Oceania    2007    81.2  20434176    34435.
+##  2 Canada           Americas   2007    80.7  33390141    36319.
+##  3 France           Europe     2007    80.7  61083916    30470.
+##  4 Hong Kong, China Asia       2007    82.2   6980412    39725.
+##  5 Iceland          Europe     2007    81.8    301931    36181.
+##  6 Israel           Asia       2007    80.7   6426679    25523.
+##  7 Italy            Europe     2007    80.5  58147733    28570.
+##  8 Japan            Asia       2007    82.6 127467972    31656.
+##  9 New Zealand      Oceania    2007    80.2   4115771    25185.
+## 10 Norway           Europe     2007    80.2   4627926    49357.
+## 11 Spain            Europe     2007    80.9  40448191    28821.
+## 12 Sweden           Europe     2007    80.9   9031088    33860.
+## 13 Switzerland      Europe     2007    81.7   7554661    37506.</code></pre>
+<p><strong>Ejercicio</strong>
+El conjunto de datos del <code>gapminder</code> contiene datos económicos y demográficos sobre diversos países desde 1952. Filtra el tibble de <code>gapminder</code> e inspecciona qué países tenían una población de más de 1.000.000.000 en el año 2007! Los paquetes necesarios ya están cargados.</p>
+<ol style="list-style-type: decimal">
+<li>Utiliza la función <code>filter()</code> en el tibble <code>gapminder</code>.</li>
+<li>Filtra todas las filas donde la variable <code>year</code> es igual a 2007 y la población <code>pop</code> es mayor de 1000000000!</li>
+</ol>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="transformación-de-datos-con-dplyr.html#cb180-1"></a><span class="kw">filter</span>(gapminder, year<span class="op">==</span><span class="dv">2007</span>, pop <span class="op">&gt;</span><span class="st"> </span><span class="dv">1000000000</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 6
+##   country continent  year lifeExp        pop gdpPercap
+##   &lt;fct&gt;   &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;      &lt;int&gt;     &lt;dbl&gt;
+## 1 China   Asia       2007    73.0 1318683096     4959.
+## 2 India   Asia       2007    64.7 1110396331     2452.</code></pre>
+</div>
+</div>
+<div id="ordenar-marcos-de-datos-por-columnas" class="section level2">
+<h2><span class="header-section-number">3.4</span> Ordenar marcos de datos por columnas</h2>
+<p>Para seleccionar las áreas de interés en un marco de datos, a menudo es necesario ordenarlas por columnas específicas. La función <strong>dplyr</strong> <code>arrange()</code> permite ordenar los marcos de datos por múltiples columnas en orden ascendente y descendente.</p>
+<ul>
+<li>Utilice la función <code>arrange()</code> para ordenar los marcos de datos.</li>
+<li>Ordene los marcos de datos por múltiples columnas usando <code>arrange()</code>.</li>
+</ul>
+<pre><code>arrange(my_data_frame, column_one)
+arrange(my_data_frame, column_one, column_two, ...)</code></pre>
+<div id="la-función-arrange-con-una-sola-columna" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> La función arrange() con una sola columna</h3>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="transformación-de-datos-con-dplyr.html#cb183-1"></a><span class="kw">arrange</span>(my_data_frame, column_one)</span></code></pre></div>
+<p>La función <code>arrange()</code> ordena las filas de un marco de datos. Toma un marco de datos o un tibble como primer parámetro y los nombres de las columnas en función de los cuales las filas deben ordenarse como parámetros adicionales. Supongamos que queremos responder la pregunta: <em>¿Qué estados tuvieron el mayor porcentaje de votantes republicanos en las elecciones presidenciales de 2016 en los Estados Unidos?</em> Para responder a esta pregunta, en el siguiente ejemplo usamos el marco de datos <code>pres_results_2016</code>, que contiene información solo para las elecciones presidenciales de EE.UU. de 2016. Nuestra función <code>arrange()</code> en el marco de datos <code>rep</code> basado en la columna (votos republicanos en porcentaje):</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="transformación-de-datos-con-dplyr.html#cb184-1"></a>pres_results_<span class="dv">2016</span> &lt;-<span class="st"> </span>pres_results <span class="op">%&gt;%</span></span>
+<span id="cb184-2"><a href="transformación-de-datos-con-dplyr.html#cb184-2"></a><span class="st">  </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">2016</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="transformación-de-datos-con-dplyr.html#cb185-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb185-2"><a href="transformación-de-datos-con-dplyr.html#cb185-2"></a><span class="kw">arrange</span>(pres_results_<span class="dv">2016</span>, rep)</span>
+<span id="cb185-3"><a href="transformación-de-datos-con-dplyr.html#cb185-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 51 x 6
+##     year state total_votes   dem    rep  other
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1  2016 DC         312575 0.905 0.0407 0.0335
+##  2  2016 HI         437664 0.610 0.294  0.0958
+##  3  2016 VT         320467 0.557 0.298  0.0737
+##  4  2016 CA       14181595 0.617 0.316  0.0581
+##  5  2016 MA        3378821 0.591 0.323  0.0858
+##  6  2016 MD        2781446 0.603 0.339  0.0415
+##  7  2016 NY        7802084 0.584 0.361  0.0530
+##  8  2016 WA        3317019 0.525 0.368  0.0738
+##  9  2016 IL        5536424 0.558 0.388  0.0517
+## 10  2016 RI         464144 0.544 0.389  0.0466
+## # … with 41 more rows</code></pre>
+<p>Como puede ver en la salida, el marco de datos se ordena en orden ascendente según la columna <code>rep</code>. Sin embargo, preferiríamos tener los resultados en orden descendente, para que podamos ver instantáneamente <code>state</code> con el mayor porcentaje de repeticiones. Para ordenar una columna en orden descendente, todo lo que tenemos que hacer es aplicar la función <code>desc()</code> en la columna dada dentro de la función <code>arrange()</code>:</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="transformación-de-datos-con-dplyr.html#cb187-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb187-2"><a href="transformación-de-datos-con-dplyr.html#cb187-2"></a><span class="kw">arrange</span>(pres_results_<span class="dv">2016</span>, <span class="kw">desc</span>(rep))</span>
+<span id="cb187-3"><a href="transformación-de-datos-con-dplyr.html#cb187-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 51 x 6
+##     year state total_votes   dem   rep  other
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1  2016 WV         713051 0.265 0.686 0.0489
+##  2  2016 WY         258788 0.216 0.674 0.0830
+##  3  2016 OK        1452992 0.289 0.653 0.0575
+##  4  2016 ND         344360 0.272 0.630 0.0971
+##  5  2016 KY        1924149 0.327 0.625 0.0476
+##  6  2016 AL        2123372 0.344 0.621 0.0254
+##  7  2016 SD         370093 0.317 0.615 0.0673
+##  8  2016 TN        2508027 0.347 0.607 0.0401
+##  9  2016 AR        1130635 0.337 0.606 0.0577
+## 10  2016 ID         690255 0.275 0.593 0.132 
+## # … with 41 more rows</code></pre>
+<p>La organización no solo es posible en valores numéricos, sino también en valores de caracteres. En ese caso, <strong>dplyr</strong> ordena las filas en orden alfabético. Podemos organizar columnas de caracteres como las numéricas:</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="transformación-de-datos-con-dplyr.html#cb189-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb189-2"><a href="transformación-de-datos-con-dplyr.html#cb189-2"></a><span class="kw">arrange</span>(pres_results_<span class="dv">2016</span>, state)</span>
+<span id="cb189-3"><a href="transformación-de-datos-con-dplyr.html#cb189-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 51 x 6
+##     year state total_votes   dem    rep  other
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1  2016 AK         318608 0.366 0.513  0.0928
+##  2  2016 AL        2123372 0.344 0.621  0.0254
+##  3  2016 AR        1130635 0.337 0.606  0.0577
+##  4  2016 AZ        2573165 0.451 0.487  0.0547
+##  5  2016 CA       14181595 0.617 0.316  0.0581
+##  6  2016 CO        2780220 0.482 0.433  0.0859
+##  7  2016 CT        1644920 0.546 0.409  0.0435
+##  8  2016 DC         312575 0.905 0.0407 0.0335
+##  9  2016 DE         441590 0.534 0.419  0.0472
+## 10  2016 FL        9420039 0.478 0.490  0.0315
+## # … with 41 more rows</code></pre>
+</div>
+<div id="la-función-arrange-con-múltiples-columnas" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> La función arrange() con múltiples columnas</h3>
+<p>También podemos usar la función <code>arrange()</code> en varias columnas. En este caso, el orden de las columnas en los parámetros de la función establece una jerarquía de ordenamiento. La función comienza ordenando las filas en función de la primera columna definida en los parámetros. En caso de que haya varias filas con el mismo valor, la función decide el orden en función de la segunda columna definida en los parámetros. Si todavía hay varias filas con los mismos valores, la función decide en función de la tercera columna definida en los parámetros (si está definida) y así sucesivamente.</p>
+<p>En el siguiente ejemplo, utilizamos el marco de datos <code>pres_results_subset</code>, que contiene los resultados de las elecciones solo para los estados: <code>"TX"</code> (Texas), <code>"UT"</code> (Utah) y <code>"FL"</code> (Florida). Primero ordenamos el marco de datos en orden descendente según la columna de year. Luego, agregamos un segundo nivel y ordenamos el marco de datos basado en la columna <code>dem</code>:</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="transformación-de-datos-con-dplyr.html#cb191-1"></a>pres_results_subset &lt;-<span class="st"> </span>pres_results <span class="op">%&gt;%</span></span>
+<span id="cb191-2"><a href="transformación-de-datos-con-dplyr.html#cb191-2"></a><span class="st">  </span><span class="kw">filter</span>(state <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;TX&quot;</span>,</span>
+<span id="cb191-3"><a href="transformación-de-datos-con-dplyr.html#cb191-3"></a>                      <span class="st">&quot;UT&quot;</span>,</span>
+<span id="cb191-4"><a href="transformación-de-datos-con-dplyr.html#cb191-4"></a>                      <span class="st">&quot;FL&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="transformación-de-datos-con-dplyr.html#cb192-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb192-2"><a href="transformación-de-datos-con-dplyr.html#cb192-2"></a><span class="kw">arrange</span>(pres_results_subset, year, dem)</span>
+<span id="cb192-3"><a href="transformación-de-datos-con-dplyr.html#cb192-3"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 33 x 6
+##     year state total_votes   dem   rep    other
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+##  1  1976 UT         541218 0.336 0.624 0.0392  
+##  2  1976 TX        4071884 0.511 0.480 0.00817 
+##  3  1976 FL        3150631 0.519 0.466 0.0143  
+##  4  1980 UT         604152 0.206 0.728 0.0665  
+##  5  1980 FL        3686927 0.385 0.555 0.0597  
+##  6  1980 TX        4541636 0.414 0.553 0.0329  
+##  7  1984 UT         629656 0.247 0.745 0.00823 
+##  8  1984 FL        4180051 0.347 0.653 0.000212
+##  9  1984 TX        5397571 0.361 0.636 0.00275 
+## 10  1988 UT         647008 0.320 0.662 0.0173  
+## # … with 23 more rows</code></pre>
+<p>Como puede ver en la salida, el marco de datos se ordena en general en función de la columna <code>year</code>. Sin embargo, cuando el valor de <code>year</code> es el mismo, el orden de las filas lo decide la columna <code>dem</code>.</p>
+</div>
+</div>
+<div id="crear-una-tubería-de-transformación-de-datos" class="section level2">
+<h2><span class="header-section-number">3.5</span> Crear una tubería de transformación de datos</h2>
+<p>Todas las funciones de transformación de datos en <strong>dplyr</strong> pueden ser conectadas a través del operador de tubería (pipe) <code>%&gt;%</code> para crear poderosas y a la vez expresivas tuberías de transformación de datos.</p>
+<ul>
+<li>Utilice el operador pipe <code>%&gt;%</code> para combinar múltiples funciones <strong>dplyr</strong> en una tubería</li>
+</ul>
+<pre><code>my_data_frame %&gt;%
+  filter(___) %&gt;%
+  select(___) %&gt;%
+  arrange(___)</code></pre>
+<div id="usando-el-operador" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Usando el operador %&gt;%</h3>
+<p>El operador pipe <code>%&gt;%</code> es una parte especial del universo <code>tidyverse</code>. Se utiliza para combinar múltiples funciones y ejecutarlas una tras otra. En esta configuración, la entrada de cada función es la salida de la función anterior. Imagine que tenemos el marco de datos <code>pres_results</code> y queremos crear un marco de datos más pequeño y transparente para responder a la pregunta: <em>¿En qué estados fue el partido democrático la opción más popular en las elecciones presidenciales de 2016 en los Estados Unidos?</em> Para lograr esta tarea, deberíamos seguir los siguientes pasos:</p>
+<ol style="list-style-type: decimal">
+<li><code>filter()</code> el marco de datos para las filas, donde la variable <code>year</code> es igual a 2016</li>
+<li><code>select()</code> las dos variables <code>state</code> y <code>dem</code>, ya que no estamos interesados en el resto de las columnas.</li>
+<li><code>arrange()</code> el marco de datos filtrado y seleccionado en función de la columna <code>dem</code> de forma descendente.</li>
+</ol>
+<p>Los pasos y funciones descritos anteriormente deben ejecutarse uno tras otro, donde la entrada de cada función es la salida del paso anterior. Aplicando las cosas que aprendió hasta ahora, puede realizar esta tarea siguiendo los siguientes pasos:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="transformación-de-datos-con-dplyr.html#cb195-1"></a>result &lt;-<span class="st"> </span><span class="kw">filter</span>(pres_results, year<span class="op">==</span><span class="dv">2016</span>)</span>
+<span id="cb195-2"><a href="transformación-de-datos-con-dplyr.html#cb195-2"></a>result &lt;-<span class="st"> </span><span class="kw">select</span>(result, state, dem)</span>
+<span id="cb195-3"><a href="transformación-de-datos-con-dplyr.html#cb195-3"></a>result &lt;-<span class="st"> </span><span class="kw">arrange</span>(result, <span class="kw">desc</span>(dem))</span>
+<span id="cb195-4"><a href="transformación-de-datos-con-dplyr.html#cb195-4"></a><span class="kw">tibble</span>(result)</span></code></pre></div>
+<pre><code>## # A tibble: 51 x 2
+##    state   dem
+##    &lt;chr&gt; &lt;dbl&gt;
+##  1 DC    0.905
+##  2 CA    0.617
+##  3 HI    0.610
+##  4 MD    0.603
+##  5 MA    0.591
+##  6 NY    0.584
+##  7 IL    0.558
+##  8 VT    0.557
+##  9 NJ    0.555
+## 10 CT    0.546
+## # … with 41 more rows</code></pre>
+<p>La primera función toma el marco de datos <code>pres_results</code>, lo filtra de acuerdo con la descripción de la tarea y lo asigna a la variable <code>result</code>. Luego, cada función posterior toma la variable <code>result</code> como entrada y la sobrescribe con su propia salida.</p>
+<p>El operador <code>%&gt;%</code> proporciona una forma práctica de combinar los pasos anteriores en aparentemente un paso. Toma un marco de datos como entrada inicial. Luego, aplica una lista de funciones y pasa la salida de cada función para la entrada de la siguiente función. La misma tarea que la anterior se puede lograr usando el operador de tubería <code>%&gt;%</code> de esta manera:</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="transformación-de-datos-con-dplyr.html#cb197-1"></a><span class="kw">tibble</span>(</span>
+<span id="cb197-2"><a href="transformación-de-datos-con-dplyr.html#cb197-2"></a>pres_results <span class="op">%&gt;%</span></span>
+<span id="cb197-3"><a href="transformación-de-datos-con-dplyr.html#cb197-3"></a><span class="st">  </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">2016</span>) <span class="op">%&gt;%</span></span>
+<span id="cb197-4"><a href="transformación-de-datos-con-dplyr.html#cb197-4"></a><span class="st">  </span><span class="kw">select</span>(state, dem, rep) <span class="op">%&gt;%</span></span>
+<span id="cb197-5"><a href="transformación-de-datos-con-dplyr.html#cb197-5"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(dem))</span>
+<span id="cb197-6"><a href="transformación-de-datos-con-dplyr.html#cb197-6"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 51 x 3
+##    state   dem    rep
+##    &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 DC    0.905 0.0407
+##  2 CA    0.617 0.316 
+##  3 HI    0.610 0.294 
+##  4 MD    0.603 0.339 
+##  5 MA    0.591 0.323 
+##  6 NY    0.584 0.361 
+##  7 IL    0.558 0.388 
+##  8 VT    0.557 0.298 
+##  9 NJ    0.555 0.414 
+## 10 CT    0.546 0.409 
+## # … with 41 more rows</code></pre>
+<p>Podemos interpretar el código de la siguiente manera:</p>
+<ol style="list-style-type: decimal">
+<li>Definimos el conjunto de datos original como punto de partida.</li>
+<li>El uso del operador <code>%&gt;%</code> justo después del marco de datos le dice a <strong>dplyr</strong>, que viene una función, que toma el marco de datos previamente definido como entrada.</li>
+<li>Usamos cada función como de costumbre, pero omite el primer parámetro. La entrada del marco de datos se proporciona automáticamente por la salida del paso anterior.</li>
+<li>Mientras agreguemos el operador <code>%&gt;%</code> después de un paso, <strong>dplyr</strong> esperará un paso adicional.</li>
+<li>En nuestro ejemplo, la tubería se cierra con una función <code>arrange()</code>. Obtiene la versión filtrada y seleccionada del marco de datos <code>pres_results</code> como entrada y la ordena en función de la columna <code>dem</code> de forma descendente. Finalmente, devuelve la salida.</li>
+</ol>
+<p>Una diferencia entre los dos enfoques es que el operador <code>%&gt;%</code> no guarda permanentemente los resultados intermedios o finales. Para guardar el marco de datos resultante, debemos asignar la salida a una variable:</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="transformación-de-datos-con-dplyr.html#cb199-1"></a>result &lt;-<span class="st"> </span>pres_results <span class="op">%&lt;&gt;%</span></span>
+<span id="cb199-2"><a href="transformación-de-datos-con-dplyr.html#cb199-2"></a><span class="st">  </span><span class="kw">filter</span>(year<span class="op">==</span><span class="dv">2016</span>) <span class="op">%&gt;%</span></span>
+<span id="cb199-3"><a href="transformación-de-datos-con-dplyr.html#cb199-3"></a><span class="st">  </span><span class="kw">select</span>(state, dem) <span class="op">%&gt;%</span></span>
+<span id="cb199-4"><a href="transformación-de-datos-con-dplyr.html#cb199-4"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(dem))</span>
+<span id="cb199-5"><a href="transformación-de-datos-con-dplyr.html#cb199-5"></a><span class="kw">tibble</span>(result)</span></code></pre></div>
+<pre><code>## # A tibble: 51 x 2
+##    state   dem
+##    &lt;chr&gt; &lt;dbl&gt;
+##  1 DC    0.905
+##  2 CA    0.617
+##  3 HI    0.610
+##  4 MD    0.603
+##  5 MA    0.591
+##  6 NY    0.584
+##  7 IL    0.558
+##  8 VT    0.557
+##  9 NJ    0.555
+## 10 CT    0.546
+## # … with 41 more rows</code></pre>
+</div>
+<div id="ejercicios" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Ejercicios:</h3>
+<p><strong>Esperanza de vida austriaca</strong></p>
+<p>Utiliza el operador <code>%&gt;%</code> en el conjunto de datos de <code>gapminder</code> y crea un simple marco de datos para responder a la siguiente pregunta: <em>¿Cómo ha cambiado la esperanza de vida en Austria en las últimas décadas?</em> Los paquetes necesarios ya están cargados.</p>
+<ol style="list-style-type: decimal">
+<li>Defina el marco de datos de <code>gapminder</code> como el marco de datos de base</li>
+<li>Filtra sólo las filas en las que la columna <code>country</code> es igual a <code>Austria</code> mediante la tubería <code>gapminder</code> a la función <code>filter()</code>.</li>
+<li>Selecciona sólo las columnas: <code>year</code> y <code>lifeExp</code> del resultado filtrado.</li>
+<li>Ordena los resultados en base a la columna <code>year</code> en función de las columnas seleccionadas.</li>
+</ol>
+<p><strong>Solución:</strong></p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="transformación-de-datos-con-dplyr.html#cb201-1"></a>gapminder <span class="op">%&gt;%</span></span>
+<span id="cb201-2"><a href="transformación-de-datos-con-dplyr.html#cb201-2"></a><span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &quot;Austria&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb201-3"><a href="transformación-de-datos-con-dplyr.html#cb201-3"></a><span class="st">  </span><span class="kw">select</span>(year, lifeExp) <span class="op">%&gt;%</span></span>
+<span id="cb201-4"><a href="transformación-de-datos-con-dplyr.html#cb201-4"></a><span class="st">  </span><span class="kw">arrange</span>(year)</span></code></pre></div>
+<pre><code>## # A tibble: 12 x 2
+##     year lifeExp
+##    &lt;int&gt;   &lt;dbl&gt;
+##  1  1952    66.8
+##  2  1957    67.5
+##  3  1962    69.5
+##  4  1967    70.1
+##  5  1972    70.6
+##  6  1977    72.2
+##  7  1982    73.2
+##  8  1987    74.9
+##  9  1992    76.0
+## 10  1997    77.5
+## 11  2002    79.0
+## 12  2007    79.8</code></pre>
+<p><strong>PIB europeo per cápita</strong></p>
+<p>Utiliza el operador <code>%&gt;%</code> en el conjunto de datos de <code>gapminder</code> y crea un simple tibble para responder a la siguiente pregunta: <em>¿Qué país europeo tuvo el mayor PIB per cápita en 2007?</em> Los paquetes requeridos ya están cargados.</p>
+<ol style="list-style-type: decimal">
+<li>Defina el tibble de <code>gapminder</code> como la entrada</li>
+<li>Filtra sólo las filas donde la columna <code>year</code> es igual a <code>2007</code></li>
+<li>Usar una segunda capa de filtro y mantener sólo las filas donde la columna del continente es igual a <code>Europe</code></li>
+<li>Seleccione sólo las columnas: <code>country</code> y <code>gdpPercap</code></li>
+<li>Ordena los resultados basados en la columna <code>gdpPercap</code> de forma descendente</li>
+</ol>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="transformación-de-datos-con-dplyr.html#cb203-1"></a>gapminder <span class="op">%&gt;%</span></span>
+<span id="cb203-2"><a href="transformación-de-datos-con-dplyr.html#cb203-2"></a><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>, continent <span class="op">==</span><span class="st"> &quot;Europe&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb203-3"><a href="transformación-de-datos-con-dplyr.html#cb203-3"></a><span class="st">  </span><span class="kw">select</span>(country, gdpPercap) <span class="op">%&gt;%</span></span>
+<span id="cb203-4"><a href="transformación-de-datos-con-dplyr.html#cb203-4"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(gdpPercap))</span></code></pre></div>
+<pre><code>## # A tibble: 30 x 2
+##    country     gdpPercap
+##    &lt;fct&gt;           &lt;dbl&gt;
+##  1 Norway         49357.
+##  2 Ireland        40676.
+##  3 Switzerland    37506.
+##  4 Netherlands    36798.
+##  5 Iceland        36181.
+##  6 Austria        36126.
+##  7 Denmark        35278.
+##  8 Sweden         33860.
+##  9 Belgium        33693.
+## 10 Finland        33207.
+## # … with 20 more rows</code></pre>
+<p><strong>Población de las Américas</strong></p>
+<p>Utiliza el operador <code>%&gt;%</code> en el conjunto de datos de <code>gapminder</code> y crea un simple tibble para responder a la siguiente pregunta: <em>¿Qué país del continente americano tenía la mayor población en 2007?</em></p>
+<ol style="list-style-type: decimal">
+<li>Defina el tibble de <code>gapminder</code> como la entrada</li>
+<li>Filtra sólo las filas donde la columna <code>year</code> es igual a <code>2007</code></li>
+<li>Utilice una segunda capa de filtro y mantenga sólo las filas donde la columna del <code>continent</code> es igual a <code>Americas</code></li>
+<li>Seleccione sólo las columnas: <code>country</code> y <code>pop</code></li>
+<li>Arregla los resultados basados en la columna <code>pop</code> de forma descendente</li>
+</ol>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="transformación-de-datos-con-dplyr.html#cb205-1"></a>gapminder <span class="op">%&gt;%</span></span>
+<span id="cb205-2"><a href="transformación-de-datos-con-dplyr.html#cb205-2"></a><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>, continent <span class="op">==</span><span class="st"> &quot;Americas&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb205-3"><a href="transformación-de-datos-con-dplyr.html#cb205-3"></a><span class="st">  </span><span class="kw">select</span>(country, pop) <span class="op">%&gt;%</span></span>
+<span id="cb205-4"><a href="transformación-de-datos-con-dplyr.html#cb205-4"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(pop))</span></code></pre></div>
+<pre><code>## # A tibble: 25 x 2
+##    country             pop
+##    &lt;fct&gt;             &lt;int&gt;
+##  1 United States 301139947
+##  2 Brazil        190010647
+##  3 Mexico        108700891
+##  4 Colombia       44227550
+##  5 Argentina      40301927
+##  6 Canada         33390141
+##  7 Peru           28674757
+##  8 Venezuela      26084662
+##  9 Chile          16284741
+## 10 Ecuador        13755680
+## # … with 15 more rows</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="marcos-de-datos-y-tibbles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introducción-a-machine-learning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["BookR.pdf", "BookR.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
