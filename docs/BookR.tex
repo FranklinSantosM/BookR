@@ -5,12 +5,13 @@
 \documentclass[
 ]{book}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
+\usepackage{amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
 \else % if luatex or xetex
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
@@ -82,6 +83,7 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
+\usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
 \makeatletter
@@ -90,7 +92,7 @@
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -108,12 +110,15 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \usepackage{booktabs}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
 \title{R en las Ciencias Agropecuarias}
 \author{Franklin Santos}
-\date{2020-12-03}
+\date{2021-01-19}
 
 \begin{document}
 \maketitle
@@ -139,9 +144,9 @@ The \textbf{bookdown} package can be installed from CRAN or Github:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{# or the development version}
-\CommentTok{# devtools::install_github("rstudio/bookdown")}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
+\CommentTok{\# or the development version}
+\CommentTok{\# devtools::install\_github("rstudio/bookdown")}
 \end{Highlighting}
 \end{Shaded}
 
@@ -253,10 +258,10 @@ R siempre crea listas de valores, incluso cuando solo hay un valor en una lista.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{1}\OperatorTok{:}\DecValTok{100}
-\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
-\KeywordTok{c}\NormalTok{(}\StringTok{"abc"}\NormalTok{, }\StringTok{"def"}\NormalTok{, }\StringTok{"ghi"}\NormalTok{)}
-\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}
+\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\FunctionTok{c}\NormalTok{(}\StringTok{"abc"}\NormalTok{, }\StringTok{"def"}\NormalTok{, }\StringTok{"ghi"}\NormalTok{)}
+\FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -305,7 +310,7 @@ Para crear una secuencia de valores numéricos, podemos usar el operador \texttt
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{2}\OperatorTok{:}\DecValTok{11}
+\DecValTok{2}\SpecialCharTok{:}\DecValTok{11}
 \end{Highlighting}
 \end{Shaded}
 
@@ -321,7 +326,7 @@ El operador \texttt{:} crea un vector desde el número en el lado izquierdo hast
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{11}\OperatorTok{:}\DecValTok{2}
+\DecValTok{11}\SpecialCharTok{:}\DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -344,7 +349,7 @@ Para crear nuestro primer vector con siete números diferentes, podemos usar la 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{1}\NormalTok{) }
+\FunctionTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{1}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -362,7 +367,7 @@ Puede ver esto más claramente, cuando la salida se extiende sobre varias línea
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{1}\OperatorTok{:}\DecValTok{60}
+\DecValTok{1}\SpecialCharTok{:}\DecValTok{60}
 \end{Highlighting}
 \end{Shaded}
 
@@ -399,7 +404,7 @@ Para crear un vector de caracteres de múltiples elementos, podemos usar nuevame
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{c}\NormalTok{(}\StringTok{"golden retriever"}\NormalTok{, }\StringTok{"labrador is a family dog"}\NormalTok{, }\StringTok{"beagle"}\NormalTok{)}
+\FunctionTok{c}\NormalTok{(}\StringTok{"golden retriever"}\NormalTok{, }\StringTok{"labrador is a family dog"}\NormalTok{, }\StringTok{"beagle"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -419,7 +424,7 @@ Los vectores lógicos solo pueden contener los valores \texttt{TRUE} y \texttt{F
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\OtherTok{TRUE}
+\ConstantTok{TRUE}
 \end{Highlighting}
 \end{Shaded}
 
@@ -435,7 +440,7 @@ De manera similar a otros tipos de vectores, podemos usar la función concatenar
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)   }
+\FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{)   }
 \end{Highlighting}
 \end{Shaded}
 
@@ -473,7 +478,7 @@ Veamos un ejemplo, en el que asignamos un vector numérico a una variable llamad
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{numbers <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{) }
+\NormalTok{numbers }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -497,7 +502,7 @@ Tenga en cuenta que cuando asignamos algo a una variable que ya existe, se sobre
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{numbers <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{13}\NormalTok{)}
+\NormalTok{numbers }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{13}\NormalTok{)}
 \NormalTok{numbers}
 \end{Highlighting}
 \end{Shaded}
@@ -514,9 +519,9 @@ Una vez que haya definido una variable, puede usarla tal como usaría el vector 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{low <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
-\NormalTok{high <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{)}
-\NormalTok{sequence <-}\StringTok{ }\KeywordTok{c}\NormalTok{(low, high)}
+\NormalTok{low }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{high }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+\NormalTok{sequence }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(low, high)}
 \NormalTok{sequence}
 \end{Highlighting}
 \end{Shaded}
@@ -589,7 +594,7 @@ R es un lenguaje de programación desarrollado principalmente para estadísticas
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{5} \OperatorTok{+}\StringTok{ }\DecValTok{5}
+\DecValTok{5} \SpecialCharTok{+} \DecValTok{5}
 \end{Highlighting}
 \end{Shaded}
 
@@ -601,7 +606,7 @@ R es un lenguaje de programación desarrollado principalmente para estadísticas
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{7} \OperatorTok{-}\StringTok{ }\FloatTok{3.5}
+\DecValTok{7} \SpecialCharTok{{-}} \FloatTok{3.5}
 \end{Highlighting}
 \end{Shaded}
 
@@ -613,7 +618,7 @@ Del mismo modo, puede multiplicar \texttt{*} o dividir \texttt{/} números:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{5} \OperatorTok{*}\StringTok{ }\DecValTok{7}   
+\DecValTok{5} \SpecialCharTok{*} \DecValTok{7}   
 \end{Highlighting}
 \end{Shaded}
 
@@ -623,7 +628,7 @@ Del mismo modo, puede multiplicar \texttt{*} o dividir \texttt{/} números:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{8} \OperatorTok{/}\StringTok{ }\DecValTok{4}   
+\DecValTok{8} \SpecialCharTok{/} \DecValTok{4}   
 \end{Highlighting}
 \end{Shaded}
 
@@ -635,7 +640,7 @@ Puedes tomar el poder de un número usando el signo \texttt{\^{}} para potenciar
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{2}\OperatorTok{^}\DecValTok{3}
+\DecValTok{2}\SpecialCharTok{\^{}}\DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -647,7 +652,7 @@ De acuerdo con las reglas de las matemáticas, puede usar corchetes para especif
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{5} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{2} \OperatorTok{+}\StringTok{ }\DecValTok{4} \OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\DecValTok{5} \SpecialCharTok{*}\NormalTok{ (}\DecValTok{2} \SpecialCharTok{+} \DecValTok{4} \SpecialCharTok{/} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -671,9 +676,9 @@ En el siguiente ejemplo creamos dos vectores numéricos y los asignamos a las va
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{)}
-\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{12}\NormalTok{)}
-\NormalTok{a }\OperatorTok{+}\StringTok{ }\NormalTok{b}
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{)}
+\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{12}\NormalTok{)}
+\NormalTok{a }\SpecialCharTok{+}\NormalTok{ b}
 \end{Highlighting}
 \end{Shaded}
 
@@ -687,9 +692,9 @@ Podemos aplicar cualquier otra operación aritmética de manera similar:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{4}\NormalTok{)}
-\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{8}\NormalTok{)}
-\NormalTok{a }\OperatorTok{/}\StringTok{ }\NormalTok{b}
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{8}\NormalTok{)}
+\NormalTok{a }\SpecialCharTok{/}\NormalTok{ b}
 \end{Highlighting}
 \end{Shaded}
 
@@ -717,7 +722,7 @@ Los operadores igual \texttt{==} y no igual \texttt{!=} comprueban si dos valore
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{2} \OperatorTok{==}\StringTok{ }\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{1}
+\DecValTok{2} \SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
 \end{Highlighting}
 \end{Shaded}
 
@@ -727,7 +732,7 @@ Los operadores igual \texttt{==} y no igual \texttt{!=} comprueban si dos valore
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{2} \OperatorTok{!=}\StringTok{ }\DecValTok{3}
+\DecValTok{2} \SpecialCharTok{!=} \DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -739,7 +744,7 @@ Los operadores \emph{menor que} \texttt{\textless{}} y \emph{mayor que} \texttt{
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{2} \OperatorTok{>}\StringTok{ }\DecValTok{4}
+\DecValTok{2} \SpecialCharTok{\textgreater{}} \DecValTok{4}
 \end{Highlighting}
 \end{Shaded}
 
@@ -749,7 +754,7 @@ Los operadores \emph{menor que} \texttt{\textless{}} y \emph{mayor que} \texttt{
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{2} \OperatorTok{<}\StringTok{ }\DecValTok{4}
+\DecValTok{2} \SpecialCharTok{\textless{}} \DecValTok{4}
 \end{Highlighting}
 \end{Shaded}
 
@@ -761,7 +766,7 @@ Los operadores \emph{menor que o igual a} \texttt{\textless{}=} y \emph{mayor qu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{2} \OperatorTok{>=}\StringTok{ }\DecValTok{2}
+\DecValTok{2} \SpecialCharTok{\textgreater{}=} \DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -771,7 +776,7 @@ Los operadores \emph{menor que o igual a} \texttt{\textless{}=} y \emph{mayor qu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{2} \OperatorTok{<=}\StringTok{ }\DecValTok{3}
+\DecValTok{2} \SpecialCharTok{\textless{}=} \DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -783,9 +788,9 @@ Todos estos operadores pueden usarse en vectores con uno o más elementos tambi�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vector1 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{)}
-\NormalTok{vector2 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{)}
-\NormalTok{vector1 }\OperatorTok{>}\StringTok{ }\NormalTok{vector2}
+\NormalTok{vector1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{vector2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{vector1 }\SpecialCharTok{\textgreater{}}\NormalTok{ vector2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -807,7 +812,7 @@ El operador \emph{AND} \texttt{\&} se usa para verificar si varias declaraciones
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{3} \OperatorTok{>}\StringTok{ }\DecValTok{1} \OperatorTok{&}\StringTok{ }\DecValTok{4} \OperatorTok{<}\StringTok{ }\DecValTok{2}
+\DecValTok{3} \SpecialCharTok{\textgreater{}} \DecValTok{1} \SpecialCharTok{\&} \DecValTok{4} \SpecialCharTok{\textless{}} \DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -821,7 +826,7 @@ El operador \emph{OR} \texttt{\textbar{}} solo verifica si alguna de las declara
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{3} \OperatorTok{>}\StringTok{ }\DecValTok{1} \OperatorTok{|}\StringTok{ }\DecValTok{4} \OperatorTok{<}\StringTok{ }\DecValTok{2}
+\DecValTok{3} \SpecialCharTok{\textgreater{}} \DecValTok{1} \SpecialCharTok{|} \DecValTok{4} \SpecialCharTok{\textless{}} \DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -835,7 +840,7 @@ El operador \texttt{!} se utiliza para la negación de valores lógicos, lo que 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\OperatorTok{!}\DecValTok{3} \OperatorTok{>}\StringTok{ }\DecValTok{2}
+\SpecialCharTok{!}\DecValTok{3} \SpecialCharTok{\textgreater{}} \DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -847,11 +852,11 @@ Los operadores lógicos, al igual que los operadores aritméticos y relacionales
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
-\NormalTok{b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{)}
-\NormalTok{c <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{c }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{)}
 
-\NormalTok{a}\OperatorTok{>}\NormalTok{b }\OperatorTok{&}\StringTok{ }\NormalTok{b}\OperatorTok{<}\NormalTok{c}
+\NormalTok{a}\SpecialCharTok{\textgreater{}}\NormalTok{b }\SpecialCharTok{\&}\NormalTok{ b}\SpecialCharTok{\textless{}}\NormalTok{c}
 \end{Highlighting}
 \end{Shaded}
 
@@ -863,7 +868,7 @@ Primero, ambas comparaciones relacionales \texttt{a\ \textgreater{}\ b} y \textt
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{c}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{) }\OperatorTok{&}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
+\FunctionTok{c}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\&} \FunctionTok{c}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -877,7 +882,7 @@ El operador \texttt{\textbar{}} comprueba si alguno de los valores en la misma p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{c}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{) }\OperatorTok{|}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{)}
+\FunctionTok{c}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{|} \FunctionTok{c}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -898,10 +903,10 @@ En el siguiente ejemplo utilizamos la variable \texttt{UE} que contiene la abrev
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{EU <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"AU"}\NormalTok{,}\StringTok{"BE"}\NormalTok{,}\StringTok{"BG"}\NormalTok{,}\StringTok{"CY"}\NormalTok{,}\StringTok{"CZ"}\NormalTok{,}\StringTok{"DE"}\NormalTok{,}\StringTok{"DK"}\NormalTok{,}\StringTok{"EE"}\NormalTok{,}\StringTok{"ES"}\NormalTok{,}\StringTok{"FI"}\NormalTok{,}\StringTok{"FR"}\NormalTok{,}\StringTok{"GR"}\NormalTok{,}\StringTok{"HR"}\NormalTok{,}\StringTok{"HU"}\NormalTok{,}
+\NormalTok{EU }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"AU"}\NormalTok{,}\StringTok{"BE"}\NormalTok{,}\StringTok{"BG"}\NormalTok{,}\StringTok{"CY"}\NormalTok{,}\StringTok{"CZ"}\NormalTok{,}\StringTok{"DE"}\NormalTok{,}\StringTok{"DK"}\NormalTok{,}\StringTok{"EE"}\NormalTok{,}\StringTok{"ES"}\NormalTok{,}\StringTok{"FI"}\NormalTok{,}\StringTok{"FR"}\NormalTok{,}\StringTok{"GR"}\NormalTok{,}\StringTok{"HR"}\NormalTok{,}\StringTok{"HU"}\NormalTok{,}
         \StringTok{"IE"}\NormalTok{,}\StringTok{"IT"}\NormalTok{,}\StringTok{"LT"}\NormalTok{,}\StringTok{"LU"}\NormalTok{,}\StringTok{"LV"}\NormalTok{,}\StringTok{"MT"}\NormalTok{,}\StringTok{"NL"}\NormalTok{,}\StringTok{"PO"}\NormalTok{,}\StringTok{"PT"}\NormalTok{,}\StringTok{"RO"}\NormalTok{,}\StringTok{"SE"}\NormalTok{,}\StringTok{"SI"}\NormalTok{,}\StringTok{"SK"}\NormalTok{)}
 
-\StringTok{"AU"} \OperatorTok{%in%}\StringTok{ }\NormalTok{EU}
+\StringTok{"AU"} \SpecialCharTok{\%in\%}\NormalTok{ EU}
 \end{Highlighting}
 \end{Shaded}
 
@@ -913,7 +918,7 @@ El siguiente ejemplo amplía la búsqueda y compara múltiples elementos con el 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{c}\NormalTok{(}\StringTok{"AU"}\NormalTok{,}\StringTok{"HU"}\NormalTok{,}\StringTok{"UK"}\NormalTok{) }\OperatorTok{%in%}\StringTok{ }\NormalTok{EU}
+\FunctionTok{c}\NormalTok{(}\StringTok{"AU"}\NormalTok{,}\StringTok{"HU"}\NormalTok{,}\StringTok{"UK"}\NormalTok{) }\SpecialCharTok{\%in\%}\NormalTok{ EU}
 \end{Highlighting}
 \end{Shaded}
 
@@ -953,7 +958,7 @@ Una función simple, por ejemplo, es \texttt{abs()} que se usa para obtener el v
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{abs}\NormalTok{(}\OperatorTok{-}\DecValTok{3}\NormalTok{)}
+\FunctionTok{abs}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -976,36 +981,36 @@ Por otro lado, podemos ver que algunos de los parámetros tienen valores predete
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{runif}\NormalTok{(}\DataTypeTok{n =} \DecValTok{5}\NormalTok{)}
+\FunctionTok{runif}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1505970 0.9940860 0.6664535 0.8860263 0.4617516
+## [1] 0.2162403 0.9932776 0.8533215 0.3011281 0.1793432
 \end{verbatim}
 
 La salida es un vector numérico de 5 números. Cada uno de ellos está entre 0 y 1, ya que no cambiamos la configuración predeterminada. Si también cambiamos los parámetros \texttt{min} y \texttt{max}, podríamos personalizar aún más la salida:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{runif}\NormalTok{(}\DataTypeTok{n =} \DecValTok{5}\NormalTok{, }\DataTypeTok{min =} \DecValTok{8}\NormalTok{, }\DataTypeTok{max =} \DecValTok{9}\NormalTok{)}
+\FunctionTok{runif}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{, }\AttributeTok{min =} \DecValTok{8}\NormalTok{, }\AttributeTok{max =} \DecValTok{9}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 8.971256 8.797856 8.717703 8.591625 8.168009
+## [1] 8.821339 8.819969 8.586649 8.061424 8.335431
 \end{verbatim}
 
 También es posible omitir el nombre de los parámetros y simplemente escribir los valores de entrada de esta manera:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{runif}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{)}
+\FunctionTok{runif}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 8.744800 8.201082 8.712732 8.910819 8.885754
+## [1] 8.542788 8.972193 8.146812 8.766378 8.901057
 \end{verbatim}
 
 Sin embargo, en este caso debemos tener cuidado con el orden de las entradas, ya que cada función tiene un orden predeterminado para los parámetros. Si no nombramos explícitamente los parámetros que estamos configurando, R asumirá que los establecemos en el orden predefinido.
@@ -1027,13 +1032,13 @@ Utilice la función \texttt{sample()} y muestree 5 valores aleatorios de la vari
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{full <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{7}\NormalTok{)}
-\KeywordTok{sample}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ full, }\DataTypeTok{size =} \DecValTok{5}\NormalTok{)}
+\NormalTok{full }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{7}\NormalTok{)}
+\FunctionTok{sample}\NormalTok{(}\AttributeTok{x =}\NormalTok{ full, }\AttributeTok{size =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 48  1  9  4 32
+## [1] 48 27  7 32 27
 \end{verbatim}
 
 \hypertarget{utilice-la-funciuxf3n-seq}{%
@@ -1055,7 +1060,7 @@ Utilice la función \texttt{seq()} y cree una secuencia de números del 2 al 10,
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{seq}\NormalTok{(}\DataTypeTok{from =} \DecValTok{2}\NormalTok{, }\DataTypeTok{to =} \DecValTok{10}\NormalTok{, }\DataTypeTok{by =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \DecValTok{2}\NormalTok{, }\AttributeTok{to =} \DecValTok{10}\NormalTok{, }\AttributeTok{by =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1097,8 +1102,8 @@ Para usar un paquete, primero tenemos que cargarlo. Esto se puede hacer aplicand
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(primes)}
-\KeywordTok{generate_primes}\NormalTok{(}\DataTypeTok{min =} \DecValTok{500}\NormalTok{, }\DataTypeTok{max =} \DecValTok{550}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(primes)}
+\FunctionTok{generate\_primes}\NormalTok{(}\AttributeTok{min =} \DecValTok{500}\NormalTok{, }\AttributeTok{max =} \DecValTok{550}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1118,7 +1123,7 @@ Para usar un paquete, primero tenemos que cargarlo. Esto se puede hacer aplicand
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(lubridate)}
+\FunctionTok{library}\NormalTok{(lubridate)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1135,7 +1140,7 @@ Para usar un paquete, primero tenemos que cargarlo. Esto se puede hacer aplicand
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{leap_year}\NormalTok{(}\DecValTok{2020}\NormalTok{)}
+\FunctionTok{leap\_year}\NormalTok{(}\DecValTok{2020}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1154,8 +1159,8 @@ Figures and tables with captions will be placed in \texttt{figure} and \texttt{t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\FloatTok{.1}\NormalTok{, }\FloatTok{.1}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(pressure, }\DataTypeTok{type =} \StringTok{'b'}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{19}\NormalTok{)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1172,9 +1177,9 @@ Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}
-  \KeywordTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\DataTypeTok{caption =} \StringTok{'Here is a nice table!'}\NormalTok{,}
-  \DataTypeTok{booktabs =} \OtherTok{TRUE}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+  \FunctionTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{booktabs =} \ConstantTok{TRUE}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1255,7 +1260,7 @@ Echemos un vistazo a un objeto de marco de datos llamado \texttt{Davis}, del paq
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{ (Davis)}
+\FunctionTok{tibble}\NormalTok{ (Davis)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1297,10 +1302,10 @@ Creemos nuestro primer marco de datos con cuatro personas diferentes, incluidos 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{data.frame}\NormalTok{(}
-  \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
-  \KeywordTok{c}\NormalTok{(}\StringTok{"Louisa"}\NormalTok{, }\StringTok{"Jonathan"}\NormalTok{, }\StringTok{"Luigi"}\NormalTok{, }\StringTok{"Rachel"}\NormalTok{),}
-  \KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\FunctionTok{data.frame}\NormalTok{(}
+  \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+  \FunctionTok{c}\NormalTok{(}\StringTok{"Louisa"}\NormalTok{, }\StringTok{"Jonathan"}\NormalTok{, }\StringTok{"Luigi"}\NormalTok{, }\StringTok{"Rachel"}\NormalTok{),}
+  \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1324,10 +1329,10 @@ Los nombres de columna se pueden incluir en la construcción de \texttt{data.fra
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{data.frame}\NormalTok{(}
-  \DataTypeTok{id =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
-  \DataTypeTok{name =} \KeywordTok{c}\NormalTok{(}\StringTok{"Louisa"}\NormalTok{, }\StringTok{"Jonathan"}\NormalTok{, }\StringTok{"Luigi"}\NormalTok{, }\StringTok{"Rachel"}\NormalTok{),}
-  \DataTypeTok{female =} \KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{id =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+  \AttributeTok{name =} \FunctionTok{c}\NormalTok{(}\StringTok{"Louisa"}\NormalTok{, }\StringTok{"Jonathan"}\NormalTok{, }\StringTok{"Luigi"}\NormalTok{, }\StringTok{"Rachel"}\NormalTok{),}
+  \AttributeTok{female =} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1378,7 +1383,7 @@ Además de todo lo que ofrece un marco de datos, los tibbles tienen un comportam
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder}\OperatorTok{::}\NormalTok{gapminder}
+\NormalTok{gapminder}\SpecialCharTok{::}\NormalTok{gapminder}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1419,11 +1424,11 @@ Por ejemplo, un tibble que contenga datos de cuatro personas diferentes y tres c
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tibble)}
-\KeywordTok{tibble}\NormalTok{(}
-  \DataTypeTok{id =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
-  \DataTypeTok{name =} \KeywordTok{c}\NormalTok{(}\StringTok{"Louisa"}\NormalTok{, }\StringTok{"Jonathan"}\NormalTok{, }\StringTok{"Luigi"}\NormalTok{, }\StringTok{"Rachel"}\NormalTok{),}
-  \DataTypeTok{female =} \KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{FALSE}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(tibble)}
+\FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{id =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+  \AttributeTok{name =} \FunctionTok{c}\NormalTok{(}\StringTok{"Louisa"}\NormalTok{, }\StringTok{"Jonathan"}\NormalTok{, }\StringTok{"Luigi"}\NormalTok{, }\StringTok{"Rachel"}\NormalTok{),}
+  \AttributeTok{female =} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1447,7 +1452,7 @@ Por ejemplo, el marco de datos de \texttt{Davis} del paquete \textbf{carData} se
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{as_tibble}\NormalTok{(Davis)}
+\FunctionTok{as\_tibble}\NormalTok{(Davis)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1497,7 +1502,7 @@ Para ver el operador \texttt{\$} en acción, extraigamos la población \texttt{p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{carData}\OperatorTok{::}\NormalTok{States}\OperatorTok{$}\NormalTok{pop}
+\NormalTok{carData}\SpecialCharTok{::}\NormalTok{States}\SpecialCharTok{$}\NormalTok{pop}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1513,7 +1518,7 @@ El comando extrae la columna de población como vector del marco de datos. A par
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{sum}\NormalTok{(States}\OperatorTok{$}\NormalTok{pop)}
+\FunctionTok{sum}\NormalTok{(States}\SpecialCharTok{$}\NormalTok{pop)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1525,7 +1530,7 @@ De manera similar, el salario promedio (en \$1,000) de los maestros se puede cal
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{mean}\NormalTok{(States}\OperatorTok{$}\NormalTok{pay)}
+\FunctionTok{mean}\NormalTok{(States}\SpecialCharTok{$}\NormalTok{pay)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1564,7 +1569,7 @@ Los marcos de datos tienen dos dimensiones. El número de filas se considera la 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{nrow}\NormalTok{(Davis)}
+\FunctionTok{nrow}\NormalTok{(Davis)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1576,7 +1581,7 @@ De manera similar, el número de columnas o \emph{atributos} del marco de datos 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ncol}\NormalTok{(Davis)}
+\FunctionTok{ncol}\NormalTok{(Davis)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1593,7 +1598,7 @@ Por ejemplo, las dimensiones del conjunto de datos de \texttt{Davis} se pueden r
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{dim}\NormalTok{(Davis)}
+\FunctionTok{dim}\NormalTok{(Davis)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1605,7 +1610,7 @@ Además de los marcos de datos, \texttt{dim()} también se puede utilizar para o
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{dim}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{))}
+\FunctionTok{dim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1617,7 +1622,7 @@ En cambio, la longitud de un vector se determina mediante \texttt{length()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{length}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{))}
+\FunctionTok{length}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1629,7 +1634,7 @@ En el caso de un marco de datos, \texttt{length()} devuelve su número de column
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{length}\NormalTok{(Davis)}
+\FunctionTok{length}\NormalTok{(Davis)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1666,7 +1671,7 @@ El conjunto de datos \texttt{TitanicSurvival} contiene datos de 1309 pasajeros r
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(TitanicSurvival)}
+\FunctionTok{head}\NormalTok{(TitanicSurvival)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1684,7 +1689,7 @@ El número de columnas se puede ajustar mediante el parámetro \texttt{n}. Para 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(TitanicSurvival, }\DataTypeTok{n =} \DecValTok{3}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(TitanicSurvival, }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1704,7 +1709,7 @@ Por ejemplo, para seleccionar las últimas cinco filas del conjunto de datos \te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tail}\NormalTok{(TitanicSurvival, }\DataTypeTok{n =} \DecValTok{5}\NormalTok{)}
+\FunctionTok{tail}\NormalTok{(TitanicSurvival, }\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1721,7 +1726,7 @@ Las funciones de cabeza y cola también se pueden combinar para seleccionar un f
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(}\KeywordTok{tail}\NormalTok{(TitanicSurvival, }\DataTypeTok{n =} \DecValTok{500}\NormalTok{), }\DataTypeTok{n =} \DecValTok{5}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{tail}\NormalTok{(TitanicSurvival, }\AttributeTok{n =} \DecValTok{500}\NormalTok{), }\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1789,9 +1794,9 @@ Cada función de transformación de datos en \textbf{dplyr} acepta un marco de d
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{transformed <-}\StringTok{ }\KeywordTok{dplyr_function}\NormalTok{(my_data_frame, }
-\NormalTok{                              param_one, }
-\NormalTok{                              param_two, }
+\NormalTok{transformed }\OtherTok{\textless{}{-}} \FunctionTok{dplyr\_function}\NormalTok{(my\_data\_frame, }
+\NormalTok{                              param\_one, }
+\NormalTok{                              param\_two, }
 \NormalTok{                              ...)}
 \end{Highlighting}
 \end{Shaded}
@@ -1802,9 +1807,9 @@ El poder real de \textbf{dplyr} viene con el operador pipe \texttt{\%\textgreate
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{dplyr_function_three}\NormalTok{(}
-  \KeywordTok{dplyr_function_two}\NormalTok{(}
-    \KeywordTok{dplyr_function_one}\NormalTok{(input_data_frame)))}
+\FunctionTok{dplyr\_function\_three}\NormalTok{(}
+  \FunctionTok{dplyr\_function\_two}\NormalTok{(}
+    \FunctionTok{dplyr\_function\_one}\NormalTok{(input\_data\_frame)))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1812,10 +1817,10 @@ pero con \texttt{pipe} se puede escribir de la siguiente manera:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{input_data_frame }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{dplyr_function_one}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{dplyr_function_two}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{dplyr_function_three}\NormalTok{()}
+\NormalTok{input\_data\_frame }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{dplyr\_function\_one}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{dplyr\_function\_two}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{dplyr\_function\_three}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1838,11 +1843,11 @@ Para seleccionar sólo un conjunto específico de columnas de marcos de datos in
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{select}\NormalTok{(my_data_frame, column_one, column_two, ...)}
-\KeywordTok{select}\NormalTok{(my_data_frame, }\DataTypeTok{new_column_name =}\NormalTok{ current_column, ...)}
-\KeywordTok{select}\NormalTok{(my_data_frame, column_start}\OperatorTok{:}\NormalTok{column_end)}
-\KeywordTok{select}\NormalTok{(my_data_frame, index_one, index_two, ...)}
-\KeywordTok{select}\NormalTok{(my_data_frame, index_start}\OperatorTok{:}\NormalTok{index_end)}
+\FunctionTok{select}\NormalTok{(my\_data\_frame, column\_one, column\_two, ...)}
+\FunctionTok{select}\NormalTok{(my\_data\_frame, }\AttributeTok{new\_column\_name =}\NormalTok{ current\_column, ...)}
+\FunctionTok{select}\NormalTok{(my\_data\_frame, column\_start}\SpecialCharTok{:}\NormalTok{column\_end)}
+\FunctionTok{select}\NormalTok{(my\_data\_frame, index\_one, index\_two, ...)}
+\FunctionTok{select}\NormalTok{(my\_data\_frame, index\_start}\SpecialCharTok{:}\NormalTok{index\_end)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1851,7 +1856,7 @@ Para seleccionar sólo un conjunto específico de columnas de marcos de datos in
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{select}\NormalTok{(my_data_frame, column_one, column_two, ...)}
+\FunctionTok{select}\NormalTok{(my\_data\_frame, column\_one, column\_two, ...)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1882,8 +1887,8 @@ Podemos reducir nuestro conjunto de datos a solo \texttt{year}, \texttt{state} y
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{select}\NormalTok{(pres_results, year, state, total_votes)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{select}\NormalTok{(pres\_results, year, state, total\_votes)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1913,8 +1918,8 @@ Si cambiamos el orden de los parámetros cuando llamamos a la función, las colu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{select}\NormalTok{(pres_results, total_votes, year, state)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{select}\NormalTok{(pres\_results, total\_votes, year, state)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1941,7 +1946,7 @@ Si cambiamos el orden de los parámetros cuando llamamos a la función, las colu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{select}\NormalTok{(my_data_frame, }\DataTypeTok{new_column_name =}\NormalTok{ current_column, ...)}
+\FunctionTok{select}\NormalTok{(my\_data\_frame, }\AttributeTok{new\_column\_name =}\NormalTok{ current\_column, ...)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1949,7 +1954,7 @@ Además de definir las columnas que queremos conservar, también podemos cambiar
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{new_column_name =}\StringTok{ }\NormalTok{current_column}
+\NormalTok{new\_column\_name }\OtherTok{=}\NormalTok{ current\_column}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1957,8 +1962,8 @@ En el siguiente ejemplo, seleccionamos las columnas \texttt{year}, \texttt{state
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{select}\NormalTok{(pres_results, }\DataTypeTok{Election =}\NormalTok{ year, state, total_votes)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{select}\NormalTok{(pres\_results, }\AttributeTok{Election =}\NormalTok{ year, state, total\_votes)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1985,7 +1990,7 @@ En el siguiente ejemplo, seleccionamos las columnas \texttt{year}, \texttt{state
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{select}\NormalTok{(my_data_frame, column_start}\OperatorTok{:}\NormalTok{column_end)}
+\FunctionTok{select}\NormalTok{(my\_data\_frame, column\_start}\SpecialCharTok{:}\NormalTok{column\_end)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1993,8 +1998,8 @@ Cuando usamos la función \texttt{select()} y definimos las columnas que queremo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{select}\NormalTok{(pres_results, year}\OperatorTok{:}\NormalTok{total_votes)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{select}\NormalTok{(pres\_results, year}\SpecialCharTok{:}\NormalTok{total\_votes)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2023,8 +2028,8 @@ Lo que hace \texttt{year:total\_votes}, se puede traducir a \texttt{1:3}, que es
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{select}\NormalTok{(my_data_frame, index_one, index_two, ...)}
-\KeywordTok{select}\NormalTok{(my_data_frame, index_start}\OperatorTok{:}\NormalTok{index_end)}
+\FunctionTok{select}\NormalTok{(my\_data\_frame, index\_one, index\_two, ...)}
+\FunctionTok{select}\NormalTok{(my\_data\_frame, index\_start}\SpecialCharTok{:}\NormalTok{index\_end)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2032,8 +2037,8 @@ La función \texttt{select()} también se puede usar con índices de columna. En
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{select}\NormalTok{(pres_results, }\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{select}\NormalTok{(pres\_results, }\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2059,8 +2064,8 @@ De manera similar a la definición de rangos de columnas usando sus nombres, pod
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{select}\NormalTok{(pres_results, }\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{select}\NormalTok{(pres\_results, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2097,8 +2102,8 @@ A menudo queremos operar sólo en un subconjunto específico de filas de un marc
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{filter}\NormalTok{(my_data_frame, condition)}
-\KeywordTok{filter}\NormalTok{(my_data_frame, condition_one, condition_two, ...)}
+\FunctionTok{filter}\NormalTok{(my\_data\_frame, condition)}
+\FunctionTok{filter}\NormalTok{(my\_data\_frame, condition\_one, condition\_two, ...)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2107,7 +2112,7 @@ A menudo queremos operar sólo en un subconjunto específico de filas de un marc
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{filter}\NormalTok{(my_data_frame, condition)}
+\FunctionTok{filter}\NormalTok{(my\_data\_frame, condition)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2115,8 +2120,8 @@ La función \texttt{filter()} toma un marco de datos y una o más expresiones de
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{filter}\NormalTok{(pres_results, state }\OperatorTok{==}\StringTok{ "CA"}\NormalTok{)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{filter}\NormalTok{(pres\_results, state }\SpecialCharTok{==} \StringTok{"CA"}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2144,8 +2149,8 @@ Como otro ejemplo, podríamos filtrar el marco de datos \texttt{pres\_results} y
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{filter}\NormalTok{(pres_results, dem }\OperatorTok{>}\StringTok{ }\FloatTok{0.85}\NormalTok{)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{filter}\NormalTok{(pres\_results, dem }\SpecialCharTok{\textgreater{}} \FloatTok{0.85}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2170,7 +2175,7 @@ En el resultado podemos ver para cada año electoral los estados donde el Partid
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{filter}\NormalTok{(my_data_frame, condition_one, condition_two, ...)}
+\FunctionTok{filter}\NormalTok{(my\_data\_frame, condition\_one, condition\_two, ...)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2178,8 +2183,8 @@ La función \texttt{filter()} también puede tomar múltiples reglas de filtrado
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{filter}\NormalTok{(pres_results, state }\OperatorTok{==}\StringTok{ "CA"}\NormalTok{, year}\OperatorTok{==}\DecValTok{2016}\NormalTok{)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{filter}\NormalTok{(pres\_results, state }\SpecialCharTok{==} \StringTok{"CA"}\NormalTok{, year}\SpecialCharTok{==}\DecValTok{2016}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2209,8 +2214,8 @@ Solución
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{filter}\NormalTok{(gapminder, year}\OperatorTok{==}\DecValTok{2007}\NormalTok{, lifeExp }\OperatorTok{>}\StringTok{ }\DecValTok{80}\NormalTok{)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{filter}\NormalTok{(gapminder, year}\SpecialCharTok{==}\DecValTok{2007}\NormalTok{, lifeExp }\SpecialCharTok{\textgreater{}} \DecValTok{80}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2248,7 +2253,7 @@ El conjunto de datos del \texttt{gapminder} contiene datos económicos y demogr�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{filter}\NormalTok{(gapminder, year}\OperatorTok{==}\DecValTok{2007}\NormalTok{, pop }\OperatorTok{>}\StringTok{ }\DecValTok{1000000000}\NormalTok{)}
+\FunctionTok{filter}\NormalTok{(gapminder, year}\SpecialCharTok{==}\DecValTok{2007}\NormalTok{, pop }\SpecialCharTok{\textgreater{}} \DecValTok{1000000000}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2283,7 +2288,7 @@ arrange(my_data_frame, column_one, column_two, ...)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{arrange}\NormalTok{(my_data_frame, column_one)}
+\FunctionTok{arrange}\NormalTok{(my\_data\_frame, column\_one)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2291,15 +2296,15 @@ La función \texttt{arrange()} ordena las filas de un marco de datos. Toma un ma
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pres_results_}\DecValTok{2016}\NormalTok{ <-}\StringTok{ }\NormalTok{pres_results }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year}\OperatorTok{==}\DecValTok{2016}\NormalTok{)}
+\NormalTok{pres\_results\_2016 }\OtherTok{\textless{}{-}}\NormalTok{ pres\_results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year}\SpecialCharTok{==}\DecValTok{2016}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{arrange}\NormalTok{(pres_results_}\DecValTok{2016}\NormalTok{, rep)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{arrange}\NormalTok{(pres\_results\_2016, rep)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2325,8 +2330,8 @@ Como puede ver en la salida, el marco de datos se ordena en orden ascendente seg
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{arrange}\NormalTok{(pres_results_}\DecValTok{2016}\NormalTok{, }\KeywordTok{desc}\NormalTok{(rep))}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{arrange}\NormalTok{(pres\_results\_2016, }\FunctionTok{desc}\NormalTok{(rep))}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2352,8 +2357,8 @@ La organización no solo es posible en valores numéricos, sino también en valo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{arrange}\NormalTok{(pres_results_}\DecValTok{2016}\NormalTok{, state)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{arrange}\NormalTok{(pres\_results\_2016, state)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2384,8 +2389,8 @@ En el siguiente ejemplo, utilizamos el marco de datos \texttt{pres\_results\_sub
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pres_results_subset <-}\StringTok{ }\NormalTok{pres_results }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"TX"}\NormalTok{,}
+\NormalTok{pres\_results\_subset }\OtherTok{\textless{}{-}}\NormalTok{ pres\_results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(state }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"TX"}\NormalTok{,}
                       \StringTok{"UT"}\NormalTok{,}
                       \StringTok{"FL"}\NormalTok{))}
 \end{Highlighting}
@@ -2393,8 +2398,8 @@ En el siguiente ejemplo, utilizamos el marco de datos \texttt{pres\_results\_sub
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\KeywordTok{arrange}\NormalTok{(pres_results_subset, year, dem)}
+\FunctionTok{tibble}\NormalTok{(}
+\FunctionTok{arrange}\NormalTok{(pres\_results\_subset, year, dem)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2456,10 +2461,10 @@ Los pasos y funciones descritos anteriormente deben ejecutarse uno tras otro, do
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{result <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(pres_results, year}\OperatorTok{==}\DecValTok{2016}\NormalTok{)}
-\NormalTok{result <-}\StringTok{ }\KeywordTok{select}\NormalTok{(result, state, dem)}
-\NormalTok{result <-}\StringTok{ }\KeywordTok{arrange}\NormalTok{(result, }\KeywordTok{desc}\NormalTok{(dem))}
-\KeywordTok{tibble}\NormalTok{(result)}
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(pres\_results, year}\SpecialCharTok{==}\DecValTok{2016}\NormalTok{)}
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(result, state, dem)}
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{arrange}\NormalTok{(result, }\FunctionTok{desc}\NormalTok{(dem))}
+\FunctionTok{tibble}\NormalTok{(result)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2486,11 +2491,11 @@ El operador \texttt{\%\textgreater{}\%} proporciona una forma práctica de combi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}
-\NormalTok{pres_results }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year}\OperatorTok{==}\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(state, dem, rep) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(dem))}
+\FunctionTok{tibble}\NormalTok{(}
+\NormalTok{pres\_results }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year}\SpecialCharTok{==}\DecValTok{2016}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(state, dem, rep) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(dem))}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -2533,11 +2538,11 @@ Una diferencia entre los dos enfoques es que el operador \texttt{\%\textgreater{
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{result <-}\StringTok{ }\NormalTok{pres_results }\OperatorTok{%<>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year}\OperatorTok{==}\DecValTok{2016}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(state, dem) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(dem))}
-\KeywordTok{tibble}\NormalTok{(result)}
+\NormalTok{result }\OtherTok{\textless{}{-}}\NormalTok{ pres\_results }\SpecialCharTok{\%\textless{}\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year}\SpecialCharTok{==}\DecValTok{2016}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(state, dem) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(dem))}
+\FunctionTok{tibble}\NormalTok{(result)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2582,10 +2587,10 @@ Utiliza el operador \texttt{\%\textgreater{}\%} en el conjunto de datos de \text
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(country }\OperatorTok{==}\StringTok{ "Austria"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(year, lifeExp) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(year)}
+\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(country }\SpecialCharTok{==} \StringTok{"Austria"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(year, lifeExp) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(year)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2628,10 +2633,10 @@ Utiliza el operador \texttt{\%\textgreater{}\%} en el conjunto de datos de \text
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2007}\NormalTok{, continent }\OperatorTok{==}\StringTok{ "Europe"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(country, gdpPercap) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(gdpPercap))}
+\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{, continent }\SpecialCharTok{==} \StringTok{"Europe"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(country, gdpPercap) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(gdpPercap))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2673,10 +2678,10 @@ Utiliza el operador \texttt{\%\textgreater{}\%} en el conjunto de datos de \text
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gapminder }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ }\DecValTok{2007}\NormalTok{, continent }\OperatorTok{==}\StringTok{ "Americas"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(country, pop) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(pop))}
+\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{, continent }\SpecialCharTok{==} \StringTok{"Americas"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(country, pop) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(pop))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2696,6 +2701,572 @@ Utiliza el operador \texttt{\%\textgreater{}\%} en el conjunto de datos de \text
 ## 10 Ecuador        13755680
 ## # ... with 15 more rows
 \end{verbatim}
+
+\hypertarget{visualizaciuxf3n-de-datos-con-ggplot2}{%
+\chapter{Visualización de datos con ggplot2}\label{visualizaciuxf3n-de-datos-con-ggplot2}}
+
+Comprender los tipos de gráficos y los principios básicos de la gramática de los gráficos. Cree sus primeras visualizaciones con el paquete ggplot2 que incluye diagramas de dispersión, gráficos de líneas y gráficos de barras.
+
+\hypertarget{por-quuxe9-es-importante-la-visualizaciuxf3n-de-datos}{%
+\section{Por qué es importante la visualización de datos}\label{por-quuxe9-es-importante-la-visualizaciuxf3n-de-datos}}
+
+La visualización de datos no solo es importante para comunicar los resultados, sino también una técnica poderosa para el análisis exploratorio de datos. Cada tipo de diagrama, como diagramas de dispersión, gráficos de líneas, gráficos de barras e histogramas, tiene su propio propósito y se puede aprovechar de una manera poderosa utilizando el paquete \textbf{ggplot2}.
+
+\begin{itemize}
+\tightlist
+\item
+  Comprender los diferentes roles de la visualización de datos.
+\item
+  Comprender los diferentes tipos de parcelas disponibles.
+\item
+  Obtenga una descripción general del paquete \textbf{ggplot2}.
+\end{itemize}
+
+\includegraphics{img/geom.png}
+
+\hypertarget{introducciuxf3n-a-la-visualizaciuxf3n-de-datos}{%
+\subsection{Introducción a la visualización de datos}\label{introducciuxf3n-a-la-visualizaciuxf3n-de-datos}}
+
+\begin{quote}
+\textbf{Una imagen vale mas que mil palabras}.
+\end{quote}
+
+La visualización de datos es la técnica más rápida y poderosa para comprender información nueva y existente. Durante una fase de exploración inicial, los científicos de datos intentan revelar las características subyacentes de un conjunto de datos, como diferentes distribuciones, correlaciones u otros patrones visibles. Este proceso también se denomina \emph{análisis exploratorio de datos} (EDA) y marca el punto de partida de cada proyecto de ciencia de datos.
+
+Los gráficos producidos durante la EDA muestran al científico de datos las direcciones del viaje por delante. Los patrones revelados pueden inspirar hipótesis sobre los procesos subyacentes, las características del conjunto de datos que se extraerán o las técnicas de modelado que se probarán. Por último, pero no menos importante, las visualizaciones descubren valores atípicos y errores de datos de los que el científico de datos debe ocuparse.
+
+El papel más importante de la visualización de datos es la comunicación de los hallazgos de la ciencia de datos a colegas y clientes a través de presentaciones, informes o paneles. El esfuerzo utilizado para la EDA y las visualizaciones es un tiempo bien invertido, ya que los resultados se pueden utilizar directamente para comunicar los hallazgos.
+
+\hypertarget{tipos-de-gruxe1ficas-disponibles}{%
+\subsection{Tipos de gráficas disponibles}\label{tipos-de-gruxe1ficas-disponibles}}
+
+Hay muchos tipos de gráficos disponibles que ayudan a comprender las diferentes características y relaciones en el conjunto de datos.
+
+Durante la fase de análisis de datos exploratorios, normalmente queremos detectar los patrones más obvios observando cada variable de forma aislada o detectando relaciones de variables con otras. El tipo de gráfico utilizado también está determinado por el tipo de datos de las variables de entrada, como numéricas o categóricas.
+
+\hypertarget{gruxe1fico-de-dispersiuxf3n}{%
+\subsubsection{Gráfico de dispersión}\label{gruxe1fico-de-dispersiuxf3n}}
+
+Los gráficos de dispersión se utilizan para visualizar la relación entre dos variables numéricas. La posición de cada punto representa el valor de las variables en los ejes \emph{x} e \emph{y}.
+
+\includegraphics{img/scat.png}
+
+\hypertarget{gruxe1ficos-lineales}{%
+\subsubsection{Gráficos lineales}\label{gruxe1ficos-lineales}}
+
+Los gráficos de líneas se utilizan para visualizar la trayectoria de una variable numérica contra otra que están conectadas a través de líneas. Son muy adecuados si los valores solo cambian \textbf{continuamente}, como la temperatura con el tiempo.
+
+\includegraphics{img/unna.png}
+
+\hypertarget{gruxe1ficos-de-barras-e-histogramas}{%
+\subsubsection{Gráficos de barras e histogramas}\label{gruxe1ficos-de-barras-e-histogramas}}
+
+Los gráficos de barras visualizan valores \texttt{numéricos} agrupados por categorías. Cada categoría está representada por una barra con una altura definida por cada valor \texttt{numérico}. Los histogramas son gráficos de barras específicos para resumir el número de apariciones de valores numéricos en un conjunto de rangos de valores (o bins). Suelen utilizarse para determinar la \emph{distribución} de valores numéricos.
+
+\includegraphics{img/hist.png}
+
+\hypertarget{otros}{%
+\subsubsection{Otros}\label{otros}}
+
+Otros tipos de gráficos de uso frecuente en la ciencia de datos incluyen:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Diagramas de caja}: Muestra información de distribución de valores numéricos agrupados en categorías como cajas. Genial para comparar rápidamente múltiples distribuciones.
+\item
+  \textbf{Gráficos de violín}: igual que los gráficos de caja, pero muestran distribuciones como \emph{violines}.
+\item
+  \textbf{Mapas de calor}: muestran las interacciones de las variables, generalmente correlaciones, como imágenes rasterizadas que resaltan áreas de alta interacción.
+\item
+  \textbf{Gráficos de red}: muestra conexiones entre nodos
+\end{itemize}
+
+\includegraphics{img/otr.png}
+
+\hypertarget{presentamos-ggplot2}{%
+\subsection{Presentamos: ggplot2}\label{presentamos-ggplot2}}
+
+Debido a la importancia de la visualización para la ciencia de datos y las estadísticas, R ofrece un amplio conjunto de herramientas y paquetes. El lenguaje R básico ya proporciona un rico conjunto de funciones de trazado y tipos de trazado. Estas funciones de trazado requieren que los usuarios especifiquen cómo trazar cada elemento en el lienzo paso a paso. Por el contrario, el paquete \textbf{ggplot2} permite la especificación de trazados a través de un conjunto de \emph{capas} de trazado. Esto requiere que el paquete averigüe los pasos necesarios para producir el gráfico.
+
+A través del conjunto predefinido de capas geométricas, facetas y temas, \textbf{ggplot2} permite a los usuarios crear hermosos gráficos en muy poco tiempo. \textbf{ggplot2} es también la biblioteca de trazado más adoptada en la comunidad R.
+
+\hypertarget{crea-un-diagrama-de-dispersiuxf3n-con-ggplot}{%
+\section{Crea un diagrama de dispersión con ggplot}\label{crea-un-diagrama-de-dispersiuxf3n-con-ggplot}}
+
+Realice sus primeros pasos con el paquete \textbf{ggplot2} para crear un diagrama de dispersión. Utilice la gramática de los gráficos para asignar los atributos del conjunto de datos a su gráfico y conectar diferentes capas con el operador \texttt{+}.
+
+\begin{itemize}
+\tightlist
+\item
+  Defina un conjunto de datos para la gráfica usando la función \texttt{ggplot()}
+\item
+  Especifique una capa geométrica usando la función \texttt{geom\_point()}
+\item
+  Asigne los atributos del conjunto de datos a las propiedades de trazado usando el parámetro de \texttt{mapping}
+\item
+  Conectar diferentes objetos \texttt{ggplot} usando el operador \texttt{+}
+\end{itemize}
+
+\begin{verbatim}
+library(ggplot2)
+ggplot(___) + 
+  geom_point(
+    mapping = aes(x = ___, y = ___)
+  )
+\end{verbatim}
+
+\hypertarget{introducciuxf3n-a-los-gruxe1ficos-de-dispersiuxf3n}{%
+\subsection{Introducción a los gráficos de dispersión}\label{introducciuxf3n-a-los-gruxe1ficos-de-dispersiuxf3n}}
+
+Los diagramas de dispersión utilizan puntos para visualizar la relación entre dos variables numéricas. La posición de cada punto representa el valor de las variables en los ejes X e Y. Veamos un ejemplo de un diagrama de dispersión para comprender la relación entre la \emph{speed} y la \emph{distancia de frenado} de los automóviles:
+
+\includegraphics{img/scat1.png}
+
+Cada punto representa un automóvil. Cada automóvil comienza a frenar a una velocidad dada en el eje-y y recorre la distancia que se muestra en el eje-x hasta detenerse por completo. Si echamos un vistazo a todos los puntos de la trama, podemos ver claramente que los coches más rápidos necesitan más distancia para detenerse por completo.
+
+\hypertarget{especificar-un-conjunto-de-datos}{%
+\subsection{Especificar un conjunto de datos}\label{especificar-un-conjunto-de-datos}}
+
+Para crear gráficos con \textbf{ggplot2}, primero debe cargar el paquete usando la \texttt{library(ggplot2)}.
+
+Una vez que se haya cargado el paquete, especifique el conjunto de datos que se utilizará como argumento de la función \texttt{ggplot()}. Por ejemplo, para especificar una gráfica usando el conjunto de datos de \texttt{cars}, puede usar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(gapminder)}
+\FunctionTok{ggplot}\NormalTok{(cars)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-118-1.pdf}
+
+Tenga en cuenta que este comando no traza nada más que un lienzo gris todavía. Simplemente define el conjunto de datos para el gráfico y crea una base vacía sobre la cual podemos agregar capas adicionales.
+
+\hypertarget{especificando-una-capa-geomuxe9trica}{%
+\subsection{Especificando una capa geométrica}\label{especificando-una-capa-geomuxe9trica}}
+
+Podemos usar las capas geométricas de \textbf{ggplot} (o \emph{geoms}) para definir cómo queremos visualizar nuestro conjunto de datos. Las \emph{geoms} utilizan objetos geométricos para visualizar las variables de un conjunto de datos. Los objetos pueden tener múltiples formas como puntos, líneas y barras y se especifican mediante las funciones correspondientes \texttt{geom\_point()}, \texttt{geom\_line()} y \texttt{geom\_col()}:
+
+\includegraphics{img/geom.png}
+
+\hypertarget{creando-mapeos-estuxe9ticos}{%
+\subsection{Creando mapeos estéticos}\label{creando-mapeos-estuxe9ticos}}
+
+\textbf{ggplot2} utiliza el concepto de \emph{estética}, que \emph{asigna} los atributos del conjunto de datos a las características visuales de la gráfica. Cada capa geométrica requiere un conjunto diferente de \emph{asignaciones estéticas}, p.~Ej. la función \texttt{geom\_point()} usa la estética \texttt{x} e \texttt{y} para determinar las coordenadas de los ejes \texttt{x} e \texttt{y} de los puntos a graficar. La estética se asigna dentro de la función \texttt{aes()} para construir las asignaciones finales.
+
+Para especificar una capa de puntos que traza la velocidad variable en el eje-x y la distancia \texttt{dist} en el eje-y, podemos escribir:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{geom\_point}\NormalTok{(}
+  \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{speed, }\AttributeTok{y=}\NormalTok{dist)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+La expresión anterior construye una capa geométrica. Sin embargo, esta capa actualmente no está vinculada a un conjunto de datos y no produce una gráfica. Para \textbf{vincular} la capa con un objeto \texttt{ggplot} que especifica el conjunto de datos de \texttt{cars}, necesitamos conectar el objeto \texttt{ggplot(cars)} con la capa \texttt{geom\_point()} usando el operador \texttt{+}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(cars) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}
+    \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{speed, }\AttributeTok{y=}\NormalTok{dist)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-120-1.pdf}
+
+A través del enlace, \texttt{ggplot()} sabe que las variables de \texttt{speed} y \texttt{dist} asignadas se toman del conjunto de datos de \texttt{cars}. \texttt{geom\_point()} instruye a ggplot para trazar las variables mapeadas como puntos.
+
+Los pasos necesarios para crear un diagrama de dispersión con \texttt{ggplot} se pueden resumir de la siguiente manera:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Cargue el paquete \textbf{ggplot2} usando \texttt{library(ggplot2)}.
+\item
+  Especifique el conjunto de datos que se graficará usando \texttt{ggplot()}.
+\item
+  Utilice el operador \texttt{+} para agregar capas al gráfico.
+\item
+  Agregue una capa geométrica para definir las formas que se graficaran. En caso de gráficos de dispersión, use \texttt{geom\_point()}.
+\item
+  Asigne variables del conjunto de datos a propiedades de trazado a través del parámetro de \texttt{mapping} en la capa geométrica.
+\end{enumerate}
+
+\hypertarget{especificar-estuxe9tica-adicional-para-puntos}{%
+\section{Especificar estética adicional para puntos}\label{especificar-estuxe9tica-adicional-para-puntos}}
+
+\textbf{ggplot2} implementa la gramática de gráficos para mapear atributos de un conjunto de datos para trazar características a través de la estética. Este marco se puede utilizar para ajustar el \texttt{tamaño\ de\ punto}, el \texttt{color} y la transparencia \texttt{alpha} de los puntos en un diagrama de dispersión.
+
+\begin{itemize}
+\tightlist
+\item
+  Agregue dimensiones de trazado adicionales a través de la estética
+\item
+  Ajuste el tamaño del punto de un gráfico de dispersión usando el parámetro \texttt{size}
+\item
+  Cambiar el color del punto de un diagrama de dispersión usando el parámetro \texttt{color}
+\item
+  Establecer un parámetro \texttt{alpha} para cambiar la transparencia de todos los puntos
+\item
+  Diferenciar entre mapeos estéticos y parámetros constantes
+\end{itemize}
+
+\begin{verbatim}
+ggplot(___) + 
+  geom_point(
+    mapping = aes(x = ___, y = ___, 
+                  color = ___, 
+                  size  = ___),
+    alpha  = ___
+  )
+\end{verbatim}
+
+\hypertarget{auxf1adiendo-muxe1s-estuxe9tica-a-la-trama}{%
+\subsection{Añadiendo más estética a la trama}\label{auxf1adiendo-muxe1s-estuxe9tica-a-la-trama}}
+
+En su forma más básica, los diagramas de dispersión solo pueden visualizar conjuntos de datos en dos dimensiones a través de la estética \texttt{x} e \texttt{y} de la capa \texttt{geom\_point()}. Sin embargo, la mayoría de los conjuntos de datos tienen más de dos variables y, por lo tanto, pueden requerir dimensiones de trazado adicionales. \texttt{ggplot()} hace que sea muy fácil mapear variables adicionales a diferentes estéticas de trazado como \texttt{size}, transparencia \texttt{alpha} y \texttt{color}.
+
+Consideremos el conjunto de datos \texttt{gapminder\_2007} que contiene las variables PIB per cápita \texttt{gdpPercap} y esperanza de vida \texttt{lifeExp} para 142 países en el año 2007:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(gapminder)}
+\DocumentationTok{\#\# select data}
+\NormalTok{gapminder\_2007 }\OtherTok{\textless{}{-}}\NormalTok{ gapminder}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_2007) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gdpPercap, }\AttributeTok{y =}\NormalTok{ lifeExp))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-122-1.pdf}
+
+Al mapear la variable \texttt{continent} a través de la estética del \texttt{color} del punto y la población \texttt{pop} (en millones) a través del tamaño del punto \texttt{size}, obtenemos una gráfica mucho más rica que incluye 4 variables diferentes del conjunto de datos:
+
+\includegraphics{img/un4.png}
+
+\hypertarget{ajuste-del-color-del-punto}{%
+\subsection{Ajuste del color del punto}\label{ajuste-del-color-del-punto}}
+
+Normalmente, el color del punto se utiliza para introducir una nueva dimensión en un diagrama de dispersión. En ggplot usamos la estética del \texttt{color} para especificar el mapeo de una variable al color de los puntos.
+
+Para el conjunto de datos \texttt{gapminder\_2007} podemos trazar el PIB per cápita \texttt{gdpPercap} frente a la esperanza de vida \texttt{lifeExp} de la siguiente manera:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_2007) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gdpPercap, }\AttributeTok{y =}\NormalTok{ lifeExp))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-123-1.pdf}
+
+Para colorear cada punto en función del \texttt{continent} de cada país podemos utilizar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_2007) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gdpPercap, }\AttributeTok{y =}\NormalTok{ lifeExp,}
+                 \AttributeTok{color =}\NormalTok{ continent))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-124-1.pdf}
+
+Vemos que en la trama resultante cada punto está coloreado de manera diferente según el \texttt{continent} de cada país. \texttt{ggplot} usa el esquema de coloración basado en el tipo de datos categóricos de la variable \texttt{continent}.
+
+Por el contrario, veamos cómo se ve el gráfico si coloreamos los puntos por el \texttt{pop} de población de la variable \texttt{numeric}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_2007) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gdpPercap, }\AttributeTok{y =}\NormalTok{ lifeExp,}
+                 \AttributeTok{color =}\NormalTok{ pop))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-125-1.pdf}
+
+La escala cambia inmediatamente a continua como se puede ver en la leyenda y los puntos celestes son ahora los países con mayor número de población (China e India).
+
+\hypertarget{ajustar-el-tamauxf1o-del-punto}{%
+\subsection{Ajustar el tamaño del punto}\label{ajustar-el-tamauxf1o-del-punto}}
+
+Para el conjunto de datos de \texttt{gapminder\_2007} podemos trazar el PIB per cápita \texttt{gdpPercap} frente a la esperanza de vida de la siguiente manera:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_2007) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gdpPercap, }
+                 \AttributeTok{y =}\NormalTok{ lifeExp))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-126-1.pdf}
+
+Para ajustar el tamaño de puntos en función de la población (\texttt{pop}) de cada país, podemos usar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_2007) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gdpPercap, }\AttributeTok{y =}\NormalTok{ lifeExp,}
+                 \AttributeTok{size =}\NormalTok{ pop))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-127-1.pdf}
+
+Vemos que los tamaños de puntos en el gráfico anterior no reflejan claramente las diferencias de población en cada país. Si comparamos el tamaño en puntos que representa una población de 250 millones de personas con el que muestra 750 millones, podemos ver que sus tamaños no son proporcionales. En su lugar, los tamaños en puntos están agrupados de forma predeterminada. Para reflejar las diferencias de población reales por el tamaño de puntos, podemos usar la función \texttt{scale\_size\_area()} en su lugar. La información de escala se puede agregar como cualquier otro objeto ggplot con el operador \texttt{+}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_2007) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gdpPercap, }\AttributeTok{y =}\NormalTok{ lifeExp,}
+                 \AttributeTok{color =}\NormalTok{ continent,}
+                 \AttributeTok{size =}\NormalTok{ pop)) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_size\_area}\NormalTok{(}\AttributeTok{max\_size =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-128-1.pdf}
+
+Tenga en cuenta que hemos ajustado el tamaño del punto con \texttt{max\_size}, lo que da como resultado tamaños de punto más grandes.
+
+\hypertarget{establecer-la-estuxe9tica-global-transparencia}{%
+\subsection{Establecer la estética global: transparencia}\label{establecer-la-estuxe9tica-global-transparencia}}
+
+Trazar muchos puntos con coordenadas X e Y similares en un gráfico puede producir nubes de puntos densas. Muchos puntos en estas nubes están sobretrazados y el número real de observaciones en un área determinada ya no es visible. Como solución, podemos establecer la transparencia de cada punto usando el parámetro ggplot \texttt{alpha}.
+
+Dado que \textbf{no} queremos establecer la transparencia del punto \textbf{individualmente} para cada punto sino \textbf{globalmente} para todos los puntos, no establecemos el parámetro \texttt{alpha} como un mapeo estético (dentro de \texttt{aes()}) sino fuera.
+
+Establecemos la \textbf{opacidad} de cada punto al 50\% a través del parámetro \texttt{alpha} \textbf{outside} como parámetro constante:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_2007) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gdpPercap, }\AttributeTok{y =}\NormalTok{ lifeExp, }\AttributeTok{size =}\NormalTok{ pop), }
+             \AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-129-1.pdf}
+
+Ahora podemos ver claramente cuántos puntos se superponen entre sí y la opacidad de cada punto se establece en \texttt{0.5}.
+
+\hypertarget{crea-un-gruxe1fico-de-luxedneas-con-ggplot}{%
+\section{Crea un gráfico de líneas con ggplot}\label{crea-un-gruxe1fico-de-luxedneas-con-ggplot}}
+
+Use la estética \texttt{geom\_line()} para dibujar gráficos de líneas y personalizar su estilo usando el parámetro \texttt{color}. Especifique qué coordenadas usar para cada línea con el parámetro \texttt{group}.
+
+\begin{itemize}
+\tightlist
+\item
+  Crea tu primer gráfico de línea usando \texttt{geom\_line()}
+\item
+  Defina cómo se conectan las diferentes líneas mediante el parámetro \texttt{group}
+\item
+  Cambiar el color de línea de un gráfico de líneas usando el parámetro \texttt{color}
+\end{itemize}
+
+\begin{verbatim}
+ggplot(___) + 
+  geom_line(
+    mapping = aes(x = ___, y = ___, 
+                  group = ___, 
+                  color = ___)
+)
+\end{verbatim}
+
+\hypertarget{introducciuxf3n-a-los-gruxe1ficos-lineales}{%
+\subsection{Introducción a los gráficos lineales}\label{introducciuxf3n-a-los-gruxe1ficos-lineales}}
+
+Los gráficos de líneas se utilizan para visualizar la trayectoria de una variable numérica contra otra. A diferencia de los diagramas de dispersión, las coordenadas \texttt{x} e \texttt{y} no se visualizan a través de puntos, sino que están conectadas a través de líneas. Los gráficos de líneas se utilizan con mayor frecuencia si una variable cambia \emph{continuamente} contra otra variable numérica, como es el caso de la mayoría de los gráficos de series de tiempo (por ejemplo, precios, clientes, concentración de CO2, temperatura a lo largo del tiempo), funciones continuas (por ejemplo, sinusoidal (x)) u otras relaciones casi continuas (curvas de oferta/demanda del mundo real).
+
+\includegraphics{img/geo1.png}
+
+\hypertarget{crear-un-gruxe1fico-lineal-simple}{%
+\subsection{Crear un gráfico lineal simple}\label{crear-un-gruxe1fico-lineal-simple}}
+
+Japón se encuentra entre los países con mayor esperanza de vida. Utilizando el conjunto de datos \texttt{gapminder\_japan}, determinamos cómo se ha desarrollado la esperanza de vida en Japón a lo largo del tiempo. Necesitamos que:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Especifique el conjunto de datos dentro de \texttt{ggplot()}
+\item
+  Definir la capa de trazado \texttt{geom\_line()}
+\item
+  Asigne el \texttt{year} al eje x y la esperanza de vida \texttt{lifeExp} al eje y con la función \texttt{aes()}
+\end{enumerate}
+
+Tenga en cuenta que la biblioteca \textbf{ggplot2} debe cargarse primero con \texttt{library(ggplot2)}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\NormalTok{gapminder\_japan }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(country }\SpecialCharTok{==} \StringTok{"Japan"}\NormalTok{)}
+\DocumentationTok{\#\# gráfica}
+\FunctionTok{ggplot}\NormalTok{(gapminder\_japan) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_line}\NormalTok{(}
+    \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ year, }\AttributeTok{y =}\NormalTok{ lifeExp)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-130-1.pdf}
+
+\hypertarget{agregar-muxe1s-luxedneas}{%
+\subsection{Agregar más líneas}\label{agregar-muxe1s-luxedneas}}
+
+Hasta ahora solo nos hemos centrado en líneas simples, pero ¿qué pasa si tenemos varios países en el conjunto de datos y queremos diferenciarlos de alguna manera?
+
+Los gráficos de líneas a menudo se amplían y se utilizan para comparar dos o más líneas. Los gráficos de líneas múltiples muestran las diferencias absolutas entre las observaciones, pero también cómo las trayectorias específicas se relacionan entre sí. Por ejemplo, respondamos a la pregunta: \emph{¿Cómo ha cambiado la esperanza de vida en los países Austria y Hungría a lo largo del tiempo?}
+
+Primero filtramos el conjunto de datos para ambos países de interés. Luego, establecemos la variable \texttt{country} como argumento de \texttt{group} para el mapeo estético. El argumento de grupo le dice a ggplot qué observaciones pertenecen juntas y deben conectarse a través de líneas. Al especificar la variable \texttt{country}, ggplot crea una línea separada para cada país. Para que las líneas sean más fáciles de distinguir, también asignamos \texttt{color} a \texttt{country} para que cada línea de país tenga un color diferente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gapminder\_comparison }\OtherTok{\textless{}{-}} 
+  \FunctionTok{filter}\NormalTok{(gapminder, country }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Austria"}\NormalTok{, }\StringTok{"Hungary"}\NormalTok{))}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ gapminder\_comparison) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ year, }\AttributeTok{y =}\NormalTok{ lifeExp, }
+                          \AttributeTok{group =}\NormalTok{ country, }
+                          \AttributeTok{color =}\NormalTok{ country)}
+\NormalTok{            )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-131-1.pdf}
+
+Tenga en cuenta que ggplot también separa las líneas correctamente si solo se especifica la asignación \texttt{color} (el parámetro \texttt{group} se establece implícitamente).
+
+\hypertarget{crea-tu-primer-gruxe1fico-de-barras}{%
+\section{Crea tu primer gráfico de barras}\label{crea-tu-primer-gruxe1fico-de-barras}}
+
+\begin{itemize}
+\tightlist
+\item
+  Crea tu primer gráfico de barras usando \texttt{geom\_col()}
+\item
+  Rellenar barras con color usando la estética \texttt{fill}
+\end{itemize}
+
+\begin{verbatim}
+ggplot(___) + 
+  geom_col(
+    mapping = aes(x = ___, y = ___, 
+                  fill = ___)
+ )
+\end{verbatim}
+
+\hypertarget{introducciuxf3n-a-los-gruxe1ficos-de-barras}{%
+\subsection{Introducción a los gráficos de barras}\label{introducciuxf3n-a-los-gruxe1ficos-de-barras}}
+
+Los gráficos de barras visualizan valores \texttt{numéricos} agrupados por categorías. Cada categoría está representada por una barra con una altura definida por cada valor \texttt{numérico}.
+
+Los gráficos de barras son adecuados para comparar valores entre diferentes grupos, p.~Ej. número de votos por partidos, número de personas en diferentes países o PIB per cápita en diferentes países. Los gráficos de barras son un poco espaciosos y funcionan mejor si el número de grupos a comparar es bastante pequeño.
+
+A continuación, puede encontrar un ejemplo que muestra la cantidad de personas (en millones) en los cinco países más grandes por población en 2007:
+
+\includegraphics{img/bar1.png}
+
+\hypertarget{crear-un-gruxe1fico-de-barras-simple}{%
+\subsection{Crear un gráfico de barras simple}\label{crear-un-gruxe1fico-de-barras-simple}}
+
+En \textbf{ggplot2}, los gráficos de barras se crean utilizando la capa geométrica \texttt{geom\_col()}. La capa \texttt{geom\_col()} requiere el mapeo estético \texttt{x} que define las diferentes barras a trazar. La altura de cada barra está definida por la variable especificada en el mapeo estético \texttt{y}. Ambas asignaciones, \texttt{x} e \texttt{y}, son necesarias para \texttt{geom\_col()}.
+
+Creemos nuestro primer gráfico de barras con el conjunto de datos \texttt{gapminder\_top5}. Contiene datos de población (en millones) y esperanza de vida de los países más grandes por población en 2007.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gapminder\_top5 }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2007}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{slice\_max}\NormalTok{(pop, }\AttributeTok{n=}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_top5) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ country, }\AttributeTok{y =}\NormalTok{ pop))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-133-1.pdf}
+
+Vemos que las barras resultantes están ordenadas por los nombres de los países en orden alfabético por defecto.
+
+\hypertarget{llenado-de-barras-de-color}{%
+\subsection{Llenado de barras de color}\label{llenado-de-barras-de-color}}
+
+Al igual que otras geoms, \texttt{geom\_col()} permite a los usuarios asignar variables de conjuntos de datos adicionales al atributo de color de la barra. La estética \texttt{fill} se puede utilizar para llenar de color todas las barras. Una confusión habitual es la estética \texttt{color} que especifica el color de la \emph{línea} del borde de cada barra en lugar del color \texttt{fill}.
+
+Según el conjunto de datos \texttt{gapminder\_top5}, trazamos la población (en millones) de los países más grandes y usamos la variable \texttt{continent} para colorear cada barra:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_top5) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ country, }\AttributeTok{y =}\NormalTok{ pop, }\AttributeTok{fill =}\NormalTok{ continent))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-134-1.pdf}
+
+Dado que la variable \texttt{continent} es una variable categórica, las barras tienen un esquema de color claro para cada continente. Veamos qué sucede si usamos una variable \texttt{numérica} como la esperanza de vida \texttt{lifeExp} en su lugar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(gapminder\_top5) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ country, }\AttributeTok{y =}\NormalTok{ pop, }\AttributeTok{fill =}\NormalTok{ lifeExp))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-135-1.pdf}
+
+Los colores de las barras ahora han cambiado según la leyenda \textbf{continua} de la derecha. Vemos que también se pueden utilizar variables \texttt{numéricas} para \texttt{rellenar} barras.
+
+\hypertarget{gruxe1ficos-de-barras-apiladas}{%
+\subsection{Gráficos de barras apiladas}\label{gruxe1ficos-de-barras-apiladas}}
+
+En algunas circunstancias, puede resultar útil trazar múltiples variables de valores numéricos dentro de cada barra. Los ejemplos son valores numéricos que describen una entidad específica (por ejemplo, clientes) dividida entre varias categorías (segmentos de clientes) de modo que la altura de la barra representa el número total (todos los clientes).
+
+El siguiente gráfico muestra la cantidad de teléfonos (en miles) por continente desde 1956 hasta 1961 como un gráfico de barras apiladas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Ordenando la base de dato}
+\NormalTok{world\_phones }\OtherTok{\textless{}{-}}\NormalTok{ WorldPhones }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.data.frame}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"Year"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols=}\SpecialCharTok{{-}}\NormalTok{Year, }\AttributeTok{names\_to=}\StringTok{"region"}\NormalTok{, }\AttributeTok{values\_to=}\StringTok{"phones"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Year }\SpecialCharTok{\textgreater{}}\DecValTok{1955}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(world\_phones) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year, }\AttributeTok{y =}\NormalTok{ phones,}
+               \AttributeTok{fill =}\NormalTok{ region))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BookR_files/figure-latex/unnamed-chunk-137-1.pdf}
 
 \hypertarget{introducciuxf3n-a-machine-learning}{%
 \chapter{Introducción a Machine Learning}\label{introducciuxf3n-a-machine-learning}}
@@ -2924,11 +3495,6 @@ Cuando queremos predecir el precio de un apartamento, la salida es un valor \tex
 \includegraphics{img/RCE.png}
 
 Todo el material descrito se encuentra en idioma ingles en la página oficial de Quantargo \citep{quantargo2}
-
-\hypertarget{final-words}{%
-\chapter{Final Words}\label{final-words}}
-
-We have finished a nice book.
 
   \bibliography{book.bib,packages.bib}
 

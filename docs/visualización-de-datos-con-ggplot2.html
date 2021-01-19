@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Visualización de datos con ggplot2 | R en las Ciencias Agropecuarias</title>
+  <meta name="description" content="En este libro encontrarás una compilación de paquetes estadísticos aplicadas a las ciencias agropecuarias. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Visualización de datos con ggplot2 | R en las Ciencias Agropecuarias" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="cover.jpg" />
+  <meta property="og:description" content="En este libro encontrarás una compilación de paquetes estadísticos aplicadas a las ciencias agropecuarias. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Visualización de datos con ggplot2 | R en las Ciencias Agropecuarias" />
+  <meta name="twitter:site" content="@FranklinSantosM" />
+  <meta name="twitter:description" content="En este libro encontrarás una compilación de paquetes estadísticos aplicadas a las ciencias agropecuarias. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:image" content="cover.jpg" />
+
+<meta name="author" content="Franklin Santos" />
+
+
+<meta name="date" content="2021-01-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="transformación-de-datos-con-dplyr.html"/>
+<link rel="next" href="introducción-a-machine-learning.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R Ciencias Agropecuarias</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R básico</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introducción-a-r"><i class="fa fa-check"></i><b>1.1</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#por-qué-usar-r"><i class="fa fa-check"></i><b>1.1.1</b> ¿Por qué usar R?</a></li>
+<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#r-en-buena-compañía"><i class="fa fa-check"></i><b>1.1.2</b> R en buena compañía</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#bloques-de-construcción"><i class="fa fa-check"></i><b>1.2</b> Bloques de construcción</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#combinar-valores-en-un-vector"><i class="fa fa-check"></i><b>1.3</b> Combinar valores en un vector</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#introducción-a-los-vectores"><i class="fa fa-check"></i><b>1.3.1</b> Introducción a los vectores</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#tipos-de-vectores"><i class="fa fa-check"></i><b>1.3.2</b> Tipos de vectores</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#creando-una-secuencia-de-números"><i class="fa fa-check"></i><b>1.3.3</b> Creando una secuencia de números</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro.html"><a href="intro.html#concatenando-valores-numéricos-a-un-vector"><i class="fa fa-check"></i><b>1.3.4</b> Concatenando valores numéricos a un vector</a></li>
+<li class="chapter" data-level="1.3.5" data-path="intro.html"><a href="intro.html#creando-vectores-de-caracteres"><i class="fa fa-check"></i><b>1.3.5</b> Creando vectores de caracteres</a></li>
+<li class="chapter" data-level="1.3.6" data-path="intro.html"><a href="intro.html#creando-vectores-lógicos"><i class="fa fa-check"></i><b>1.3.6</b> Creando vectores lógicos</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#crea-variables-a-través-de-asignaciones"><i class="fa fa-check"></i><b>1.4</b> Crea variables a través de asignaciones</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#asignando-variables"><i class="fa fa-check"></i><b>1.4.1</b> Asignando variables</a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#reglas-de-nomenclatura"><i class="fa fa-check"></i><b>1.4.2</b> Reglas de nomenclatura</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#utilice-operadores-básicos"><i class="fa fa-check"></i><b>1.5</b> Utilice operadores básicos</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#usando-r-como-calculadora-de-bolsillo"><i class="fa fa-check"></i><b>1.5.1</b> Usando R como calculadora de bolsillo</a></li>
+<li class="chapter" data-level="1.5.2" data-path="intro.html"><a href="intro.html#aplicación-de-operadoras-aritméticas-en-vectores"><i class="fa fa-check"></i><b>1.5.2</b> Aplicación de operadoras aritméticas en vectores</a></li>
+<li class="chapter" data-level="1.5.3" data-path="intro.html"><a href="intro.html#usar-operadores-relacionales"><i class="fa fa-check"></i><b>1.5.3</b> Usar operadores relacionales</a></li>
+<li class="chapter" data-level="1.5.4" data-path="intro.html"><a href="intro.html#usando-operadores-lógicos"><i class="fa fa-check"></i><b>1.5.4</b> Usando operadores lógicos</a></li>
+<li class="chapter" data-level="1.5.5" data-path="intro.html"><a href="intro.html#usando-el-operador-in"><i class="fa fa-check"></i><b>1.5.5</b> Usando el operador %in%</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#llamar-al-código-r-existente-a-través-de-funciones"><i class="fa fa-check"></i><b>1.6</b> Llamar al código R existente a través de funciones</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="intro.html"><a href="intro.html#introducción-a-las-funciones."><i class="fa fa-check"></i><b>1.6.1</b> Introducción a las funciones.</a></li>
+<li class="chapter" data-level="1.6.2" data-path="intro.html"><a href="intro.html#personalización-de-funciones-a-través-de-parámetros"><i class="fa fa-check"></i><b>1.6.2</b> Personalización de funciones a través de parámetros</a></li>
+<li class="chapter" data-level="1.6.3" data-path="intro.html"><a href="intro.html#usar-la-función-sample"><i class="fa fa-check"></i><b>1.6.3</b> Usar la función <code>sample()</code></a></li>
+<li class="chapter" data-level="1.6.4" data-path="intro.html"><a href="intro.html#utilice-la-función-seq"><i class="fa fa-check"></i><b>1.6.4</b> Utilice la función <code>seq()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#utilice-funciones-y-datos-existentes-a-través-de-paquetes"><i class="fa fa-check"></i><b>1.7</b> Utilice funciones y datos existentes a través de paquetes</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="intro.html"><a href="intro.html#introducción-a-paquetes"><i class="fa fa-check"></i><b>1.7.1</b> Introducción a paquetes</a></li>
+<li class="chapter" data-level="1.7.2" data-path="intro.html"><a href="intro.html#llamar-un-paquete"><i class="fa fa-check"></i><b>1.7.2</b> Llamar un paquete</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#formato-de-introducción"><i class="fa fa-check"></i><b>1.8</b> Formato de introducción</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html"><i class="fa fa-check"></i><b>2</b> Marcos de datos y Tibbles</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#construye-un-marco-de-datos-a-partir-de-vectores"><i class="fa fa-check"></i><b>2.1</b> Construye un marco de datos a partir de vectores</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#introducción-a-los-marcos-de-datos"><i class="fa fa-check"></i><b>2.1.1</b> Introducción a los marcos de datos</a></li>
+<li class="chapter" data-level="2.1.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crear-marcos-de-datos"><i class="fa fa-check"></i><b>2.1.2</b> Crear marcos de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crea-y-convierte-tibbles"><i class="fa fa-check"></i><b>2.2</b> Crea y convierte tibbles</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#introducción-a-tibbles"><i class="fa fa-check"></i><b>2.2.1</b> Introducción a Tibbles</a></li>
+<li class="chapter" data-level="2.2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#creando-tibbles"><i class="fa fa-check"></i><b>2.2.2</b> Creando Tibbles</a></li>
+<li class="chapter" data-level="2.2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#conversión-de-marcos-de-datos-a-tibbles"><i class="fa fa-check"></i><b>2.2.3</b> Conversión de marcos de datos a Tibbles</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando"><i class="fa fa-check"></i><b>2.3</b> Extraiga o reemplace columnas en un marco de datos usando $</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraer-columnas-con"><i class="fa fa-check"></i><b>2.3.1</b> Extraer columnas con $</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#determinar-el-tamaño-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.4</b> Determinar el tamaño de un marco de datos</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#dimensiones-del-marco-de-datos"><i class="fa fa-check"></i><b>2.4.1</b> Dimensiones del marco de datos</a></li>
+<li class="chapter" data-level="2.4.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#recuperar-las-dimensiones-del-marco-de-datos"><i class="fa fa-check"></i><b>2.4.2</b> Recuperar las dimensiones del marco de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-primera-o-la-última-fila-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5</b> Seleccionar la primera o la última fila de un marco de datos</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-parte-superior-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5.1</b> Seleccionar la parte superior de un marco de datos</a></li>
+<li class="chapter" data-level="2.5.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-parte-inferior-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5.2</b> Seleccionar la parte inferior de un marco de datos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformación de datos con dplyr</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#introducción-a-dplyr"><i class="fa fa-check"></i><b>3.1</b> Introducción a dplyr</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#qué-es-dplyr"><i class="fa fa-check"></i><b>3.1.1</b> ¿Qué es dplyr?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#marco-de-funciones"><i class="fa fa-check"></i><b>3.1.2</b> Marco de funciones</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionar-columnas-de-un-marco-de-datos"><i class="fa fa-check"></i><b>3.2</b> Seleccionar columnas de un marco de datos</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionando-por-nombre"><i class="fa fa-check"></i><b>3.2.1</b> Seleccionando por nombre</a></li>
+<li class="chapter" data-level="3.2.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#renombrar-nombres-de-columnas"><i class="fa fa-check"></i><b>3.2.2</b> Renombrar nombres de columnas</a></li>
+<li class="chapter" data-level="3.2.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#selección-por-rango-de-nombre"><i class="fa fa-check"></i><b>3.2.3</b> Selección por rango de nombre</a></li>
+<li class="chapter" data-level="3.2.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#select-por-índices"><i class="fa fa-check"></i><b>3.2.4</b> Select() por índices</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#filtrar-filas-de-marcos-de-datos"><i class="fa fa-check"></i><b>3.3</b> Filtrar filas de marcos de datos</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#función-filter"><i class="fa fa-check"></i><b>3.3.1</b> Función filter()</a></li>
+<li class="chapter" data-level="3.3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#múltiples-expresiones-de-filtro"><i class="fa fa-check"></i><b>3.3.2</b> Múltiples expresiones de filtro</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ordenar-marcos-de-datos-por-columnas"><i class="fa fa-check"></i><b>3.4</b> Ordenar marcos de datos por columnas</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#la-función-arrange-con-una-sola-columna"><i class="fa fa-check"></i><b>3.4.1</b> La función arrange() con una sola columna</a></li>
+<li class="chapter" data-level="3.4.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#la-función-arrange-con-múltiples-columnas"><i class="fa fa-check"></i><b>3.4.2</b> La función arrange() con múltiples columnas</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#crear-una-tubería-de-transformación-de-datos"><i class="fa fa-check"></i><b>3.5</b> Crear una tubería de transformación de datos</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#usando-el-operador"><i class="fa fa-check"></i><b>3.5.1</b> Usando el operador %&gt;%</a></li>
+<li class="chapter" data-level="3.5.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ejercicios"><i class="fa fa-check"></i><b>3.5.2</b> Ejercicios:</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos con ggplot2</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#por-qué-es-importante-la-visualización-de-datos"><i class="fa fa-check"></i><b>4.1</b> Por qué es importante la visualización de datos</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-la-visualización-de-datos"><i class="fa fa-check"></i><b>4.1.1</b> Introducción a la visualización de datos</a></li>
+<li class="chapter" data-level="4.1.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#tipos-de-gráficas-disponibles"><i class="fa fa-check"></i><b>4.1.2</b> Tipos de gráficas disponibles</a></li>
+<li class="chapter" data-level="4.1.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#presentamos-ggplot2"><i class="fa fa-check"></i><b>4.1.3</b> Presentamos: ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-un-diagrama-de-dispersión-con-ggplot"><i class="fa fa-check"></i><b>4.2</b> Crea un diagrama de dispersión con ggplot</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-de-dispersión"><i class="fa fa-check"></i><b>4.2.1</b> Introducción a los gráficos de dispersión</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificar-un-conjunto-de-datos"><i class="fa fa-check"></i><b>4.2.2</b> Especificar un conjunto de datos</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificando-una-capa-geométrica"><i class="fa fa-check"></i><b>4.2.3</b> Especificando una capa geométrica</a></li>
+<li class="chapter" data-level="4.2.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#creando-mapeos-estéticos"><i class="fa fa-check"></i><b>4.2.4</b> Creando mapeos estéticos</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificar-estética-adicional-para-puntos"><i class="fa fa-check"></i><b>4.3</b> Especificar estética adicional para puntos</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#añadiendo-más-estética-a-la-trama"><i class="fa fa-check"></i><b>4.3.1</b> Añadiendo más estética a la trama</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#ajuste-del-color-del-punto"><i class="fa fa-check"></i><b>4.3.2</b> Ajuste del color del punto</a></li>
+<li class="chapter" data-level="4.3.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#ajustar-el-tamaño-del-punto"><i class="fa fa-check"></i><b>4.3.3</b> Ajustar el tamaño del punto</a></li>
+<li class="chapter" data-level="4.3.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#establecer-la-estética-global-transparencia"><i class="fa fa-check"></i><b>4.3.4</b> Establecer la estética global: transparencia</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-un-gráfico-de-líneas-con-ggplot"><i class="fa fa-check"></i><b>4.4</b> Crea un gráfico de líneas con ggplot</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-lineales"><i class="fa fa-check"></i><b>4.4.1</b> Introducción a los gráficos lineales</a></li>
+<li class="chapter" data-level="4.4.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crear-un-gráfico-lineal-simple"><i class="fa fa-check"></i><b>4.4.2</b> Crear un gráfico lineal simple</a></li>
+<li class="chapter" data-level="4.4.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#agregar-más-líneas"><i class="fa fa-check"></i><b>4.4.3</b> Agregar más líneas</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-tu-primer-gráfico-de-barras"><i class="fa fa-check"></i><b>4.5</b> Crea tu primer gráfico de barras</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-de-barras"><i class="fa fa-check"></i><b>4.5.1</b> Introducción a los gráficos de barras</a></li>
+<li class="chapter" data-level="4.5.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crear-un-gráfico-de-barras-simple"><i class="fa fa-check"></i><b>4.5.2</b> Crear un gráfico de barras simple</a></li>
+<li class="chapter" data-level="4.5.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#llenado-de-barras-de-color"><i class="fa fa-check"></i><b>4.5.3</b> Llenado de barras de color</a></li>
+<li class="chapter" data-level="4.5.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#gráficos-de-barras-apiladas"><i class="fa fa-check"></i><b>4.5.4</b> Gráficos de barras apiladas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html"><i class="fa fa-check"></i><b>5</b> Introducción a Machine Learning</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#inteligencia-artificial"><i class="fa fa-check"></i><b>5.1</b> Inteligencia artificial</a></li>
+<li class="chapter" data-level="5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#machine-learning-aprendizaje-automático"><i class="fa fa-check"></i><b>5.2</b> Machine Learning (Aprendizaje automático)</a></li>
+<li class="chapter" data-level="5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-profundo-deep-learning"><i class="fa fa-check"></i><b>5.3</b> Aprendizaje profundo (Deep Learning)</a></li>
+<li class="chapter" data-level="5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#casos-de-uso-populares"><i class="fa fa-check"></i><b>5.4</b> Casos de uso populares</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-motores-de-búsqueda-y-sistemas-de-recomendación"><i class="fa fa-check"></i><b>5.4.1</b> Caso de uso: motores de búsqueda y sistemas de recomendación</a></li>
+<li class="chapter" data-level="5.4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-traducción-automática"><i class="fa fa-check"></i><b>5.4.2</b> Caso de uso: traducción automática</a></li>
+<li class="chapter" data-level="5.4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-identificación-de-música-y-reconocimiento-de-voz"><i class="fa fa-check"></i><b>5.4.3</b> Caso de uso: identificación de música y reconocimiento de voz</a></li>
+<li class="chapter" data-level="5.4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-coches-autónomos"><i class="fa fa-check"></i><b>5.4.4</b> Caso de uso: coches autónomos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#técnicas-de-machine-learning"><i class="fa fa-check"></i><b>5.5</b> Técnicas de Machine Learning</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado"><i class="fa fa-check"></i><b>5.5.1</b> Aprendizaje supervisado</a></li>
+<li class="chapter" data-level="5.5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-objetivo"><i class="fa fa-check"></i><b>5.5.2</b> Aprendizaje supervisado: objetivo</a></li>
+<li class="chapter" data-level="5.5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-no-supervisado"><i class="fa fa-check"></i><b>5.5.3</b> Aprendizaje no supervisado</a></li>
+<li class="chapter" data-level="5.5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-reforzado"><i class="fa fa-check"></i><b>5.5.4</b> Aprendizaje reforzado</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-con-regresión-y-clasificación"><i class="fa fa-check"></i><b>5.6</b> Aprendizaje supervisado con regresión y clasificación</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-datos-de-entrada"><i class="fa fa-check"></i><b>5.6.1</b> Aprendizaje supervisado: datos de entrada</a></li>
+<li class="chapter" data-level="5.6.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#predictores"><i class="fa fa-check"></i><b>5.6.2</b> Predictores</a></li>
+<li class="chapter" data-level="5.6.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#variable-de-resultado"><i class="fa fa-check"></i><b>5.6.3</b> Variable de resultado</a></li>
+<li class="chapter" data-level="5.6.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#regresión-vs.-clasificación"><i class="fa fa-check"></i><b>5.6.4</b> Regresión vs. clasificación</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R en las Ciencias Agropecuarias</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="visualización-de-datos-con-ggplot2" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Visualización de datos con ggplot2</h1>
+<p>Comprender los tipos de gráficos y los principios básicos de la gramática de los gráficos. Cree sus primeras visualizaciones con el paquete ggplot2 que incluye diagramas de dispersión, gráficos de líneas y gráficos de barras.</p>
+<div id="por-qué-es-importante-la-visualización-de-datos" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Por qué es importante la visualización de datos</h2>
+<p>La visualización de datos no solo es importante para comunicar los resultados, sino también una técnica poderosa para el análisis exploratorio de datos. Cada tipo de diagrama, como diagramas de dispersión, gráficos de líneas, gráficos de barras e histogramas, tiene su propio propósito y se puede aprovechar de una manera poderosa utilizando el paquete <strong>ggplot2</strong>.</p>
+<ul>
+<li>Comprender los diferentes roles de la visualización de datos.</li>
+<li>Comprender los diferentes tipos de parcelas disponibles.</li>
+<li>Obtenga una descripción general del paquete <strong>ggplot2</strong>.</li>
+</ul>
+<p><img src="img/geom.png" /></p>
+<div id="introducción-a-la-visualización-de-datos" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Introducción a la visualización de datos</h3>
+<blockquote>
+<p><strong>Una imagen vale mas que mil palabras</strong>.</p>
+</blockquote>
+<p>La visualización de datos es la técnica más rápida y poderosa para comprender información nueva y existente. Durante una fase de exploración inicial, los científicos de datos intentan revelar las características subyacentes de un conjunto de datos, como diferentes distribuciones, correlaciones u otros patrones visibles. Este proceso también se denomina <em>análisis exploratorio de datos</em> (EDA) y marca el punto de partida de cada proyecto de ciencia de datos.</p>
+<p>Los gráficos producidos durante la EDA muestran al científico de datos las direcciones del viaje por delante. Los patrones revelados pueden inspirar hipótesis sobre los procesos subyacentes, las características del conjunto de datos que se extraerán o las técnicas de modelado que se probarán. Por último, pero no menos importante, las visualizaciones descubren valores atípicos y errores de datos de los que el científico de datos debe ocuparse.</p>
+<p>El papel más importante de la visualización de datos es la comunicación de los hallazgos de la ciencia de datos a colegas y clientes a través de presentaciones, informes o paneles. El esfuerzo utilizado para la EDA y las visualizaciones es un tiempo bien invertido, ya que los resultados se pueden utilizar directamente para comunicar los hallazgos.</p>
+</div>
+<div id="tipos-de-gráficas-disponibles" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Tipos de gráficas disponibles</h3>
+<p>Hay muchos tipos de gráficos disponibles que ayudan a comprender las diferentes características y relaciones en el conjunto de datos.</p>
+<p>Durante la fase de análisis de datos exploratorios, normalmente queremos detectar los patrones más obvios observando cada variable de forma aislada o detectando relaciones de variables con otras. El tipo de gráfico utilizado también está determinado por el tipo de datos de las variables de entrada, como numéricas o categóricas.</p>
+<div id="gráfico-de-dispersión" class="section level4" number="4.1.2.1">
+<h4><span class="header-section-number">4.1.2.1</span> Gráfico de dispersión</h4>
+<p>Los gráficos de dispersión se utilizan para visualizar la relación entre dos variables numéricas. La posición de cada punto representa el valor de las variables en los ejes <em>x</em> e <em>y</em>.</p>
+<p><img src="img/scat.png" /></p>
+</div>
+<div id="gráficos-lineales" class="section level4" number="4.1.2.2">
+<h4><span class="header-section-number">4.1.2.2</span> Gráficos lineales</h4>
+<p>Los gráficos de líneas se utilizan para visualizar la trayectoria de una variable numérica contra otra que están conectadas a través de líneas. Son muy adecuados si los valores solo cambian <strong>continuamente</strong>, como la temperatura con el tiempo.</p>
+<p><img src="img/unna.png" /></p>
+</div>
+<div id="gráficos-de-barras-e-histogramas" class="section level4" number="4.1.2.3">
+<h4><span class="header-section-number">4.1.2.3</span> Gráficos de barras e histogramas</h4>
+<p>Los gráficos de barras visualizan valores <code>numéricos</code> agrupados por categorías. Cada categoría está representada por una barra con una altura definida por cada valor <code>numérico</code>. Los histogramas son gráficos de barras específicos para resumir el número de apariciones de valores numéricos en un conjunto de rangos de valores (o bins). Suelen utilizarse para determinar la <em>distribución</em> de valores numéricos.</p>
+<p><img src="img/hist.png" /></p>
+</div>
+<div id="otros" class="section level4" number="4.1.2.4">
+<h4><span class="header-section-number">4.1.2.4</span> Otros</h4>
+<p>Otros tipos de gráficos de uso frecuente en la ciencia de datos incluyen:</p>
+<ul>
+<li><strong>Diagramas de caja</strong>: Muestra información de distribución de valores numéricos agrupados en categorías como cajas. Genial para comparar rápidamente múltiples distribuciones.</li>
+<li><strong>Gráficos de violín</strong>: igual que los gráficos de caja, pero muestran distribuciones como <em>violines</em>.</li>
+<li><strong>Mapas de calor</strong>: muestran las interacciones de las variables, generalmente correlaciones, como imágenes rasterizadas que resaltan áreas de alta interacción.</li>
+<li><strong>Gráficos de red</strong>: muestra conexiones entre nodos</li>
+</ul>
+<p><img src="img/otr.png" /></p>
+</div>
+</div>
+<div id="presentamos-ggplot2" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Presentamos: ggplot2</h3>
+<p>Debido a la importancia de la visualización para la ciencia de datos y las estadísticas, R ofrece un amplio conjunto de herramientas y paquetes. El lenguaje R básico ya proporciona un rico conjunto de funciones de trazado y tipos de trazado. Estas funciones de trazado requieren que los usuarios especifiquen cómo trazar cada elemento en el lienzo paso a paso. Por el contrario, el paquete <strong>ggplot2</strong> permite la especificación de trazados a través de un conjunto de <em>capas</em> de trazado. Esto requiere que el paquete averigüe los pasos necesarios para producir el gráfico.</p>
+<p>A través del conjunto predefinido de capas geométricas, facetas y temas, <strong>ggplot2</strong> permite a los usuarios crear hermosos gráficos en muy poco tiempo. <strong>ggplot2</strong> es también la biblioteca de trazado más adoptada en la comunidad R.</p>
+</div>
+</div>
+<div id="crea-un-diagrama-de-dispersión-con-ggplot" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Crea un diagrama de dispersión con ggplot</h2>
+<p>Realice sus primeros pasos con el paquete <strong>ggplot2</strong> para crear un diagrama de dispersión. Utilice la gramática de los gráficos para asignar los atributos del conjunto de datos a su gráfico y conectar diferentes capas con el operador <code>+</code>.</p>
+<ul>
+<li>Defina un conjunto de datos para la gráfica usando la función <code>ggplot()</code></li>
+<li>Especifique una capa geométrica usando la función <code>geom_point()</code></li>
+<li>Asigne los atributos del conjunto de datos a las propiedades de trazado usando el parámetro de <code>mapping</code></li>
+<li>Conectar diferentes objetos <code>ggplot</code> usando el operador <code>+</code></li>
+</ul>
+<pre><code>library(ggplot2)
+ggplot(___) + 
+  geom_point(
+    mapping = aes(x = ___, y = ___)
+  )</code></pre>
+<div id="introducción-a-los-gráficos-de-dispersión" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Introducción a los gráficos de dispersión</h3>
+<p>Los diagramas de dispersión utilizan puntos para visualizar la relación entre dos variables numéricas. La posición de cada punto representa el valor de las variables en los ejes X e Y. Veamos un ejemplo de un diagrama de dispersión para comprender la relación entre la <em>speed</em> y la <em>distancia de frenado</em> de los automóviles:</p>
+<p><img src="img/scat1.png" /></p>
+<p>Cada punto representa un automóvil. Cada automóvil comienza a frenar a una velocidad dada en el eje-y y recorre la distancia que se muestra en el eje-x hasta detenerse por completo. Si echamos un vistazo a todos los puntos de la trama, podemos ver claramente que los coches más rápidos necesitan más distancia para detenerse por completo.</p>
+</div>
+<div id="especificar-un-conjunto-de-datos" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Especificar un conjunto de datos</h3>
+<p>Para crear gráficos con <strong>ggplot2</strong>, primero debe cargar el paquete usando la <code>library(ggplot2)</code>.</p>
+<p>Una vez que se haya cargado el paquete, especifique el conjunto de datos que se utilizará como argumento de la función <code>ggplot()</code>. Por ejemplo, para especificar una gráfica usando el conjunto de datos de <code>cars</code>, puede usar:</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="visualización-de-datos-con-ggplot2.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb208-2"><a href="visualización-de-datos-con-ggplot2.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
+<span id="cb208-3"><a href="visualización-de-datos-con-ggplot2.html#cb208-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cars)</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
+<p>Tenga en cuenta que este comando no traza nada más que un lienzo gris todavía. Simplemente define el conjunto de datos para el gráfico y crea una base vacía sobre la cual podemos agregar capas adicionales.</p>
+</div>
+<div id="especificando-una-capa-geométrica" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Especificando una capa geométrica</h3>
+<p>Podemos usar las capas geométricas de <strong>ggplot</strong> (o <em>geoms</em>) para definir cómo queremos visualizar nuestro conjunto de datos. Las <em>geoms</em> utilizan objetos geométricos para visualizar las variables de un conjunto de datos. Los objetos pueden tener múltiples formas como puntos, líneas y barras y se especifican mediante las funciones correspondientes <code>geom_point()</code>, <code>geom_line()</code> y <code>geom_col()</code>:</p>
+<p><img src="img/geom.png" /></p>
+</div>
+<div id="creando-mapeos-estéticos" class="section level3" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> Creando mapeos estéticos</h3>
+<p><strong>ggplot2</strong> utiliza el concepto de <em>estética</em>, que <em>asigna</em> los atributos del conjunto de datos a las características visuales de la gráfica. Cada capa geométrica requiere un conjunto diferente de <em>asignaciones estéticas</em>, p. Ej. la función <code>geom_point()</code> usa la estética <code>x</code> e <code>y</code> para determinar las coordenadas de los ejes <code>x</code> e <code>y</code> de los puntos a graficar. La estética se asigna dentro de la función <code>aes()</code> para construir las asignaciones finales.</p>
+<p>Para especificar una capa de puntos que traza la velocidad variable en el eje-x y la distancia <code>dist</code> en el eje-y, podemos escribir:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="visualización-de-datos-con-ggplot2.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(</span>
+<span id="cb209-2"><a href="visualización-de-datos-con-ggplot2.html#cb209-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>speed, <span class="at">y=</span>dist)</span>
+<span id="cb209-3"><a href="visualización-de-datos-con-ggplot2.html#cb209-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>La expresión anterior construye una capa geométrica. Sin embargo, esta capa actualmente no está vinculada a un conjunto de datos y no produce una gráfica. Para <strong>vincular</strong> la capa con un objeto <code>ggplot</code> que especifica el conjunto de datos de <code>cars</code>, necesitamos conectar el objeto <code>ggplot(cars)</code> con la capa <code>geom_point()</code> usando el operador <code>+</code>:</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="visualización-de-datos-con-ggplot2.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cars) <span class="sc">+</span> </span>
+<span id="cb210-2"><a href="visualización-de-datos-con-ggplot2.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb210-3"><a href="visualización-de-datos-con-ggplot2.html#cb210-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>speed, <span class="at">y=</span>dist)</span>
+<span id="cb210-4"><a href="visualización-de-datos-con-ggplot2.html#cb210-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+<p>A través del enlace, <code>ggplot()</code> sabe que las variables de <code>speed</code> y <code>dist</code> asignadas se toman del conjunto de datos de <code>cars</code>. <code>geom_point()</code> instruye a ggplot para trazar las variables mapeadas como puntos.</p>
+<p>Los pasos necesarios para crear un diagrama de dispersión con <code>ggplot</code> se pueden resumir de la siguiente manera:</p>
+<ol style="list-style-type: decimal">
+<li>Cargue el paquete <strong>ggplot2</strong> usando <code>library(ggplot2)</code>.</li>
+<li>Especifique el conjunto de datos que se graficará usando <code>ggplot()</code>.</li>
+<li>Utilice el operador <code>+</code> para agregar capas al gráfico.</li>
+<li>Agregue una capa geométrica para definir las formas que se graficaran. En caso de gráficos de dispersión, use <code>geom_point()</code>.</li>
+<li>Asigne variables del conjunto de datos a propiedades de trazado a través del parámetro de <code>mapping</code> en la capa geométrica.</li>
+</ol>
+</div>
+</div>
+<div id="especificar-estética-adicional-para-puntos" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Especificar estética adicional para puntos</h2>
+<p><strong>ggplot2</strong> implementa la gramática de gráficos para mapear atributos de un conjunto de datos para trazar características a través de la estética. Este marco se puede utilizar para ajustar el <code>tamaño de punto</code>, el <code>color</code> y la transparencia <code>alpha</code> de los puntos en un diagrama de dispersión.</p>
+<ul>
+<li>Agregue dimensiones de trazado adicionales a través de la estética</li>
+<li>Ajuste el tamaño del punto de un gráfico de dispersión usando el parámetro <code>size</code></li>
+<li>Cambiar el color del punto de un diagrama de dispersión usando el parámetro <code>color</code></li>
+<li>Establecer un parámetro <code>alpha</code> para cambiar la transparencia de todos los puntos</li>
+<li>Diferenciar entre mapeos estéticos y parámetros constantes</li>
+</ul>
+<pre><code>ggplot(___) + 
+  geom_point(
+    mapping = aes(x = ___, y = ___, 
+                  color = ___, 
+                  size  = ___),
+    alpha  = ___
+  )</code></pre>
+<div id="añadiendo-más-estética-a-la-trama" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Añadiendo más estética a la trama</h3>
+<p>En su forma más básica, los diagramas de dispersión solo pueden visualizar conjuntos de datos en dos dimensiones a través de la estética <code>x</code> e <code>y</code> de la capa <code>geom_point()</code>. Sin embargo, la mayoría de los conjuntos de datos tienen más de dos variables y, por lo tanto, pueden requerir dimensiones de trazado adicionales. <code>ggplot()</code> hace que sea muy fácil mapear variables adicionales a diferentes estéticas de trazado como <code>size</code>, transparencia <code>alpha</code> y <code>color</code>.</p>
+<p>Consideremos el conjunto de datos <code>gapminder_2007</code> que contiene las variables PIB per cápita <code>gdpPercap</code> y esperanza de vida <code>lifeExp</code> para 142 países en el año 2007:</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="visualización-de-datos-con-ggplot2.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb212-2"><a href="visualización-de-datos-con-ggplot2.html#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
+<span id="cb212-3"><a href="visualización-de-datos-con-ggplot2.html#cb212-3" aria-hidden="true" tabindex="-1"></a><span class="do">## select data</span></span>
+<span id="cb212-4"><a href="visualización-de-datos-con-ggplot2.html#cb212-4" aria-hidden="true" tabindex="-1"></a>gapminder_2007 <span class="ot">&lt;-</span> gapminder<span class="sc">%&gt;%</span></span>
+<span id="cb212-5"><a href="visualización-de-datos-con-ggplot2.html#cb212-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="visualización-de-datos-con-ggplot2.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb213-2"><a href="visualización-de-datos-con-ggplot2.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp))</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
+<p>Al mapear la variable <code>continent</code> a través de la estética del <code>color</code> del punto y la población <code>pop</code> (en millones) a través del tamaño del punto <code>size</code>, obtenemos una gráfica mucho más rica que incluye 4 variables diferentes del conjunto de datos:</p>
+<p><img src="img/un4.png" /></p>
+</div>
+<div id="ajuste-del-color-del-punto" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Ajuste del color del punto</h3>
+<p>Normalmente, el color del punto se utiliza para introducir una nueva dimensión en un diagrama de dispersión. En ggplot usamos la estética del <code>color</code> para especificar el mapeo de una variable al color de los puntos.</p>
+<p>Para el conjunto de datos <code>gapminder_2007</code> podemos trazar el PIB per cápita <code>gdpPercap</code> frente a la esperanza de vida <code>lifeExp</code> de la siguiente manera:</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="visualización-de-datos-con-ggplot2.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb214-2"><a href="visualización-de-datos-con-ggplot2.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp))</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+<p>Para colorear cada punto en función del <code>continent</code> de cada país podemos utilizar:</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="visualización-de-datos-con-ggplot2.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb215-2"><a href="visualización-de-datos-con-ggplot2.html#cb215-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp,</span>
+<span id="cb215-3"><a href="visualización-de-datos-con-ggplot2.html#cb215-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> continent))</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+<p>Vemos que en la trama resultante cada punto está coloreado de manera diferente según el <code>continent</code> de cada país. <code>ggplot</code> usa el esquema de coloración basado en el tipo de datos categóricos de la variable <code>continent</code>.</p>
+<p>Por el contrario, veamos cómo se ve el gráfico si coloreamos los puntos por el <code>pop</code> de población de la variable <code>numeric</code>:</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="visualización-de-datos-con-ggplot2.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb216-2"><a href="visualización-de-datos-con-ggplot2.html#cb216-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp,</span>
+<span id="cb216-3"><a href="visualización-de-datos-con-ggplot2.html#cb216-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> pop))</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
+<p>La escala cambia inmediatamente a continua como se puede ver en la leyenda y los puntos celestes son ahora los países con mayor número de población (China e India).</p>
+</div>
+<div id="ajustar-el-tamaño-del-punto" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Ajustar el tamaño del punto</h3>
+<p>Para el conjunto de datos de <code>gapminder_2007</code> podemos trazar el PIB per cápita <code>gdpPercap</code> frente a la esperanza de vida de la siguiente manera:</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="visualización-de-datos-con-ggplot2.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb217-2"><a href="visualización-de-datos-con-ggplot2.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, </span>
+<span id="cb217-3"><a href="visualización-de-datos-con-ggplot2.html#cb217-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> lifeExp))</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
+<p>Para ajustar el tamaño de puntos en función de la población (<code>pop</code>) de cada país, podemos usar:</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="visualización-de-datos-con-ggplot2.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb218-2"><a href="visualización-de-datos-con-ggplot2.html#cb218-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp,</span>
+<span id="cb218-3"><a href="visualización-de-datos-con-ggplot2.html#cb218-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> pop))</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<p>Vemos que los tamaños de puntos en el gráfico anterior no reflejan claramente las diferencias de población en cada país. Si comparamos el tamaño en puntos que representa una población de 250 millones de personas con el que muestra 750 millones, podemos ver que sus tamaños no son proporcionales. En su lugar, los tamaños en puntos están agrupados de forma predeterminada. Para reflejar las diferencias de población reales por el tamaño de puntos, podemos usar la función <code>scale_size_area()</code> en su lugar. La información de escala se puede agregar como cualquier otro objeto ggplot con el operador <code>+</code>:</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="visualización-de-datos-con-ggplot2.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb219-2"><a href="visualización-de-datos-con-ggplot2.html#cb219-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp,</span>
+<span id="cb219-3"><a href="visualización-de-datos-con-ggplot2.html#cb219-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> continent,</span>
+<span id="cb219-4"><a href="visualización-de-datos-con-ggplot2.html#cb219-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> pop)) <span class="sc">+</span> </span>
+<span id="cb219-5"><a href="visualización-de-datos-con-ggplot2.html#cb219-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<p>Tenga en cuenta que hemos ajustado el tamaño del punto con <code>max_size</code>, lo que da como resultado tamaños de punto más grandes.</p>
+</div>
+<div id="establecer-la-estética-global-transparencia" class="section level3" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Establecer la estética global: transparencia</h3>
+<p>Trazar muchos puntos con coordenadas X e Y similares en un gráfico puede producir nubes de puntos densas. Muchos puntos en estas nubes están sobretrazados y el número real de observaciones en un área determinada ya no es visible. Como solución, podemos establecer la transparencia de cada punto usando el parámetro ggplot <code>alpha</code>.</p>
+<p>Dado que <strong>no</strong> queremos establecer la transparencia del punto <strong>individualmente</strong> para cada punto sino <strong>globalmente</strong> para todos los puntos, no establecemos el parámetro <code>alpha</code> como un mapeo estético (dentro de <code>aes()</code>) sino fuera.</p>
+<p>Establecemos la <strong>opacidad</strong> de cada punto al 50% a través del parámetro <code>alpha</code> <strong>outside</strong> como parámetro constante:</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="visualización-de-datos-con-ggplot2.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_2007) <span class="sc">+</span> </span>
+<span id="cb220-2"><a href="visualización-de-datos-con-ggplot2.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp, <span class="at">size =</span> pop), </span>
+<span id="cb220-3"><a href="visualización-de-datos-con-ggplot2.html#cb220-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<p>Ahora podemos ver claramente cuántos puntos se superponen entre sí y la opacidad de cada punto se establece en <code>0.5</code>.</p>
+</div>
+</div>
+<div id="crea-un-gráfico-de-líneas-con-ggplot" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Crea un gráfico de líneas con ggplot</h2>
+<p>Use la estética <code>geom_line()</code> para dibujar gráficos de líneas y personalizar su estilo usando el parámetro <code>color</code>. Especifique qué coordenadas usar para cada línea con el parámetro <code>group</code>.</p>
+<ul>
+<li>Crea tu primer gráfico de línea usando <code>geom_line()</code></li>
+<li>Defina cómo se conectan las diferentes líneas mediante el parámetro <code>group</code></li>
+<li>Cambiar el color de línea de un gráfico de líneas usando el parámetro <code>color</code></li>
+</ul>
+<pre><code>ggplot(___) + 
+  geom_line(
+    mapping = aes(x = ___, y = ___, 
+                  group = ___, 
+                  color = ___)
+)</code></pre>
+<div id="introducción-a-los-gráficos-lineales" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Introducción a los gráficos lineales</h3>
+<p>Los gráficos de líneas se utilizan para visualizar la trayectoria de una variable numérica contra otra. A diferencia de los diagramas de dispersión, las coordenadas <code>x</code> e <code>y</code> no se visualizan a través de puntos, sino que están conectadas a través de líneas. Los gráficos de líneas se utilizan con mayor frecuencia si una variable cambia <em>continuamente</em> contra otra variable numérica, como es el caso de la mayoría de los gráficos de series de tiempo (por ejemplo, precios, clientes, concentración de CO2, temperatura a lo largo del tiempo), funciones continuas (por ejemplo, sinusoidal (x)) u otras relaciones casi continuas (curvas de oferta/demanda del mundo real).</p>
+<p><img src="img/geo1.png" /></p>
+</div>
+<div id="crear-un-gráfico-lineal-simple" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Crear un gráfico lineal simple</h3>
+<p>Japón se encuentra entre los países con mayor esperanza de vida. Utilizando el conjunto de datos <code>gapminder_japan</code>, determinamos cómo se ha desarrollado la esperanza de vida en Japón a lo largo del tiempo. Necesitamos que:</p>
+<ol style="list-style-type: decimal">
+<li>Especifique el conjunto de datos dentro de <code>ggplot()</code></li>
+<li>Definir la capa de trazado <code>geom_line()</code></li>
+<li>Asigne el <code>year</code> al eje x y la esperanza de vida <code>lifeExp</code> al eje y con la función <code>aes()</code></li>
+</ol>
+<p>Tenga en cuenta que la biblioteca <strong>ggplot2</strong> debe cargarse primero con <code>library(ggplot2)</code>.</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="visualización-de-datos-con-ggplot2.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb222-2"><a href="visualización-de-datos-con-ggplot2.html#cb222-2" aria-hidden="true" tabindex="-1"></a>gapminder_japan <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb222-3"><a href="visualización-de-datos-con-ggplot2.html#cb222-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">&quot;Japan&quot;</span>)</span>
+<span id="cb222-4"><a href="visualización-de-datos-con-ggplot2.html#cb222-4" aria-hidden="true" tabindex="-1"></a><span class="do">## gráfica</span></span>
+<span id="cb222-5"><a href="visualización-de-datos-con-ggplot2.html#cb222-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_japan) <span class="sc">+</span> </span>
+<span id="cb222-6"><a href="visualización-de-datos-con-ggplot2.html#cb222-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb222-7"><a href="visualización-de-datos-con-ggplot2.html#cb222-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp)</span>
+<span id="cb222-8"><a href="visualización-de-datos-con-ggplot2.html#cb222-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
+</div>
+<div id="agregar-más-líneas" class="section level3" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Agregar más líneas</h3>
+<p>Hasta ahora solo nos hemos centrado en líneas simples, pero ¿qué pasa si tenemos varios países en el conjunto de datos y queremos diferenciarlos de alguna manera?</p>
+<p>Los gráficos de líneas a menudo se amplían y se utilizan para comparar dos o más líneas. Los gráficos de líneas múltiples muestran las diferencias absolutas entre las observaciones, pero también cómo las trayectorias específicas se relacionan entre sí. Por ejemplo, respondamos a la pregunta: <em>¿Cómo ha cambiado la esperanza de vida en los países Austria y Hungría a lo largo del tiempo?</em></p>
+<p>Primero filtramos el conjunto de datos para ambos países de interés. Luego, establecemos la variable <code>country</code> como argumento de <code>group</code> para el mapeo estético. El argumento de grupo le dice a ggplot qué observaciones pertenecen juntas y deben conectarse a través de líneas. Al especificar la variable <code>country</code>, ggplot crea una línea separada para cada país. Para que las líneas sean más fáciles de distinguir, también asignamos <code>color</code> a <code>country</code> para que cada línea de país tenga un color diferente.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="visualización-de-datos-con-ggplot2.html#cb223-1" aria-hidden="true" tabindex="-1"></a>gapminder_comparison <span class="ot">&lt;-</span> </span>
+<span id="cb223-2"><a href="visualización-de-datos-con-ggplot2.html#cb223-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gapminder, country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Austria&quot;</span>, <span class="st">&quot;Hungary&quot;</span>))</span>
+<span id="cb223-3"><a href="visualización-de-datos-con-ggplot2.html#cb223-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-4"><a href="visualización-de-datos-con-ggplot2.html#cb223-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gapminder_comparison) <span class="sc">+</span> </span>
+<span id="cb223-5"><a href="visualización-de-datos-con-ggplot2.html#cb223-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp, </span>
+<span id="cb223-6"><a href="visualización-de-datos-con-ggplot2.html#cb223-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group =</span> country, </span>
+<span id="cb223-7"><a href="visualización-de-datos-con-ggplot2.html#cb223-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">color =</span> country)</span>
+<span id="cb223-8"><a href="visualización-de-datos-con-ggplot2.html#cb223-8" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p>Tenga en cuenta que ggplot también separa las líneas correctamente si solo se especifica la asignación <code>color</code> (el parámetro <code>group</code> se establece implícitamente).</p>
+</div>
+</div>
+<div id="crea-tu-primer-gráfico-de-barras" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Crea tu primer gráfico de barras</h2>
+<ul>
+<li>Crea tu primer gráfico de barras usando <code>geom_col()</code></li>
+<li>Rellenar barras con color usando la estética <code>fill</code></li>
+</ul>
+<pre><code>ggplot(___) + 
+  geom_col(
+    mapping = aes(x = ___, y = ___, 
+                  fill = ___)
+ )</code></pre>
+<div id="introducción-a-los-gráficos-de-barras" class="section level3" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Introducción a los gráficos de barras</h3>
+<p>Los gráficos de barras visualizan valores <code>numéricos</code> agrupados por categorías. Cada categoría está representada por una barra con una altura definida por cada valor <code>numérico</code>.</p>
+<p>Los gráficos de barras son adecuados para comparar valores entre diferentes grupos, p. Ej. número de votos por partidos, número de personas en diferentes países o PIB per cápita en diferentes países. Los gráficos de barras son un poco espaciosos y funcionan mejor si el número de grupos a comparar es bastante pequeño.</p>
+<p>A continuación, puede encontrar un ejemplo que muestra la cantidad de personas (en millones) en los cinco países más grandes por población en 2007:</p>
+<p><img src="img/bar1.png" /></p>
+</div>
+<div id="crear-un-gráfico-de-barras-simple" class="section level3" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> Crear un gráfico de barras simple</h3>
+<p>En <strong>ggplot2</strong>, los gráficos de barras se crean utilizando la capa geométrica <code>geom_col()</code>. La capa <code>geom_col()</code> requiere el mapeo estético <code>x</code> que define las diferentes barras a trazar. La altura de cada barra está definida por la variable especificada en el mapeo estético <code>y</code>. Ambas asignaciones, <code>x</code> e <code>y</code>, son necesarias para <code>geom_col()</code>.</p>
+<p>Creemos nuestro primer gráfico de barras con el conjunto de datos <code>gapminder_top5</code>. Contiene datos de población (en millones) y esperanza de vida de los países más grandes por población en 2007.</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="visualización-de-datos-con-ggplot2.html#cb225-1" aria-hidden="true" tabindex="-1"></a>gapminder_top5 <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb225-2"><a href="visualización-de-datos-con-ggplot2.html#cb225-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb225-3"><a href="visualización-de-datos-con-ggplot2.html#cb225-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(pop, <span class="at">n=</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="visualización-de-datos-con-ggplot2.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_top5) <span class="sc">+</span> </span>
+<span id="cb226-2"><a href="visualización-de-datos-con-ggplot2.html#cb226-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> pop))</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<p>Vemos que las barras resultantes están ordenadas por los nombres de los países en orden alfabético por defecto.</p>
+</div>
+<div id="llenado-de-barras-de-color" class="section level3" number="4.5.3">
+<h3><span class="header-section-number">4.5.3</span> Llenado de barras de color</h3>
+<p>Al igual que otras geoms, <code>geom_col()</code> permite a los usuarios asignar variables de conjuntos de datos adicionales al atributo de color de la barra. La estética <code>fill</code> se puede utilizar para llenar de color todas las barras. Una confusión habitual es la estética <code>color</code> que especifica el color de la <em>línea</em> del borde de cada barra en lugar del color <code>fill</code>.</p>
+<p>Según el conjunto de datos <code>gapminder_top5</code>, trazamos la población (en millones) de los países más grandes y usamos la variable <code>continent</code> para colorear cada barra:</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="visualización-de-datos-con-ggplot2.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_top5) <span class="sc">+</span> </span>
+<span id="cb227-2"><a href="visualización-de-datos-con-ggplot2.html#cb227-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> pop, <span class="at">fill =</span> continent))</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<p>Dado que la variable <code>continent</code> es una variable categórica, las barras tienen un esquema de color claro para cada continente. Veamos qué sucede si usamos una variable <code>numérica</code> como la esperanza de vida <code>lifeExp</code> en su lugar:</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="visualización-de-datos-con-ggplot2.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder_top5) <span class="sc">+</span> </span>
+<span id="cb228-2"><a href="visualización-de-datos-con-ggplot2.html#cb228-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> pop, <span class="at">fill =</span> lifeExp))</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
+<p>Los colores de las barras ahora han cambiado según la leyenda <strong>continua</strong> de la derecha. Vemos que también se pueden utilizar variables <code>numéricas</code> para <code>rellenar</code> barras.</p>
+</div>
+<div id="gráficos-de-barras-apiladas" class="section level3" number="4.5.4">
+<h3><span class="header-section-number">4.5.4</span> Gráficos de barras apiladas</h3>
+<p>En algunas circunstancias, puede resultar útil trazar múltiples variables de valores numéricos dentro de cada barra. Los ejemplos son valores numéricos que describen una entidad específica (por ejemplo, clientes) dividida entre varias categorías (segmentos de clientes) de modo que la altura de la barra representa el número total (todos los clientes).</p>
+<p>El siguiente gráfico muestra la cantidad de teléfonos (en miles) por continente desde 1956 hasta 1961 como un gráfico de barras apiladas:</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="visualización-de-datos-con-ggplot2.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Ordenando la base de dato</span></span>
+<span id="cb229-2"><a href="visualización-de-datos-con-ggplot2.html#cb229-2" aria-hidden="true" tabindex="-1"></a>world_phones <span class="ot">&lt;-</span> WorldPhones <span class="sc">%&gt;%</span></span>
+<span id="cb229-3"><a href="visualización-de-datos-con-ggplot2.html#cb229-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb229-4"><a href="visualización-de-datos-con-ggplot2.html#cb229-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb229-5"><a href="visualización-de-datos-con-ggplot2.html#cb229-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="sc">-</span>Year, <span class="at">names_to=</span><span class="st">&quot;region&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;phones&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb229-6"><a href="visualización-de-datos-con-ggplot2.html#cb229-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">&gt;</span><span class="dv">1955</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="visualización-de-datos-con-ggplot2.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(world_phones) <span class="sc">+</span> </span>
+<span id="cb230-2"><a href="visualización-de-datos-con-ggplot2.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> phones,</span>
+<span id="cb230-3"><a href="visualización-de-datos-con-ggplot2.html#cb230-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> region))</span></code></pre></div>
+<p><img src="BookR_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="transformación-de-datos-con-dplyr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introducción-a-machine-learning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["BookR.pdf", "BookR.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

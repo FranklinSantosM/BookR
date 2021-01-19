@@ -24,7 +24,7 @@
 <meta name="author" content="Franklin Santos" />
 
 
-<meta name="date" content="2020-12-03" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="marcos-de-datos-y-tibbles.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,22 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +86,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,16 +135,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R Ciencias Agropecuarias</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R básico</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introducción-a-r"><i class="fa fa-check"></i><b>1.1</b> Introducción a R</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R básico</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introducción-a-r"><i class="fa fa-check"></i><b>1.1</b> Introducción a R</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#por-qué-usar-r"><i class="fa fa-check"></i><b>1.1.1</b> ¿Por qué usar R?</a></li>
 <li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#r-en-buena-compañía"><i class="fa fa-check"></i><b>1.1.2</b> R en buena compañía</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#bloques-de-construcción"><i class="fa fa-check"></i><b>1.2</b> Bloques de construcción</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#combinar-valores-en-un-vector"><i class="fa fa-check"></i><b>1.3</b> Combinar valores en un vector</a><ul>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#combinar-valores-en-un-vector"><i class="fa fa-check"></i><b>1.3</b> Combinar valores en un vector</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#introducción-a-los-vectores"><i class="fa fa-check"></i><b>1.3.1</b> Introducción a los vectores</a></li>
 <li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#tipos-de-vectores"><i class="fa fa-check"></i><b>1.3.2</b> Tipos de vectores</a></li>
 <li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#creando-una-secuencia-de-números"><i class="fa fa-check"></i><b>1.3.3</b> Creando una secuencia de números</a></li>
@@ -153,99 +156,154 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.5" data-path="intro.html"><a href="intro.html#creando-vectores-de-caracteres"><i class="fa fa-check"></i><b>1.3.5</b> Creando vectores de caracteres</a></li>
 <li class="chapter" data-level="1.3.6" data-path="intro.html"><a href="intro.html#creando-vectores-lógicos"><i class="fa fa-check"></i><b>1.3.6</b> Creando vectores lógicos</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#crea-variables-a-través-de-asignaciones"><i class="fa fa-check"></i><b>1.4</b> Crea variables a través de asignaciones</a><ul>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#crea-variables-a-través-de-asignaciones"><i class="fa fa-check"></i><b>1.4</b> Crea variables a través de asignaciones</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#asignando-variables"><i class="fa fa-check"></i><b>1.4.1</b> Asignando variables</a></li>
 <li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#reglas-de-nomenclatura"><i class="fa fa-check"></i><b>1.4.2</b> Reglas de nomenclatura</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#utilice-operadores-básicos"><i class="fa fa-check"></i><b>1.5</b> Utilice operadores básicos</a><ul>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#utilice-operadores-básicos"><i class="fa fa-check"></i><b>1.5</b> Utilice operadores básicos</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#usando-r-como-calculadora-de-bolsillo"><i class="fa fa-check"></i><b>1.5.1</b> Usando R como calculadora de bolsillo</a></li>
 <li class="chapter" data-level="1.5.2" data-path="intro.html"><a href="intro.html#aplicación-de-operadoras-aritméticas-en-vectores"><i class="fa fa-check"></i><b>1.5.2</b> Aplicación de operadoras aritméticas en vectores</a></li>
 <li class="chapter" data-level="1.5.3" data-path="intro.html"><a href="intro.html#usar-operadores-relacionales"><i class="fa fa-check"></i><b>1.5.3</b> Usar operadores relacionales</a></li>
 <li class="chapter" data-level="1.5.4" data-path="intro.html"><a href="intro.html#usando-operadores-lógicos"><i class="fa fa-check"></i><b>1.5.4</b> Usando operadores lógicos</a></li>
 <li class="chapter" data-level="1.5.5" data-path="intro.html"><a href="intro.html#usando-el-operador-in"><i class="fa fa-check"></i><b>1.5.5</b> Usando el operador %in%</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#llamar-al-código-r-existente-a-través-de-funciones"><i class="fa fa-check"></i><b>1.6</b> Llamar al código R existente a través de funciones</a><ul>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#llamar-al-código-r-existente-a-través-de-funciones"><i class="fa fa-check"></i><b>1.6</b> Llamar al código R existente a través de funciones</a>
+<ul>
 <li class="chapter" data-level="1.6.1" data-path="intro.html"><a href="intro.html#introducción-a-las-funciones."><i class="fa fa-check"></i><b>1.6.1</b> Introducción a las funciones.</a></li>
 <li class="chapter" data-level="1.6.2" data-path="intro.html"><a href="intro.html#personalización-de-funciones-a-través-de-parámetros"><i class="fa fa-check"></i><b>1.6.2</b> Personalización de funciones a través de parámetros</a></li>
 <li class="chapter" data-level="1.6.3" data-path="intro.html"><a href="intro.html#usar-la-función-sample"><i class="fa fa-check"></i><b>1.6.3</b> Usar la función <code>sample()</code></a></li>
 <li class="chapter" data-level="1.6.4" data-path="intro.html"><a href="intro.html#utilice-la-función-seq"><i class="fa fa-check"></i><b>1.6.4</b> Utilice la función <code>seq()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#utilice-funciones-y-datos-existentes-a-través-de-paquetes"><i class="fa fa-check"></i><b>1.7</b> Utilice funciones y datos existentes a través de paquetes</a><ul>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#utilice-funciones-y-datos-existentes-a-través-de-paquetes"><i class="fa fa-check"></i><b>1.7</b> Utilice funciones y datos existentes a través de paquetes</a>
+<ul>
 <li class="chapter" data-level="1.7.1" data-path="intro.html"><a href="intro.html#introducción-a-paquetes"><i class="fa fa-check"></i><b>1.7.1</b> Introducción a paquetes</a></li>
 <li class="chapter" data-level="1.7.2" data-path="intro.html"><a href="intro.html#llamar-un-paquete"><i class="fa fa-check"></i><b>1.7.2</b> Llamar un paquete</a></li>
 </ul></li>
 <li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#formato-de-introducción"><i class="fa fa-check"></i><b>1.8</b> Formato de introducción</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html"><i class="fa fa-check"></i><b>2</b> Marcos de datos y Tibbles</a><ul>
-<li class="chapter" data-level="2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#construye-un-marco-de-datos-a-partir-de-vectores"><i class="fa fa-check"></i><b>2.1</b> Construye un marco de datos a partir de vectores</a><ul>
+<li class="chapter" data-level="2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html"><i class="fa fa-check"></i><b>2</b> Marcos de datos y Tibbles</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#construye-un-marco-de-datos-a-partir-de-vectores"><i class="fa fa-check"></i><b>2.1</b> Construye un marco de datos a partir de vectores</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#introducción-a-los-marcos-de-datos"><i class="fa fa-check"></i><b>2.1.1</b> Introducción a los marcos de datos</a></li>
 <li class="chapter" data-level="2.1.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crear-marcos-de-datos"><i class="fa fa-check"></i><b>2.1.2</b> Crear marcos de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crea-y-convierte-tibbles"><i class="fa fa-check"></i><b>2.2</b> Crea y convierte tibbles</a><ul>
+<li class="chapter" data-level="2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crea-y-convierte-tibbles"><i class="fa fa-check"></i><b>2.2</b> Crea y convierte tibbles</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#introducción-a-tibbles"><i class="fa fa-check"></i><b>2.2.1</b> Introducción a Tibbles</a></li>
 <li class="chapter" data-level="2.2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#creando-tibbles"><i class="fa fa-check"></i><b>2.2.2</b> Creando Tibbles</a></li>
 <li class="chapter" data-level="2.2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#conversión-de-marcos-de-datos-a-tibbles"><i class="fa fa-check"></i><b>2.2.3</b> Conversión de marcos de datos a Tibbles</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando"><i class="fa fa-check"></i><b>2.3</b> Extraiga o reemplace columnas en un marco de datos usando $</a><ul>
+<li class="chapter" data-level="2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando"><i class="fa fa-check"></i><b>2.3</b> Extraiga o reemplace columnas en un marco de datos usando $</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraer-columnas-con"><i class="fa fa-check"></i><b>2.3.1</b> Extraer columnas con $</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#determinar-el-tamaño-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.4</b> Determinar el tamaño de un marco de datos</a><ul>
+<li class="chapter" data-level="2.4" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#determinar-el-tamaño-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.4</b> Determinar el tamaño de un marco de datos</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#dimensiones-del-marco-de-datos"><i class="fa fa-check"></i><b>2.4.1</b> Dimensiones del marco de datos</a></li>
 <li class="chapter" data-level="2.4.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#recuperar-las-dimensiones-del-marco-de-datos"><i class="fa fa-check"></i><b>2.4.2</b> Recuperar las dimensiones del marco de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-primera-o-la-última-fila-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5</b> Seleccionar la primera o la última fila de un marco de datos</a><ul>
+<li class="chapter" data-level="2.5" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-primera-o-la-última-fila-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5</b> Seleccionar la primera o la última fila de un marco de datos</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-parte-superior-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5.1</b> Seleccionar la parte superior de un marco de datos</a></li>
 <li class="chapter" data-level="2.5.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-parte-inferior-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5.2</b> Seleccionar la parte inferior de un marco de datos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformación de datos con dplyr</a><ul>
-<li class="chapter" data-level="3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#introducción-a-dplyr"><i class="fa fa-check"></i><b>3.1</b> Introducción a dplyr</a><ul>
+<li class="chapter" data-level="3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformación de datos con dplyr</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#introducción-a-dplyr"><i class="fa fa-check"></i><b>3.1</b> Introducción a dplyr</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#qué-es-dplyr"><i class="fa fa-check"></i><b>3.1.1</b> ¿Qué es dplyr?</a></li>
 <li class="chapter" data-level="3.1.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#marco-de-funciones"><i class="fa fa-check"></i><b>3.1.2</b> Marco de funciones</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionar-columnas-de-un-marco-de-datos"><i class="fa fa-check"></i><b>3.2</b> Seleccionar columnas de un marco de datos</a><ul>
+<li class="chapter" data-level="3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionar-columnas-de-un-marco-de-datos"><i class="fa fa-check"></i><b>3.2</b> Seleccionar columnas de un marco de datos</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionando-por-nombre"><i class="fa fa-check"></i><b>3.2.1</b> Seleccionando por nombre</a></li>
 <li class="chapter" data-level="3.2.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#renombrar-nombres-de-columnas"><i class="fa fa-check"></i><b>3.2.2</b> Renombrar nombres de columnas</a></li>
 <li class="chapter" data-level="3.2.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#selección-por-rango-de-nombre"><i class="fa fa-check"></i><b>3.2.3</b> Selección por rango de nombre</a></li>
 <li class="chapter" data-level="3.2.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#select-por-índices"><i class="fa fa-check"></i><b>3.2.4</b> Select() por índices</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#filtrar-filas-de-marcos-de-datos"><i class="fa fa-check"></i><b>3.3</b> Filtrar filas de marcos de datos</a><ul>
+<li class="chapter" data-level="3.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#filtrar-filas-de-marcos-de-datos"><i class="fa fa-check"></i><b>3.3</b> Filtrar filas de marcos de datos</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#función-filter"><i class="fa fa-check"></i><b>3.3.1</b> Función filter()</a></li>
 <li class="chapter" data-level="3.3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#múltiples-expresiones-de-filtro"><i class="fa fa-check"></i><b>3.3.2</b> Múltiples expresiones de filtro</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ordenar-marcos-de-datos-por-columnas"><i class="fa fa-check"></i><b>3.4</b> Ordenar marcos de datos por columnas</a><ul>
+<li class="chapter" data-level="3.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ordenar-marcos-de-datos-por-columnas"><i class="fa fa-check"></i><b>3.4</b> Ordenar marcos de datos por columnas</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#la-función-arrange-con-una-sola-columna"><i class="fa fa-check"></i><b>3.4.1</b> La función arrange() con una sola columna</a></li>
 <li class="chapter" data-level="3.4.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#la-función-arrange-con-múltiples-columnas"><i class="fa fa-check"></i><b>3.4.2</b> La función arrange() con múltiples columnas</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#crear-una-tubería-de-transformación-de-datos"><i class="fa fa-check"></i><b>3.5</b> Crear una tubería de transformación de datos</a><ul>
+<li class="chapter" data-level="3.5" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#crear-una-tubería-de-transformación-de-datos"><i class="fa fa-check"></i><b>3.5</b> Crear una tubería de transformación de datos</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#usando-el-operador"><i class="fa fa-check"></i><b>3.5.1</b> Usando el operador %&gt;%</a></li>
 <li class="chapter" data-level="3.5.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ejercicios"><i class="fa fa-check"></i><b>3.5.2</b> Ejercicios:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html"><i class="fa fa-check"></i><b>4</b> Introducción a Machine Learning</a><ul>
-<li class="chapter" data-level="4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#inteligencia-artificial"><i class="fa fa-check"></i><b>4.1</b> Inteligencia artificial</a></li>
-<li class="chapter" data-level="4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#machine-learning-aprendizaje-automático"><i class="fa fa-check"></i><b>4.2</b> Machine Learning (Aprendizaje automático)</a></li>
-<li class="chapter" data-level="4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-profundo-deep-learning"><i class="fa fa-check"></i><b>4.3</b> Aprendizaje profundo (Deep Learning)</a></li>
-<li class="chapter" data-level="4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#casos-de-uso-populares"><i class="fa fa-check"></i><b>4.4</b> Casos de uso populares</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-motores-de-búsqueda-y-sistemas-de-recomendación"><i class="fa fa-check"></i><b>4.4.1</b> Caso de uso: motores de búsqueda y sistemas de recomendación</a></li>
-<li class="chapter" data-level="4.4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-traducción-automática"><i class="fa fa-check"></i><b>4.4.2</b> Caso de uso: traducción automática</a></li>
-<li class="chapter" data-level="4.4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-identificación-de-música-y-reconocimiento-de-voz"><i class="fa fa-check"></i><b>4.4.3</b> Caso de uso: identificación de música y reconocimiento de voz</a></li>
-<li class="chapter" data-level="4.4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-coches-autónomos"><i class="fa fa-check"></i><b>4.4.4</b> Caso de uso: coches autónomos</a></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos con ggplot2</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#por-qué-es-importante-la-visualización-de-datos"><i class="fa fa-check"></i><b>4.1</b> Por qué es importante la visualización de datos</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-la-visualización-de-datos"><i class="fa fa-check"></i><b>4.1.1</b> Introducción a la visualización de datos</a></li>
+<li class="chapter" data-level="4.1.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#tipos-de-gráficas-disponibles"><i class="fa fa-check"></i><b>4.1.2</b> Tipos de gráficas disponibles</a></li>
+<li class="chapter" data-level="4.1.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#presentamos-ggplot2"><i class="fa fa-check"></i><b>4.1.3</b> Presentamos: ggplot2</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#técnicas-de-machine-learning"><i class="fa fa-check"></i><b>4.5</b> Técnicas de Machine Learning</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado"><i class="fa fa-check"></i><b>4.5.1</b> Aprendizaje supervisado</a></li>
-<li class="chapter" data-level="4.5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-objetivo"><i class="fa fa-check"></i><b>4.5.2</b> Aprendizaje supervisado: objetivo</a></li>
-<li class="chapter" data-level="4.5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-no-supervisado"><i class="fa fa-check"></i><b>4.5.3</b> Aprendizaje no supervisado</a></li>
-<li class="chapter" data-level="4.5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-reforzado"><i class="fa fa-check"></i><b>4.5.4</b> Aprendizaje reforzado</a></li>
+<li class="chapter" data-level="4.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-un-diagrama-de-dispersión-con-ggplot"><i class="fa fa-check"></i><b>4.2</b> Crea un diagrama de dispersión con ggplot</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-de-dispersión"><i class="fa fa-check"></i><b>4.2.1</b> Introducción a los gráficos de dispersión</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificar-un-conjunto-de-datos"><i class="fa fa-check"></i><b>4.2.2</b> Especificar un conjunto de datos</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificando-una-capa-geométrica"><i class="fa fa-check"></i><b>4.2.3</b> Especificando una capa geométrica</a></li>
+<li class="chapter" data-level="4.2.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#creando-mapeos-estéticos"><i class="fa fa-check"></i><b>4.2.4</b> Creando mapeos estéticos</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-con-regresión-y-clasificación"><i class="fa fa-check"></i><b>4.6</b> Aprendizaje supervisado con regresión y clasificación</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-datos-de-entrada"><i class="fa fa-check"></i><b>4.6.1</b> Aprendizaje supervisado: datos de entrada</a></li>
-<li class="chapter" data-level="4.6.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#predictores"><i class="fa fa-check"></i><b>4.6.2</b> Predictores</a></li>
-<li class="chapter" data-level="4.6.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#variable-de-resultado"><i class="fa fa-check"></i><b>4.6.3</b> Variable de resultado</a></li>
-<li class="chapter" data-level="4.6.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#regresión-vs.-clasificación"><i class="fa fa-check"></i><b>4.6.4</b> Regresión vs. clasificación</a></li>
+<li class="chapter" data-level="4.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificar-estética-adicional-para-puntos"><i class="fa fa-check"></i><b>4.3</b> Especificar estética adicional para puntos</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#añadiendo-más-estética-a-la-trama"><i class="fa fa-check"></i><b>4.3.1</b> Añadiendo más estética a la trama</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#ajuste-del-color-del-punto"><i class="fa fa-check"></i><b>4.3.2</b> Ajuste del color del punto</a></li>
+<li class="chapter" data-level="4.3.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#ajustar-el-tamaño-del-punto"><i class="fa fa-check"></i><b>4.3.3</b> Ajustar el tamaño del punto</a></li>
+<li class="chapter" data-level="4.3.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#establecer-la-estética-global-transparencia"><i class="fa fa-check"></i><b>4.3.4</b> Establecer la estética global: transparencia</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-un-gráfico-de-líneas-con-ggplot"><i class="fa fa-check"></i><b>4.4</b> Crea un gráfico de líneas con ggplot</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-lineales"><i class="fa fa-check"></i><b>4.4.1</b> Introducción a los gráficos lineales</a></li>
+<li class="chapter" data-level="4.4.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crear-un-gráfico-lineal-simple"><i class="fa fa-check"></i><b>4.4.2</b> Crear un gráfico lineal simple</a></li>
+<li class="chapter" data-level="4.4.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#agregar-más-líneas"><i class="fa fa-check"></i><b>4.4.3</b> Agregar más líneas</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-tu-primer-gráfico-de-barras"><i class="fa fa-check"></i><b>4.5</b> Crea tu primer gráfico de barras</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-de-barras"><i class="fa fa-check"></i><b>4.5.1</b> Introducción a los gráficos de barras</a></li>
+<li class="chapter" data-level="4.5.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crear-un-gráfico-de-barras-simple"><i class="fa fa-check"></i><b>4.5.2</b> Crear un gráfico de barras simple</a></li>
+<li class="chapter" data-level="4.5.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#llenado-de-barras-de-color"><i class="fa fa-check"></i><b>4.5.3</b> Llenado de barras de color</a></li>
+<li class="chapter" data-level="4.5.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#gráficos-de-barras-apiladas"><i class="fa fa-check"></i><b>4.5.4</b> Gráficos de barras apiladas</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html"><i class="fa fa-check"></i><b>5</b> Introducción a Machine Learning</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#inteligencia-artificial"><i class="fa fa-check"></i><b>5.1</b> Inteligencia artificial</a></li>
+<li class="chapter" data-level="5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#machine-learning-aprendizaje-automático"><i class="fa fa-check"></i><b>5.2</b> Machine Learning (Aprendizaje automático)</a></li>
+<li class="chapter" data-level="5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-profundo-deep-learning"><i class="fa fa-check"></i><b>5.3</b> Aprendizaje profundo (Deep Learning)</a></li>
+<li class="chapter" data-level="5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#casos-de-uso-populares"><i class="fa fa-check"></i><b>5.4</b> Casos de uso populares</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-motores-de-búsqueda-y-sistemas-de-recomendación"><i class="fa fa-check"></i><b>5.4.1</b> Caso de uso: motores de búsqueda y sistemas de recomendación</a></li>
+<li class="chapter" data-level="5.4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-traducción-automática"><i class="fa fa-check"></i><b>5.4.2</b> Caso de uso: traducción automática</a></li>
+<li class="chapter" data-level="5.4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-identificación-de-música-y-reconocimiento-de-voz"><i class="fa fa-check"></i><b>5.4.3</b> Caso de uso: identificación de música y reconocimiento de voz</a></li>
+<li class="chapter" data-level="5.4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-coches-autónomos"><i class="fa fa-check"></i><b>5.4.4</b> Caso de uso: coches autónomos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#técnicas-de-machine-learning"><i class="fa fa-check"></i><b>5.5</b> Técnicas de Machine Learning</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado"><i class="fa fa-check"></i><b>5.5.1</b> Aprendizaje supervisado</a></li>
+<li class="chapter" data-level="5.5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-objetivo"><i class="fa fa-check"></i><b>5.5.2</b> Aprendizaje supervisado: objetivo</a></li>
+<li class="chapter" data-level="5.5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-no-supervisado"><i class="fa fa-check"></i><b>5.5.3</b> Aprendizaje no supervisado</a></li>
+<li class="chapter" data-level="5.5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-reforzado"><i class="fa fa-check"></i><b>5.5.4</b> Aprendizaje reforzado</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-con-regresión-y-clasificación"><i class="fa fa-check"></i><b>5.6</b> Aprendizaje supervisado con regresión y clasificación</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-datos-de-entrada"><i class="fa fa-check"></i><b>5.6.1</b> Aprendizaje supervisado: datos de entrada</a></li>
+<li class="chapter" data-level="5.6.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#predictores"><i class="fa fa-check"></i><b>5.6.2</b> Predictores</a></li>
+<li class="chapter" data-level="5.6.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#variable-de-resultado"><i class="fa fa-check"></i><b>5.6.3</b> Variable de resultado</a></li>
+<li class="chapter" data-level="5.6.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#regresión-vs.-clasificación"><i class="fa fa-check"></i><b>5.6.4</b> Regresión vs. clasificación</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -267,10 +325,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro" class="section level1">
+<div id="intro" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> R básico</h1>
 <p>R es muy popular e increíblemente útil para las personas que trabajan como científicos de datos o en empresas. Pero también puede usar R para cosas más simples, como crear un gráfico agradable o hacer un cálculo rápido. Comenzar a utilizar R es bastante sencillo.</p>
-<div id="introducción-a-r" class="section level2">
+<div id="introducción-a-r" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Introducción a R</h2>
 <blockquote>
 <p>El lenguaje informático estadístico más potente del planeta.
@@ -278,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>R es un lenguaje de programación y un ambiente para trabajar con datos. Es muy utilizado por estadísticos y científicos de datos por su sintaxis de código expresivo, abundantes paquetes y herramientas externas y funciona en todos los sistemas operativos principales.</p>
 <p>Es la navaja suiza para el análisis de datos y la computación estadística (¡y también puedes hacer algunos gráficos bonitos!). El lenguaje R se puede ampliar fácilmente con paquetes escritos por una gran y creciente comunidad de desarrolladores de todo el mundo. Puede encontrarlo prácticamente en cualquier lugar: lo utilizan instituciones académicas, empresas emergentes, corporaciones internacionales y muchos más.</p>
-<div id="por-qué-usar-r" class="section level3">
+<div id="por-qué-usar-r" class="section level3" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> ¿Por qué usar R?</h3>
 <p>R es un lenguaje popular para resolver problemas de análisis de datos y también lo usan personas que tradicionalmente no se consideran programadores. Al crear gráficos y visualizaciones con R, descubrirá que tiene muchas más posibilidades creativas que las aplicaciones gráficas, como Excel.</p>
 <p>Estas son algunas de las <strong>características</strong> por las que R es más famoso:</p>
@@ -287,7 +345,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Modelamiento avanzado</strong>: R proporciona la base de código más grande y poderosa para el análisis de datos en el mundo. La riqueza y profundidad de los modelos estadísticos disponibles no tiene paralelo y crece día a día, gracias a la gran comunidad de desarrolladores y colaboradores de paquetes de código abierto.</p>
 <p><strong>Automatización</strong>: el código R también se puede utilizar para automatizar informes o para realizar transformación de datos y cálculos de modelos. También se puede integrar en flujos de trabajo de producción automatizados, ambientes informáticos en la nube y sistemas de bases de datos modernos.</p>
 </div>
-<div id="r-en-buena-compañía" class="section level3">
+<div id="r-en-buena-compañía" class="section level3" number="1.1.2">
 <h3><span class="header-section-number">1.1.2</span> R en buena compañía</h3>
 <p>R es el estándar de facto para la computación estadística en instituciones académicas y empresas de todo el mundo. Su gran soporte para la programación alfabetizada (código que se puede combinar con texto legible por humanos) permite a los investigadores y científicos de datos crear informes listos para publicación que son fáciles de reproducir para los revisores.</p>
 <p>El lenguaje ha tenido una amplia adopción en varias industrias; vea algunos ejemplos a continuación:</p>
@@ -307,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 </div>
-<div id="bloques-de-construcción" class="section level2">
+<div id="bloques-de-construcción" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Bloques de construcción</h2>
 <p>El lenguaje R consta de tres bloques fundamentales de construcción necesarios para realizar sus primeros pasos en el ambiente R:</p>
 <ul>
@@ -318,7 +376,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Los <strong>objetos</strong> más importantes en R son <strong>vectores</strong>. Forman la base de (casi) todas las estructuras de datos de R. La mayor parte del poder y la expresividad de R se deriva del hecho de que es un lenguaje orientado a vectores. Las <strong>funciones</strong> y los operadores pueden definirse fácilmente y trabajar directamente en vectores para calcular resultados.</p>
 <p>La mayor fortaleza de R es su flexibilidad para integrar fácilmente nuevos algoritmos y construir <strong>interfaces</strong> a su alrededor. El sistema de paquetes R permite a los colaboradores integrar muchos modelos y bibliotecas externas de código abierto. Su repositorio principal de paquetes llamado “<strong>CRAN</strong>” aloja estos paquetes y permite a los usuarios instalarlos y cargarlos fácilmente en sus ambientes.</p>
 </div>
-<div id="combinar-valores-en-un-vector" class="section level2">
+<div id="combinar-valores-en-un-vector" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Combinar valores en un vector</h2>
 <p>R siempre crea listas de valores, incluso cuando solo hay un valor en una lista. Estas listas se denominan vectores y facilitan mucho el trabajo con datos.</p>
 <ul>
@@ -328,88 +386,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Utilice el operador <code>:</code> para crear secuencias numéricas</li>
 <li>Utilice la función de concatenar <code>c()</code> para crear vectores de diferentes tipos de datos</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="intro.html#cb2-1"></a><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></span>
-<span id="cb2-2"><a href="intro.html#cb2-2"></a><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb2-3"><a href="intro.html#cb2-3"></a><span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;def&quot;</span>, <span class="st">&quot;ghi&quot;</span>)</span>
-<span id="cb2-4"><a href="intro.html#cb2-4"></a><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</span></code></pre></div>
-<div id="introducción-a-los-vectores" class="section level3">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="intro.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">100</span></span>
+<span id="cb2-2"><a href="intro.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb2-3"><a href="intro.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;def&quot;</span>, <span class="st">&quot;ghi&quot;</span>)</span>
+<span id="cb2-4"><a href="intro.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="introducción-a-los-vectores" class="section level3" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> Introducción a los vectores</h3>
 <p>Un vector es una colección de elementos del mismo tipo y la estructura de datos más básica en R. Por ejemplo, un vector podría contener los cuatro números <code>1</code>, <code>3</code>, <code>2</code> y <code>5</code>. Otro vector podría formarse con las tres cadenas de texto <code>"Bienvenido"</code>,<code>"Hi"</code> y <code>"Hola"</code>. Estos diferentes tipos de valores (números, texto) se denominan <em>tipos de datos</em>.</p>
 <p>Un valor único también se trata como un vector, un vector con un solo elemento. Como veremos a lo largo del curso, este concepto hace que R sea muy especial. Podemos manipular los vectores y sus valores a través de muchas operaciones proporcionadas por R.</p>
 <p>Una ventaja clave de los vectores es que podemos aplicar una operación (por ejemplo, una multiplicación) a todos sus valores a la vez en lugar de pasar por cada elemento individualmente. Esto se llama <em>vectorización</em>.</p>
 </div>
-<div id="tipos-de-vectores" class="section level3">
+<div id="tipos-de-vectores" class="section level3" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> Tipos de vectores</h3>
 <p>Los vectores solo pueden contener elementos del mismo <em>tipo de datos</em>. En este libro trabajaremos con los siguientes tres tipos de datos principales:</p>
 <p>Los valores <strong>numéricos</strong> son números. Aunque pueden dividirse aún más en números enteros (enteros) y números con decimales (dobles), R convierte automáticamente entre estos subtipos si es necesario. Por lo tanto, colectivamente nos referiremos a ellos como valores <code>numéricos</code>.</p>
 <p>Los valores de <strong>caracteres</strong> contienen contenido textual. Estos pueden ser letras, símbolos, espacios y números también. Deben estar entre comillas: comillas simples <code>'___'</code> o comillas dobles <code>"___"</code>.</p>
-<p>Los valores <strong>lógicos</strong> pueden ser <code>TRUE</code> o <code>FALSE</code>. A menudo también se les conoce como valores <em>booleanos</em> o <em>binarios</em>. Debido a que un valor <code>lógico</code> solo puede ser <code>TRUE</code> o <code>FALSE</code>, se usan con mayor frecuencia para responder preguntas simples como “¿Es 1 mayor que 2?” o “¿Son más de las 3 en punto?”. Este tipo de preguntas solo necesitan respuestas como “Sí” (<code>TRUE</code>) o “No” (<code>FALSE</code>). Es importante destacar que en R los valores <code>lógicos</code> distinguen entre mayúsculas y minúsculas, lo que significa que deben escribirse con mayúsculas.</p>
+<p>Los valores <strong>lógicos</strong> pueden ser <code>TRUE</code> o <code>FALSE</code>. A menudo también se les conoce como valores <em>booleanos</em> o <em>binarios</em>. Debido a que un valor <code>lógico</code> solo puede ser <code>TRUE</code> o <code>FALSE</code>, se usan con mayor frecuencia para responder preguntas simples como “¿Es 1 mayor que 2?” o “¿Son más de las 3 en punto?” Este tipo de preguntas solo necesitan respuestas como “Sí” (<code>TRUE</code>) o “No” (<code>FALSE</code>). Es importante destacar que en R los valores <code>lógicos</code> distinguen entre mayúsculas y minúsculas, lo que significa que deben escribirse con mayúsculas.</p>
 </div>
-<div id="creando-una-secuencia-de-números" class="section level3">
+<div id="creando-una-secuencia-de-números" class="section level3" number="1.3.3">
 <h3><span class="header-section-number">1.3.3</span> Creando una secuencia de números</h3>
 <p>En R, incluso un solo valor se considera un vector. Crear un vector de un elemento es tan simple como escribir su valor:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="intro.html#cb3-1"></a><span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="intro.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span></span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>## [1] 4</code></pre>
 <p>Para crear una secuencia de valores numéricos, podemos usar el operador <code>:</code> que toma dos números y genera un vector de todos los números enteros en ese rango:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="intro.html#cb5-1"></a><span class="dv">2</span><span class="op">:</span><span class="dv">11</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="intro.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">:</span><span class="dv">11</span></span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>##  [1]  2  3  4  5  6  7  8  9 10 11</code></pre>
 <p>El operador <code>:</code> crea un vector desde el número en el lado izquierdo hasta el número en el lado derecho. Por lo tanto, el orden de los números es importante. Si definimos el ejemplo anterior al revés, obtenemos un vector de números descendentes, en lugar de ascendentes:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="intro.html#cb7-1"></a><span class="dv">11</span><span class="op">:</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="intro.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span><span class="sc">:</span><span class="dv">2</span></span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>##  [1] 11 10  9  8  7  6  5  4  3  2</code></pre>
 <p>El operador <code>:</code> es útil cuando necesitamos un vector de cada número entero en un rango dado. Sin embargo, si necesitamos un vector donde los números no sean lineales, necesitamos algo diferente.</p>
 </div>
-<div id="concatenando-valores-numéricos-a-un-vector" class="section level3">
+<div id="concatenando-valores-numéricos-a-un-vector" class="section level3" number="1.3.4">
 <h3><span class="header-section-number">1.3.4</span> Concatenando valores numéricos a un vector</h3>
 <p>Podemos combinar múltiples números en un solo vector usando la función concatenar <code>c()</code> que une elementos entre las llaves redondas en una cadena o mas conocido como paréntesis. Múltiples elementos deben estar separados por comas.</p>
 <p>Para crear nuestro primer vector con siete números diferentes, podemos usar la función de concatenación <code>c()</code> de esta manera:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="intro.html#cb9-1"></a><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">22</span>, <span class="dv">1</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="intro.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">22</span>, <span class="dv">1</span>) </span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>## [1]  7  4  2  5  5 22  1</code></pre>
 <p>Tenga en cuenta que el signo “<code>[1]</code>” antes de la salida anterior es agregado por R, y siempre se agrega automáticamente al imprimir vectores. Si sus vectores se hacen más grandes, verá más de estos prefijos. Solo sepa que R solo los agrega con fines informativos, y que están allí para ayudarlo mientras codifica. No son parte del vector en sí.</p>
 <p>Puede ver esto más claramente, cuando la salida se extiende sobre varias líneas:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="intro.html#cb11-1"></a><span class="dv">1</span><span class="op">:</span><span class="dv">60</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="intro.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">60</span></span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
 ## [26] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50
 ## [51] 51 52 53 54 55 56 57 58 59 60</code></pre>
 </div>
-<div id="creando-vectores-de-caracteres" class="section level3">
+<div id="creando-vectores-de-caracteres" class="section level3" number="1.3.5">
 <h3><span class="header-section-number">1.3.5</span> Creando vectores de caracteres</h3>
 <p>Para crear un vector de caracteres de un elemento, todo lo que tenemos que hacer es escribir el texto. Recuerde que debemos usar comillas (<code>" "</code>) alrededor de los valores de los caracteres:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="intro.html#cb13-1"></a><span class="st">&quot;golden retriever&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="intro.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;golden retriever&quot;</span></span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>## [1] &quot;golden retriever&quot;</code></pre>
 <p>Para crear un vector de caracteres de múltiples elementos, podemos usar nuevamente la función concatenar <code>c()</code>. Esta vez lo usaremos con caracteres en lugar de números:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="intro.html#cb15-1"></a><span class="kw">c</span>(<span class="st">&quot;golden retriever&quot;</span>, <span class="st">&quot;labrador is a family dog&quot;</span>, <span class="st">&quot;beagle&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="intro.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;golden retriever&quot;</span>, <span class="st">&quot;labrador is a family dog&quot;</span>, <span class="st">&quot;beagle&quot;</span>)</span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>## [1] &quot;golden retriever&quot;         &quot;labrador is a family dog&quot;
 ## [3] &quot;beagle&quot;</code></pre>
 </div>
-<div id="creando-vectores-lógicos" class="section level3">
+<div id="creando-vectores-lógicos" class="section level3" number="1.3.6">
 <h3><span class="header-section-number">1.3.6</span> Creando vectores lógicos</h3>
 <p>Los vectores lógicos solo pueden contener los valores <code>TRUE</code> y <code>FALSE</code>. Para crear un vector lógico con un solo valor, escriba uno de los valores válidos <code>TRUE</code> o <code>FALSE</code>. Recuerde que deben escribirse con letras mayúsculas:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="intro.html#cb17-1"></a><span class="ot">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="intro.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span></span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>## [1] TRUE</code></pre>
 <p>De manera similar a otros tipos de vectores, podemos usar la función concatenar <code>c()</code> para crear un vector lógico de múltiples elementos:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="intro.html#cb19-1"></a><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)   </span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="intro.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)   </span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
 </div>
 </div>
-<div id="crea-variables-a-través-de-asignaciones" class="section level2">
+<div id="crea-variables-a-través-de-asignaciones" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Crea variables a través de asignaciones</h2>
 <p>Por lo general, desea almacenar vectores y otros objetos en variables para poder trabajar con ellos más fácilmente. Las variables son como un cuadro con un nombre. A continuación, puede consultar el nombre para ver qué se almacena en el interior.</p>
 <ul>
@@ -417,34 +475,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Usa variables para almacenar objetos y vectores</li>
 <li>Reutilizar objetos asignados mediante un nombre de variable</li>
 </ul>
-<div id="asignando-variables" class="section level3">
+<div id="asignando-variables" class="section level3" number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> Asignando variables</h3>
 <p>Por lo general, queremos usar objetos como vectores más de una vez. Para evitar la molestia de volver a escribirlos y recrearlos todo el tiempo, nos gustaría guardarlos en algún lugar y reutilizarlos más tarde.</p>
 <p>Para hacer esto, podemos asignarlos a un nombre de variable. R usa el operador de flecha especial <code>&lt;-</code> para asignar valores a una variable. La flecha es simplemente la combinación de un carácter menor que (<code>&lt;</code>) y un signo menos (<code>-</code>).</p>
 <p>Veamos un ejemplo, en el que asignamos un vector numérico a una variable llamada <code>numbers</code>:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="intro.html#cb21-1"></a>numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="intro.html#cb21-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>) </span></code></pre></div>
 <p>Ahora podemos usar el nombre de la variable a continuación para ver su contenido:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="intro.html#cb22-1"></a>numbers</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="intro.html#cb22-1" aria-hidden="true" tabindex="-1"></a>numbers</span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
 <p>Tenga en cuenta que cuando asignamos algo a una variable que ya existe, se sobrescribe. Todos los contenidos anteriores se eliminan automáticamente:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="intro.html#cb24-1"></a>numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>)</span>
-<span id="cb24-2"><a href="intro.html#cb24-2"></a>numbers</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="intro.html#cb24-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>)</span>
+<span id="cb24-2"><a href="intro.html#cb24-2" aria-hidden="true" tabindex="-1"></a>numbers</span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>## [1] 10 11 12 13</code></pre>
 <p>Una vez que haya definido una variable, puede usarla tal como usaría el vector subyacente. En el siguiente ejemplo creamos dos vectores numéricos y los asignamos a las variables <code>low</code> y <code>high</code>. Luego, usamos estas variables y concatenamos los dos vectores en uno solo y los asignamos una variable denominada <code>sequence</code>. Finalmente llamamos a la variable <code>sequence</code> e inspeccionamos su contenido:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="intro.html#cb26-1"></a>low &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb26-2"><a href="intro.html#cb26-2"></a>high &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
-<span id="cb26-3"><a href="intro.html#cb26-3"></a>sequence &lt;-<span class="st"> </span><span class="kw">c</span>(low, high)</span>
-<span id="cb26-4"><a href="intro.html#cb26-4"></a>sequence</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="intro.html#cb26-1" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb26-2"><a href="intro.html#cb26-2" aria-hidden="true" tabindex="-1"></a>high <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb26-3"><a href="intro.html#cb26-3" aria-hidden="true" tabindex="-1"></a>sequence <span class="ot">&lt;-</span> <span class="fu">c</span>(low, high)</span>
+<span id="cb26-4"><a href="intro.html#cb26-4" aria-hidden="true" tabindex="-1"></a>sequence</span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>## [1] 1 2 3 4 5 6</code></pre>
 <p>Como puede ver, los vectores <code>1, 2, 3</code> y <code>4, 5, 6</code> almacenados en las variables <code>low</code> y <code>high</code>, se combinaron en un solo vector que ahora es el contenido de la variable <code>sequence</code>.</p>
 </div>
-<div id="reglas-de-nomenclatura" class="section level3">
+<div id="reglas-de-nomenclatura" class="section level3" number="1.4.2">
 <h3><span class="header-section-number">1.4.2</span> Reglas de nomenclatura</h3>
 <p>Hay algunas reglas que debemos tener en cuenta al crear variables.</p>
 <p><strong>Reglas en la asignación de variables</strong></p>
@@ -460,7 +518,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 </div>
-<div id="utilice-operadores-básicos" class="section level2">
+<div id="utilice-operadores-básicos" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Utilice operadores básicos</h2>
 <p>R no solo es bueno para analizar y visualizar datos, sino también para resolver problemas matemáticos o comparar datos entre sí. Además, puede usarlo como una calculadora de bolsillo.</p>
 <ul>
@@ -469,7 +527,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Use operadores relacionales en vectores</li>
 <li>Usa operadores lógicos en vectores</li>
 </ul>
-<div id="usando-r-como-calculadora-de-bolsillo" class="section level3">
+<div id="usando-r-como-calculadora-de-bolsillo" class="section level3" number="1.5.1">
 <h3><span class="header-section-number">1.5.1</span> Usando R como calculadora de bolsillo</h3>
 <pre><code>___ + ___
 ___ - ___
@@ -477,24 +535,24 @@ ___ / ___
 ___ * ___</code></pre>
 <p>R es un lenguaje de programación desarrollado principalmente para estadísticas y análisis de datos. Dentro de R puede usar operadores matemáticos tal como lo haría en una calculadora. Por ejemplo, puede sumar <code>+</code> y restar <code>-</code> números entre sí:</p>
 <p><code>Código de entrada:</code></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="intro.html#cb29-1"></a><span class="dv">5</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="intro.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
 <p><code>Resultado:</code></p>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="intro.html#cb31-1"></a><span class="dv">7</span> <span class="op">-</span><span class="st"> </span><span class="fl">3.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="intro.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">-</span> <span class="fl">3.5</span></span></code></pre></div>
 <pre><code>## [1] 3.5</code></pre>
 <p>Del mismo modo, puede multiplicar <code>*</code> o dividir <code>/</code> números:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="intro.html#cb33-1"></a><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">7</span>   </span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="intro.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> <span class="dv">7</span>   </span></code></pre></div>
 <pre><code>## [1] 35</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="intro.html#cb35-1"></a><span class="dv">8</span> <span class="op">/</span><span class="st"> </span><span class="dv">4</span>   </span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="intro.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="sc">/</span> <span class="dv">4</span>   </span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>Puedes tomar el poder de un número usando el signo <code>^</code> para potenciar o elevar:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="intro.html#cb37-1"></a><span class="dv">2</span><span class="op">^</span><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="intro.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
 <p>De acuerdo con las reglas de las matemáticas, puede usar corchetes para especificar el orden de evaluación en tareas más complejas:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="intro.html#cb39-1"></a><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="intro.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> (<span class="dv">2</span> <span class="sc">+</span> <span class="dv">4</span> <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 20</code></pre>
 </div>
-<div id="aplicación-de-operadoras-aritméticas-en-vectores" class="section level3">
+<div id="aplicación-de-operadoras-aritméticas-en-vectores" class="section level3" number="1.5.2">
 <h3><span class="header-section-number">1.5.2</span> Aplicación de operadoras aritméticas en vectores</h3>
 <pre><code>___ + ___
 ___ - ___
@@ -502,19 +560,19 @@ ___ / ___
 ___ * ___</code></pre>
 <p>Las operaciones, como la suma, la resta, la multiplicación y la división se denominan <em>operaciones aritméticas</em>. No solo pueden operar con valores únicos sino también con vectores. Si usa operaciones aritméticas en vectores, la operación se realiza en cada número individual del primer vector y el número individual en la misma posición del segundo vector.</p>
 <p>En el siguiente ejemplo creamos dos vectores numéricos y los asignamos a las variables <code>a</code> y <code>b</code>. Luego los agregamos juntos:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="intro.html#cb42-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>)</span>
-<span id="cb42-2"><a href="intro.html#cb42-2"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>)</span>
-<span id="cb42-3"><a href="intro.html#cb42-3"></a>a <span class="op">+</span><span class="st"> </span>b</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="intro.html#cb42-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>)</span>
+<span id="cb42-2"><a href="intro.html#cb42-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>)</span>
+<span id="cb42-3"><a href="intro.html#cb42-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code></pre></div>
 <pre><code>## [1]  3  7 12 17 22 27</code></pre>
 <p>Como muestra la salida, los primeros elementos de los dos vectores se agregaron juntos y dieron como resultado <code>1 + 2 = 3</code>. Los segundos elementos <code>3 + 4 = 7</code>, los terceros elementos <code>6 + 6 = 12</code> y así sucesivamente.</p>
 <p>Podemos aplicar cualquier otra operación aritmética de manera similar:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="intro.html#cb44-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">22</span>, <span class="dv">10</span>, <span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">14</span>, <span class="dv">4</span>)</span>
-<span id="cb44-2"><a href="intro.html#cb44-2"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">14</span>, <span class="dv">8</span>)</span>
-<span id="cb44-3"><a href="intro.html#cb44-3"></a>a <span class="op">/</span><span class="st"> </span>b</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="intro.html#cb44-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">10</span>, <span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">14</span>, <span class="dv">4</span>)</span>
+<span id="cb44-2"><a href="intro.html#cb44-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">14</span>, <span class="dv">8</span>)</span>
+<span id="cb44-3"><a href="intro.html#cb44-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">/</span> b</span></code></pre></div>
 <pre><code>## [1] 5.5 2.0 3.5 0.5 1.0 0.5</code></pre>
 <p>Usando el mismo principio, el primer elemento del resultado es <code>22 / 4 = 5.5</code>, el segundo es <code>10 / 5 = 2</code> y así sucesivamente.</p>
 </div>
-<div id="usar-operadores-relacionales" class="section level3">
+<div id="usar-operadores-relacionales" class="section level3" number="1.5.3">
 <h3><span class="header-section-number">1.5.3</span> Usar operadores relacionales</h3>
 <pre><code>___ == ___
 ___ != ___
@@ -524,74 +582,74 @@ ___ &lt;= ___
 ___ &gt;= ___</code></pre>
 <p>Los operadores relacionales se utilizan para comparar dos valores. La salida de estas operaciones siempre es un valor lógico <code>TRUE</code> o <code>FALSE</code>. Distinguimos seis tipos diferentes de operadores relacionales, como veremos a continuación.</p>
 <p>Los operadores igual <code>==</code> y no igual <code>!=</code> comprueban si dos valores son iguales (o no):</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="intro.html#cb47-1"></a><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="intro.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="intro.html#cb49-1"></a><span class="dv">2</span> <span class="op">!=</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="intro.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">!=</span> <span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Los operadores <em>menor que</em> <code>&lt;</code> y <em>mayor que</em> <code>&gt;</code> verifican si un valor es menor o mayor que otro:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="intro.html#cb51-1"></a><span class="dv">2</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="intro.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">&gt;</span> <span class="dv">4</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="intro.html#cb53-1"></a><span class="dv">2</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="intro.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">4</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Los operadores <em>menor que o igual a</em> <code>&lt;=</code> y <em>mayor que o igual a</em> <code>&gt;=</code> combinan la verificación de igualdad con la comparación menor o mayor que:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="intro.html#cb55-1"></a><span class="dv">2</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="intro.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">&gt;=</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="intro.html#cb57-1"></a><span class="dv">2</span> <span class="op">&lt;=</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="intro.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">&lt;=</span> <span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Todos estos operadores pueden usarse en vectores con uno o más elementos también. En ese caso, cada elemento de un vector se compara con el elemento en la misma posición en el otro vector, al igual que con los operadores matemáticos:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="intro.html#cb59-1"></a>vector1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">2</span>)</span>
-<span id="cb59-2"><a href="intro.html#cb59-2"></a>vector2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>)</span>
-<span id="cb59-3"><a href="intro.html#cb59-3"></a>vector1 <span class="op">&gt;</span><span class="st"> </span>vector2</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="intro.html#cb59-1" aria-hidden="true" tabindex="-1"></a>vector1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">2</span>)</span>
+<span id="cb59-2"><a href="intro.html#cb59-2" aria-hidden="true" tabindex="-1"></a>vector2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>)</span>
+<span id="cb59-3"><a href="intro.html#cb59-3" aria-hidden="true" tabindex="-1"></a>vector1 <span class="sc">&gt;</span> vector2</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
 <p>Por lo tanto, el resultado de este ejemplo se basa en las comparaciones <code>3 &gt; 2</code>, <code>5 &gt; 6</code>, <code>2 &gt; 3</code> y así sucesivamente.</p>
 </div>
-<div id="usando-operadores-lógicos" class="section level3">
+<div id="usando-operadores-lógicos" class="section level3" number="1.5.4">
 <h3><span class="header-section-number">1.5.4</span> Usando operadores lógicos</h3>
 <pre><code>___ &amp; ___
 ___ | ___</code></pre>
 <p>El operador <em>AND</em> <code>&amp;</code> se usa para verificar si varias declaraciones son <code>TRUE</code> al mismo tiempo. Usando un ejemplo simple, podríamos verificar si 3 es mayor que 1 y al mismo tiempo si 4 es menor que 2:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="intro.html#cb62-1"></a><span class="dv">3</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span><span class="dv">4</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="intro.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="dv">4</span> <span class="sc">&lt;</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>De hecho, 3 es mayor que 1, pero 4 no es menor que 2. Dado que una de las declaraciones es <code>FALSE</code>, el resultado de esta evaluación conjunta también es <code>FALSE</code>.</p>
 <p>El operador <em>OR</em> <code>|</code> solo verifica si alguna de las declaraciones es <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="intro.html#cb64-1"></a><span class="dv">3</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span><span class="dv">4</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="intro.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">|</span> <span class="dv">4</span> <span class="sc">&lt;</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>En una declaración <em>OR</em>, no todos los elementos tienen que ser <code>TRUE</code>. Como 3 es mayor que 1, el resultado de esta evaluación también es <code>TRUE</code>.</p>
 <p>El operador <code>!</code> se utiliza para la negación de valores lógicos, lo que significa que convierte los valores <code>TRUE</code> en <code>FALSE</code> y los valores <code>FALSE</code> en <code>TRUE</code>. Si tenemos una declaración que resulta en un valor lógico <code>TRUE</code> o <code>FALSE</code>, podemos negar el resultado aplicando el operador <code>!</code> en él. En el siguiente ejemplo verificamos si 3 es mayor que 2 y luego negamos el resultado de esta comparación:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="intro.html#cb66-1"></a><span class="op">!</span><span class="dv">3</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="intro.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>Los operadores lógicos, al igual que los operadores aritméticos y relacionales, también se pueden usar en vectores más largos. En el siguiente ejemplo usamos tres vectores diferentes <code>a</code>, <code>b</code> y <code>c</code> e intentamos evaluar múltiples relaciones en combinación.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="intro.html#cb68-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">21</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb68-2"><a href="intro.html#cb68-2"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
-<span id="cb68-3"><a href="intro.html#cb68-3"></a>c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">23</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
-<span id="cb68-4"><a href="intro.html#cb68-4"></a></span>
-<span id="cb68-5"><a href="intro.html#cb68-5"></a>a<span class="op">&gt;</span>b <span class="op">&amp;</span><span class="st"> </span>b<span class="op">&lt;</span>c</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="intro.html#cb68-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">21</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb68-2"><a href="intro.html#cb68-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb68-3"><a href="intro.html#cb68-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">23</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb68-4"><a href="intro.html#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-5"><a href="intro.html#cb68-5" aria-hidden="true" tabindex="-1"></a>a<span class="sc">&gt;</span>b <span class="sc">&amp;</span> b<span class="sc">&lt;</span>c</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE FALSE</code></pre>
 <p>Primero, ambas comparaciones relacionales <code>a &gt; b</code> y <code>b &lt; c</code> se evalúan y dan como resultado dos vectores lógicos. Por lo tanto, esencialmente comparamos los siguientes dos vectores:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="intro.html#cb70-1"></a><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>) <span class="op">&amp;</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="intro.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>) <span class="sc">&amp;</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE FALSE</code></pre>
 <p>El operador <code>&amp;</code> comprueba si ambos valores en la misma posición en los vectores son <code>TRUE</code>. Si algún valor de los pares es <code>FALSE</code>, la combinación también es <code>FALSE</code>.</p>
 <p>El operador <code>|</code> comprueba si alguno de los valores en la misma posición en los vectores es <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="intro.html#cb72-1"></a><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>) <span class="op">|</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="intro.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>) <span class="sc">|</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE  TRUE</code></pre>
 </div>
-<div id="usando-el-operador-in" class="section level3">
+<div id="usando-el-operador-in" class="section level3" number="1.5.5">
 <h3><span class="header-section-number">1.5.5</span> Usando el operador %in%</h3>
 <pre><code>___ %in% ___</code></pre>
 <p>Un operador especial adicional, de uso frecuente, es el operador <code>%in%</code>. Comprueba si el contenido de un vector también está presente en otro.</p>
 <p>En el siguiente ejemplo utilizamos la variable <code>UE</code> que contiene la abreviatura de todos los países de la Unión Europea. Luego, verificamos si el carácter <code>"AU"</code> está presente o no en la variable <code>UE</code>.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="intro.html#cb75-1"></a>EU &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AU&quot;</span>,<span class="st">&quot;BE&quot;</span>,<span class="st">&quot;BG&quot;</span>,<span class="st">&quot;CY&quot;</span>,<span class="st">&quot;CZ&quot;</span>,<span class="st">&quot;DE&quot;</span>,<span class="st">&quot;DK&quot;</span>,<span class="st">&quot;EE&quot;</span>,<span class="st">&quot;ES&quot;</span>,<span class="st">&quot;FI&quot;</span>,<span class="st">&quot;FR&quot;</span>,<span class="st">&quot;GR&quot;</span>,<span class="st">&quot;HR&quot;</span>,<span class="st">&quot;HU&quot;</span>,</span>
-<span id="cb75-2"><a href="intro.html#cb75-2"></a>        <span class="st">&quot;IE&quot;</span>,<span class="st">&quot;IT&quot;</span>,<span class="st">&quot;LT&quot;</span>,<span class="st">&quot;LU&quot;</span>,<span class="st">&quot;LV&quot;</span>,<span class="st">&quot;MT&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;PO&quot;</span>,<span class="st">&quot;PT&quot;</span>,<span class="st">&quot;RO&quot;</span>,<span class="st">&quot;SE&quot;</span>,<span class="st">&quot;SI&quot;</span>,<span class="st">&quot;SK&quot;</span>)</span>
-<span id="cb75-3"><a href="intro.html#cb75-3"></a></span>
-<span id="cb75-4"><a href="intro.html#cb75-4"></a><span class="st">&quot;AU&quot;</span> <span class="op">%in%</span><span class="st"> </span>EU</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="intro.html#cb75-1" aria-hidden="true" tabindex="-1"></a>EU <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AU&quot;</span>,<span class="st">&quot;BE&quot;</span>,<span class="st">&quot;BG&quot;</span>,<span class="st">&quot;CY&quot;</span>,<span class="st">&quot;CZ&quot;</span>,<span class="st">&quot;DE&quot;</span>,<span class="st">&quot;DK&quot;</span>,<span class="st">&quot;EE&quot;</span>,<span class="st">&quot;ES&quot;</span>,<span class="st">&quot;FI&quot;</span>,<span class="st">&quot;FR&quot;</span>,<span class="st">&quot;GR&quot;</span>,<span class="st">&quot;HR&quot;</span>,<span class="st">&quot;HU&quot;</span>,</span>
+<span id="cb75-2"><a href="intro.html#cb75-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;IE&quot;</span>,<span class="st">&quot;IT&quot;</span>,<span class="st">&quot;LT&quot;</span>,<span class="st">&quot;LU&quot;</span>,<span class="st">&quot;LV&quot;</span>,<span class="st">&quot;MT&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;PO&quot;</span>,<span class="st">&quot;PT&quot;</span>,<span class="st">&quot;RO&quot;</span>,<span class="st">&quot;SE&quot;</span>,<span class="st">&quot;SI&quot;</span>,<span class="st">&quot;SK&quot;</span>)</span>
+<span id="cb75-3"><a href="intro.html#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-4"><a href="intro.html#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;AU&quot;</span> <span class="sc">%in%</span> EU</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>El siguiente ejemplo amplía la búsqueda y compara múltiples elementos con el contenido de la variable <code>EU</code>. Produce un vector lógico como resultado que contiene un valor lógico para cada elemento:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="intro.html#cb77-1"></a><span class="kw">c</span>(<span class="st">&quot;AU&quot;</span>,<span class="st">&quot;HU&quot;</span>,<span class="st">&quot;UK&quot;</span>) <span class="op">%in%</span><span class="st"> </span>EU</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="intro.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;AU&quot;</span>,<span class="st">&quot;HU&quot;</span>,<span class="st">&quot;UK&quot;</span>) <span class="sc">%in%</span> EU</span></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE</code></pre>
 <p>Como muestra el resultado, los dos primeros elementos de caracteres <code>"AU"</code> y <code>"HU"</code> están presentes en la variable <code>EU</code>, sin embargo, el tercer elemento <code>"UK"</code> no lo está.</p>
 </div>
 </div>
-<div id="llamar-al-código-r-existente-a-través-de-funciones" class="section level2">
+<div id="llamar-al-código-r-existente-a-través-de-funciones" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> Llamar al código R existente a través de funciones</h2>
 <p>Cuando escribe código, las funciones son sus mejores amigas. Pueden hacer las cosas difíciles muy fáciles o proporcionar nuevas funciones de una manera agradable. A través de las funciones, obtiene acceso a todas las potentes funciones que R tiene para ofrecer.</p>
 <ul>
@@ -602,30 +660,30 @@ ___ | ___</code></pre>
 <li>Crea números aleatorios usando <code>runif()</code></li>
 <li>Vectores de muestra usando <code>sample()</code></li>
 </ul>
-<div id="introducción-a-las-funciones." class="section level3">
+<div id="introducción-a-las-funciones." class="section level3" number="1.6.1">
 <h3><span class="header-section-number">1.6.1</span> Introducción a las funciones.</h3>
 <p>Las funciones en cualquier lenguaje de programación se pueden describir como código predefinido y reutilizable destinado a realizar una tarea específica. Las funciones en R se pueden usar usando su nombre y corchetes justo después de eso. Dentro de los corchetes, podemos especificar parámetros para la función. Una función que ya hemos usado ampliamente es la función concatenada <code>c()</code>.</p>
 <p>Una función simple, por ejemplo, es <code>abs()</code> que se usa para obtener el valor absoluto de un número. En el siguiente ejemplo, la función recibe <code>-3</code> como entrada y devuelve el resultado <code>3</code>:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="intro.html#cb79-1"></a><span class="kw">abs</span>(<span class="op">-</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="intro.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="sc">-</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
-<div id="personalización-de-funciones-a-través-de-parámetros" class="section level3">
+<div id="personalización-de-funciones-a-través-de-parámetros" class="section level3" number="1.6.2">
 <h3><span class="header-section-number">1.6.2</span> Personalización de funciones a través de parámetros</h3>
 <p>Las funciones toman parámetros que los personalizan para la tarea dada. Por ejemplo, la función <code>runif()</code> genera valores distribuidos uniformemente, lo que significa que todos los resultados tienen la misma probabilidad. Por defecto, toma los siguientes parámetros:</p>
 <pre><code>runif(n, min = 0, max = 1)</code></pre>
 <p>El primer parámetro <code>n</code> es el número de valores que queremos generar. Este es un parámetro obligatorio que debemos definir para que la función funcione.</p>
 <p>Por otro lado, podemos ver que algunos de los parámetros tienen valores predeterminados definidos por el signo igual <code>=</code>. Esto significa que si no especificamos explícitamente estos parámetros entre paréntesis, la función tomará los predeterminados. Veamos un ejemplo:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="intro.html#cb82-1"></a><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">5</span>)</span></code></pre></div>
-<pre><code>## [1] 0.1444459 0.3457203 0.3295415 0.8046579 0.8350615</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="intro.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.52742744 0.08784883 0.12734326 0.63866638 0.86660637</code></pre>
 <p>La salida es un vector numérico de 5 números. Cada uno de ellos está entre 0 y 1, ya que no cambiamos la configuración predeterminada. Si también cambiamos los parámetros <code>min</code> y <code>max</code>, podríamos personalizar aún más la salida:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="intro.html#cb84-1"></a><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">min =</span> <span class="dv">8</span>, <span class="dt">max =</span> <span class="dv">9</span>)</span></code></pre></div>
-<pre><code>## [1] 8.529169 8.099363 8.483294 8.846321 8.683933</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="intro.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">min =</span> <span class="dv">8</span>, <span class="at">max =</span> <span class="dv">9</span>)</span></code></pre></div>
+<pre><code>## [1] 8.541907 8.233637 8.604116 8.298236 8.345592</code></pre>
 <p>También es posible omitir el nombre de los parámetros y simplemente escribir los valores de entrada de esta manera:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="intro.html#cb86-1"></a><span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">9</span>)</span></code></pre></div>
-<pre><code>## [1] 8.859298 8.706776 8.511059 8.993089 8.924114</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="intro.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">9</span>)</span></code></pre></div>
+<pre><code>## [1] 8.721925 8.589152 8.612817 8.654422 8.481561</code></pre>
 <p>Sin embargo, en este caso debemos tener cuidado con el orden de las entradas, ya que cada función tiene un orden predeterminado para los parámetros. Si no nombramos explícitamente los parámetros que estamos configurando, R asumirá que los establecemos en el orden predefinido.</p>
 </div>
-<div id="usar-la-función-sample" class="section level3">
+<div id="usar-la-función-sample" class="section level3" number="1.6.3">
 <h3><span class="header-section-number">1.6.3</span> Usar la función <code>sample()</code></h3>
 <p>La función <code>sample()</code> toma un vector y devuelve una muestra aleatoria de él. Los dos primeros de sus parámetros son:</p>
 <ul>
@@ -633,11 +691,11 @@ ___ | ___</code></pre>
 <li><code>size</code>, que define la cantidad de elementos que queremos incluir en la muestra aleatoria</li>
 </ul>
 <p>Utilice la función <code>sample()</code> y muestree 5 valores aleatorios de la variable <code>full</code>.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="intro.html#cb88-1"></a>full &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">32</span>, <span class="dv">4</span>, <span class="dv">27</span>, <span class="dv">48</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">27</span>, <span class="dv">7</span>)</span>
-<span id="cb88-2"><a href="intro.html#cb88-2"></a><span class="kw">sample</span>(<span class="dt">x =</span> full, <span class="dt">size =</span> <span class="dv">5</span>)</span></code></pre></div>
-<pre><code>## [1] 27 32  1  9  2</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="intro.html#cb88-1" aria-hidden="true" tabindex="-1"></a>full <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">32</span>, <span class="dv">4</span>, <span class="dv">27</span>, <span class="dv">48</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">27</span>, <span class="dv">7</span>)</span>
+<span id="cb88-2"><a href="intro.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> full, <span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## [1]  2 27  7  7  9</code></pre>
 </div>
-<div id="utilice-la-función-seq" class="section level3">
+<div id="utilice-la-función-seq" class="section level3" number="1.6.4">
 <h3><span class="header-section-number">1.6.4</span> Utilice la función <code>seq()</code></h3>
 <p>La función <code>seq()</code> crea una secuencia de números enteros. Los primeros tres de sus parámetros son: <code>from</code>, <code>to</code> y <code>by</code>.</p>
 <ul>
@@ -646,11 +704,11 @@ ___ | ___</code></pre>
 <li><code>by</code> establece los pasos entre los valores individuales</li>
 </ul>
 <p>Utilice la función <code>seq()</code> y cree una secuencia de números del 2 al 10, pero solo incluya cada segundo valor. Por lo tanto, la salida debe ser: <code>2</code>, <code>4</code>, <code>6</code>, <code>8</code>, <code>10</code>.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="intro.html#cb90-1"></a><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">2</span>, <span class="dt">to =</span> <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="intro.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1]  2  4  6  8 10</code></pre>
 </div>
 </div>
-<div id="utilice-funciones-y-datos-existentes-a-través-de-paquetes" class="section level2">
+<div id="utilice-funciones-y-datos-existentes-a-través-de-paquetes" class="section level2" number="1.7">
 <h2><span class="header-section-number">1.7</span> Utilice funciones y datos existentes a través de paquetes</h2>
 <p>Los paquetes le dan acceso a un gran conjunto de funciones y conjuntos de datos, la mayoría de los cuales son proporcionados por la generosa comunidad R. Son la salsa secreta que hace posible usar R para casi cualquier cosa que puedas imaginar. Además, muchos paquetes son de código abierto, lo que puede ser un gran recurso de aprendizaje.</p>
 <ul>
@@ -659,40 +717,40 @@ ___ | ___</code></pre>
 </ul>
 <pre><code>library(___) 
 data(___)</code></pre>
-<div id="introducción-a-paquetes" class="section level3">
+<div id="introducción-a-paquetes" class="section level3" number="1.7.1">
 <h3><span class="header-section-number">1.7.1</span> Introducción a paquetes</h3>
 <p>Los paquetes son una de las mejores cosas de R. Los paquetes son compatibles con una gran comunidad de desarrolladores y permiten que R se conecte a muchos algoritmos y bibliotecas externos diferentes, muchos de ellos incluso escritos en diferentes lenguajes de programación.</p>
 <p>Colaboradores de todo el mundo, incluidos desarrolladores o expertos en el dominio de la física, las finanzas, las estadísticas, etc., crean una gran cantidad de contenido adicional, como funciones personalizadas para casos de uso específicos. Estas funciones, junto con la documentación, los archivos de ayuda y los conjuntos de datos se pueden recopilar en paquetes. Los paquetes pueden hacerse públicos a través de <em>repositorios de paquetes</em> para que cualquiera pueda instalarlos y utilizarlos. El repositorio de paquetes más popular es <a href="https://cran.r-project.org/">CRAN</a>, que aloja más de 15.000 paquetes.</p>
 </div>
-<div id="llamar-un-paquete" class="section level3">
+<div id="llamar-un-paquete" class="section level3" number="1.7.2">
 <h3><span class="header-section-number">1.7.2</span> Llamar un paquete</h3>
 <p>Como demostración, utilizaremos la función <code>generate_primes()</code> del paquete <code>primes</code>. Esta función toma dos números como parámetros y genera todos los números primos dentro de su rango.</p>
 <p>Para usar un paquete, primero tenemos que cargarlo. Esto se puede hacer aplicando la función <code>library()</code> e insertando el nombre del paquete como primer argumento de la función. Después de eso, tenemos acceso a todo el contenido del paquete y podemos usar funciones de él como de costumbre.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="intro.html#cb93-1"></a><span class="kw">library</span>(primes)</span>
-<span id="cb93-2"><a href="intro.html#cb93-2"></a><span class="kw">generate_primes</span>(<span class="dt">min =</span> <span class="dv">500</span>, <span class="dt">max =</span> <span class="dv">550</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="intro.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(primes)</span>
+<span id="cb93-2"><a href="intro.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_primes</span>(<span class="at">min =</span> <span class="dv">500</span>, <span class="at">max =</span> <span class="dv">550</span>)</span></code></pre></div>
 <pre><code>## [1] 503 509 521 523 541 547</code></pre>
 <p><strong>Compruebe si hay año bisiesto</strong></p>
 <ul>
 <li>Cargue el paquete de <code>lubridate</code>.</li>
 <li>Utilice la función <code>leap_year</code> para comprobar si 2020 es un año bisiesto o no.</li>
 </ul>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="intro.html#cb95-1"></a><span class="kw">library</span>(lubridate)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="intro.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;lubridate&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     date, intersect, setdiff, union</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="intro.html#cb98-1"></a><span class="kw">leap_year</span>(<span class="dv">2020</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="intro.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leap_year</span>(<span class="dv">2020</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<p>El contenido de este capítulo se encuentra en la página oficial de <span class="citation">(Quartargo <a href="#ref-quantargo1" role="doc-biblioref">2020</a><a href="#ref-quantargo1" role="doc-biblioref">b</a>)</span> en idioma ingles. También, existe mas material en la página oficial y es muy recomendable para introducirse en R.</p>
+<p>El contenido de este capítulo se encuentra en la página oficial de <span class="citation">(<a href="references.html#ref-quantargo1" role="doc-biblioref">Quartargo 2020b</a>)</span> en idioma ingles. También, existe mas material en la página oficial y es muy recomendable para introducirse en R.</p>
 </div>
 </div>
-<div id="formato-de-introducción" class="section level2">
+<div id="formato-de-introducción" class="section level2" number="1.8">
 <h2><span class="header-section-number">1.8</span> Formato de introducción</h2>
 <p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="intro.html#intro">1</a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="#methods"><strong>??</strong></a>.</p>
 <p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="intro.html#cb100-1"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span>))</span>
-<span id="cb100-2"><a href="intro.html#cb100-2"></a><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="intro.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
+<span id="cb100-2"><a href="intro.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
 <img src="BookR_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
 <p class="caption">
@@ -700,10 +758,10 @@ Figure 1.1: Here is a nice figure!
 </p>
 </div>
 <p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="intro.html#fig:nice-fig">1.1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="intro.html#tab:nice-tab">1.1</a>.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="intro.html#cb101-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
-<span id="cb101-2"><a href="intro.html#cb101-2"></a>  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
-<span id="cb101-3"><a href="intro.html#cb101-3"></a>  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></span>
-<span id="cb101-4"><a href="intro.html#cb101-4"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="intro.html#cb101-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb101-2"><a href="intro.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(iris, <span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
+<span id="cb101-3"><a href="intro.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
+<span id="cb101-4"><a href="intro.html#cb101-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <caption><span id="tab:nice-tab">Table 1.1: </span>Here is a nice table!</caption>
 <thead>
@@ -858,20 +916,8 @@ Figure 1.1: Here is a nice figure!
 </tr>
 </tbody>
 </table>
-<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown" role="doc-biblioref">2020</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-xie2015" role="doc-biblioref">2015</a>)</span>.</p>
+<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="references.html#ref-R-bookdown" role="doc-biblioref">Xie 2020</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="references.html#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span>.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-quantargo1">
-<p>Quartargo. 2020b. <em>Introduction to R</em>. <a href="http://www.quantargo.com">http://www.quantargo.com</a>.</p>
-</div>
-<div id="ref-xie2015">
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.org/knitr/">http://yihui.org/knitr/</a>.</p>
-</div>
-<div id="ref-R-bookdown">
-<p>Xie, Yihui. 2020. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</p>
 </div>
 </div>
             </section>

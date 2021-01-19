@@ -24,7 +24,7 @@
 <meta name="author" content="Franklin Santos" />
 
 
-<meta name="date" content="2020-12-03" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="intro.html"/>
 <link rel="next" href="transformación-de-datos-con-dplyr.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,22 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +86,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,16 +135,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R Ciencias Agropecuarias</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R básico</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introducción-a-r"><i class="fa fa-check"></i><b>1.1</b> Introducción a R</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R básico</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introducción-a-r"><i class="fa fa-check"></i><b>1.1</b> Introducción a R</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#por-qué-usar-r"><i class="fa fa-check"></i><b>1.1.1</b> ¿Por qué usar R?</a></li>
 <li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#r-en-buena-compañía"><i class="fa fa-check"></i><b>1.1.2</b> R en buena compañía</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#bloques-de-construcción"><i class="fa fa-check"></i><b>1.2</b> Bloques de construcción</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#combinar-valores-en-un-vector"><i class="fa fa-check"></i><b>1.3</b> Combinar valores en un vector</a><ul>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#combinar-valores-en-un-vector"><i class="fa fa-check"></i><b>1.3</b> Combinar valores en un vector</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#introducción-a-los-vectores"><i class="fa fa-check"></i><b>1.3.1</b> Introducción a los vectores</a></li>
 <li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#tipos-de-vectores"><i class="fa fa-check"></i><b>1.3.2</b> Tipos de vectores</a></li>
 <li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#creando-una-secuencia-de-números"><i class="fa fa-check"></i><b>1.3.3</b> Creando una secuencia de números</a></li>
@@ -153,99 +156,154 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.5" data-path="intro.html"><a href="intro.html#creando-vectores-de-caracteres"><i class="fa fa-check"></i><b>1.3.5</b> Creando vectores de caracteres</a></li>
 <li class="chapter" data-level="1.3.6" data-path="intro.html"><a href="intro.html#creando-vectores-lógicos"><i class="fa fa-check"></i><b>1.3.6</b> Creando vectores lógicos</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#crea-variables-a-través-de-asignaciones"><i class="fa fa-check"></i><b>1.4</b> Crea variables a través de asignaciones</a><ul>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#crea-variables-a-través-de-asignaciones"><i class="fa fa-check"></i><b>1.4</b> Crea variables a través de asignaciones</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#asignando-variables"><i class="fa fa-check"></i><b>1.4.1</b> Asignando variables</a></li>
 <li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#reglas-de-nomenclatura"><i class="fa fa-check"></i><b>1.4.2</b> Reglas de nomenclatura</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#utilice-operadores-básicos"><i class="fa fa-check"></i><b>1.5</b> Utilice operadores básicos</a><ul>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#utilice-operadores-básicos"><i class="fa fa-check"></i><b>1.5</b> Utilice operadores básicos</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#usando-r-como-calculadora-de-bolsillo"><i class="fa fa-check"></i><b>1.5.1</b> Usando R como calculadora de bolsillo</a></li>
 <li class="chapter" data-level="1.5.2" data-path="intro.html"><a href="intro.html#aplicación-de-operadoras-aritméticas-en-vectores"><i class="fa fa-check"></i><b>1.5.2</b> Aplicación de operadoras aritméticas en vectores</a></li>
 <li class="chapter" data-level="1.5.3" data-path="intro.html"><a href="intro.html#usar-operadores-relacionales"><i class="fa fa-check"></i><b>1.5.3</b> Usar operadores relacionales</a></li>
 <li class="chapter" data-level="1.5.4" data-path="intro.html"><a href="intro.html#usando-operadores-lógicos"><i class="fa fa-check"></i><b>1.5.4</b> Usando operadores lógicos</a></li>
 <li class="chapter" data-level="1.5.5" data-path="intro.html"><a href="intro.html#usando-el-operador-in"><i class="fa fa-check"></i><b>1.5.5</b> Usando el operador %in%</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#llamar-al-código-r-existente-a-través-de-funciones"><i class="fa fa-check"></i><b>1.6</b> Llamar al código R existente a través de funciones</a><ul>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#llamar-al-código-r-existente-a-través-de-funciones"><i class="fa fa-check"></i><b>1.6</b> Llamar al código R existente a través de funciones</a>
+<ul>
 <li class="chapter" data-level="1.6.1" data-path="intro.html"><a href="intro.html#introducción-a-las-funciones."><i class="fa fa-check"></i><b>1.6.1</b> Introducción a las funciones.</a></li>
 <li class="chapter" data-level="1.6.2" data-path="intro.html"><a href="intro.html#personalización-de-funciones-a-través-de-parámetros"><i class="fa fa-check"></i><b>1.6.2</b> Personalización de funciones a través de parámetros</a></li>
 <li class="chapter" data-level="1.6.3" data-path="intro.html"><a href="intro.html#usar-la-función-sample"><i class="fa fa-check"></i><b>1.6.3</b> Usar la función <code>sample()</code></a></li>
 <li class="chapter" data-level="1.6.4" data-path="intro.html"><a href="intro.html#utilice-la-función-seq"><i class="fa fa-check"></i><b>1.6.4</b> Utilice la función <code>seq()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#utilice-funciones-y-datos-existentes-a-través-de-paquetes"><i class="fa fa-check"></i><b>1.7</b> Utilice funciones y datos existentes a través de paquetes</a><ul>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#utilice-funciones-y-datos-existentes-a-través-de-paquetes"><i class="fa fa-check"></i><b>1.7</b> Utilice funciones y datos existentes a través de paquetes</a>
+<ul>
 <li class="chapter" data-level="1.7.1" data-path="intro.html"><a href="intro.html#introducción-a-paquetes"><i class="fa fa-check"></i><b>1.7.1</b> Introducción a paquetes</a></li>
 <li class="chapter" data-level="1.7.2" data-path="intro.html"><a href="intro.html#llamar-un-paquete"><i class="fa fa-check"></i><b>1.7.2</b> Llamar un paquete</a></li>
 </ul></li>
 <li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#formato-de-introducción"><i class="fa fa-check"></i><b>1.8</b> Formato de introducción</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html"><i class="fa fa-check"></i><b>2</b> Marcos de datos y Tibbles</a><ul>
-<li class="chapter" data-level="2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#construye-un-marco-de-datos-a-partir-de-vectores"><i class="fa fa-check"></i><b>2.1</b> Construye un marco de datos a partir de vectores</a><ul>
+<li class="chapter" data-level="2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html"><i class="fa fa-check"></i><b>2</b> Marcos de datos y Tibbles</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#construye-un-marco-de-datos-a-partir-de-vectores"><i class="fa fa-check"></i><b>2.1</b> Construye un marco de datos a partir de vectores</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#introducción-a-los-marcos-de-datos"><i class="fa fa-check"></i><b>2.1.1</b> Introducción a los marcos de datos</a></li>
 <li class="chapter" data-level="2.1.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crear-marcos-de-datos"><i class="fa fa-check"></i><b>2.1.2</b> Crear marcos de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crea-y-convierte-tibbles"><i class="fa fa-check"></i><b>2.2</b> Crea y convierte tibbles</a><ul>
+<li class="chapter" data-level="2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crea-y-convierte-tibbles"><i class="fa fa-check"></i><b>2.2</b> Crea y convierte tibbles</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#introducción-a-tibbles"><i class="fa fa-check"></i><b>2.2.1</b> Introducción a Tibbles</a></li>
 <li class="chapter" data-level="2.2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#creando-tibbles"><i class="fa fa-check"></i><b>2.2.2</b> Creando Tibbles</a></li>
 <li class="chapter" data-level="2.2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#conversión-de-marcos-de-datos-a-tibbles"><i class="fa fa-check"></i><b>2.2.3</b> Conversión de marcos de datos a Tibbles</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando"><i class="fa fa-check"></i><b>2.3</b> Extraiga o reemplace columnas en un marco de datos usando $</a><ul>
+<li class="chapter" data-level="2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando"><i class="fa fa-check"></i><b>2.3</b> Extraiga o reemplace columnas en un marco de datos usando $</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraer-columnas-con"><i class="fa fa-check"></i><b>2.3.1</b> Extraer columnas con $</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#determinar-el-tamaño-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.4</b> Determinar el tamaño de un marco de datos</a><ul>
+<li class="chapter" data-level="2.4" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#determinar-el-tamaño-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.4</b> Determinar el tamaño de un marco de datos</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#dimensiones-del-marco-de-datos"><i class="fa fa-check"></i><b>2.4.1</b> Dimensiones del marco de datos</a></li>
 <li class="chapter" data-level="2.4.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#recuperar-las-dimensiones-del-marco-de-datos"><i class="fa fa-check"></i><b>2.4.2</b> Recuperar las dimensiones del marco de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-primera-o-la-última-fila-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5</b> Seleccionar la primera o la última fila de un marco de datos</a><ul>
+<li class="chapter" data-level="2.5" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-primera-o-la-última-fila-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5</b> Seleccionar la primera o la última fila de un marco de datos</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-parte-superior-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5.1</b> Seleccionar la parte superior de un marco de datos</a></li>
 <li class="chapter" data-level="2.5.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-parte-inferior-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5.2</b> Seleccionar la parte inferior de un marco de datos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformación de datos con dplyr</a><ul>
-<li class="chapter" data-level="3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#introducción-a-dplyr"><i class="fa fa-check"></i><b>3.1</b> Introducción a dplyr</a><ul>
+<li class="chapter" data-level="3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformación de datos con dplyr</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#introducción-a-dplyr"><i class="fa fa-check"></i><b>3.1</b> Introducción a dplyr</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#qué-es-dplyr"><i class="fa fa-check"></i><b>3.1.1</b> ¿Qué es dplyr?</a></li>
 <li class="chapter" data-level="3.1.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#marco-de-funciones"><i class="fa fa-check"></i><b>3.1.2</b> Marco de funciones</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionar-columnas-de-un-marco-de-datos"><i class="fa fa-check"></i><b>3.2</b> Seleccionar columnas de un marco de datos</a><ul>
+<li class="chapter" data-level="3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionar-columnas-de-un-marco-de-datos"><i class="fa fa-check"></i><b>3.2</b> Seleccionar columnas de un marco de datos</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionando-por-nombre"><i class="fa fa-check"></i><b>3.2.1</b> Seleccionando por nombre</a></li>
 <li class="chapter" data-level="3.2.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#renombrar-nombres-de-columnas"><i class="fa fa-check"></i><b>3.2.2</b> Renombrar nombres de columnas</a></li>
 <li class="chapter" data-level="3.2.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#selección-por-rango-de-nombre"><i class="fa fa-check"></i><b>3.2.3</b> Selección por rango de nombre</a></li>
 <li class="chapter" data-level="3.2.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#select-por-índices"><i class="fa fa-check"></i><b>3.2.4</b> Select() por índices</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#filtrar-filas-de-marcos-de-datos"><i class="fa fa-check"></i><b>3.3</b> Filtrar filas de marcos de datos</a><ul>
+<li class="chapter" data-level="3.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#filtrar-filas-de-marcos-de-datos"><i class="fa fa-check"></i><b>3.3</b> Filtrar filas de marcos de datos</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#función-filter"><i class="fa fa-check"></i><b>3.3.1</b> Función filter()</a></li>
 <li class="chapter" data-level="3.3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#múltiples-expresiones-de-filtro"><i class="fa fa-check"></i><b>3.3.2</b> Múltiples expresiones de filtro</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ordenar-marcos-de-datos-por-columnas"><i class="fa fa-check"></i><b>3.4</b> Ordenar marcos de datos por columnas</a><ul>
+<li class="chapter" data-level="3.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ordenar-marcos-de-datos-por-columnas"><i class="fa fa-check"></i><b>3.4</b> Ordenar marcos de datos por columnas</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#la-función-arrange-con-una-sola-columna"><i class="fa fa-check"></i><b>3.4.1</b> La función arrange() con una sola columna</a></li>
 <li class="chapter" data-level="3.4.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#la-función-arrange-con-múltiples-columnas"><i class="fa fa-check"></i><b>3.4.2</b> La función arrange() con múltiples columnas</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#crear-una-tubería-de-transformación-de-datos"><i class="fa fa-check"></i><b>3.5</b> Crear una tubería de transformación de datos</a><ul>
+<li class="chapter" data-level="3.5" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#crear-una-tubería-de-transformación-de-datos"><i class="fa fa-check"></i><b>3.5</b> Crear una tubería de transformación de datos</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#usando-el-operador"><i class="fa fa-check"></i><b>3.5.1</b> Usando el operador %&gt;%</a></li>
 <li class="chapter" data-level="3.5.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ejercicios"><i class="fa fa-check"></i><b>3.5.2</b> Ejercicios:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html"><i class="fa fa-check"></i><b>4</b> Introducción a Machine Learning</a><ul>
-<li class="chapter" data-level="4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#inteligencia-artificial"><i class="fa fa-check"></i><b>4.1</b> Inteligencia artificial</a></li>
-<li class="chapter" data-level="4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#machine-learning-aprendizaje-automático"><i class="fa fa-check"></i><b>4.2</b> Machine Learning (Aprendizaje automático)</a></li>
-<li class="chapter" data-level="4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-profundo-deep-learning"><i class="fa fa-check"></i><b>4.3</b> Aprendizaje profundo (Deep Learning)</a></li>
-<li class="chapter" data-level="4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#casos-de-uso-populares"><i class="fa fa-check"></i><b>4.4</b> Casos de uso populares</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-motores-de-búsqueda-y-sistemas-de-recomendación"><i class="fa fa-check"></i><b>4.4.1</b> Caso de uso: motores de búsqueda y sistemas de recomendación</a></li>
-<li class="chapter" data-level="4.4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-traducción-automática"><i class="fa fa-check"></i><b>4.4.2</b> Caso de uso: traducción automática</a></li>
-<li class="chapter" data-level="4.4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-identificación-de-música-y-reconocimiento-de-voz"><i class="fa fa-check"></i><b>4.4.3</b> Caso de uso: identificación de música y reconocimiento de voz</a></li>
-<li class="chapter" data-level="4.4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-coches-autónomos"><i class="fa fa-check"></i><b>4.4.4</b> Caso de uso: coches autónomos</a></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos con ggplot2</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#por-qué-es-importante-la-visualización-de-datos"><i class="fa fa-check"></i><b>4.1</b> Por qué es importante la visualización de datos</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-la-visualización-de-datos"><i class="fa fa-check"></i><b>4.1.1</b> Introducción a la visualización de datos</a></li>
+<li class="chapter" data-level="4.1.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#tipos-de-gráficas-disponibles"><i class="fa fa-check"></i><b>4.1.2</b> Tipos de gráficas disponibles</a></li>
+<li class="chapter" data-level="4.1.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#presentamos-ggplot2"><i class="fa fa-check"></i><b>4.1.3</b> Presentamos: ggplot2</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#técnicas-de-machine-learning"><i class="fa fa-check"></i><b>4.5</b> Técnicas de Machine Learning</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado"><i class="fa fa-check"></i><b>4.5.1</b> Aprendizaje supervisado</a></li>
-<li class="chapter" data-level="4.5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-objetivo"><i class="fa fa-check"></i><b>4.5.2</b> Aprendizaje supervisado: objetivo</a></li>
-<li class="chapter" data-level="4.5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-no-supervisado"><i class="fa fa-check"></i><b>4.5.3</b> Aprendizaje no supervisado</a></li>
-<li class="chapter" data-level="4.5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-reforzado"><i class="fa fa-check"></i><b>4.5.4</b> Aprendizaje reforzado</a></li>
+<li class="chapter" data-level="4.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-un-diagrama-de-dispersión-con-ggplot"><i class="fa fa-check"></i><b>4.2</b> Crea un diagrama de dispersión con ggplot</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-de-dispersión"><i class="fa fa-check"></i><b>4.2.1</b> Introducción a los gráficos de dispersión</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificar-un-conjunto-de-datos"><i class="fa fa-check"></i><b>4.2.2</b> Especificar un conjunto de datos</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificando-una-capa-geométrica"><i class="fa fa-check"></i><b>4.2.3</b> Especificando una capa geométrica</a></li>
+<li class="chapter" data-level="4.2.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#creando-mapeos-estéticos"><i class="fa fa-check"></i><b>4.2.4</b> Creando mapeos estéticos</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-con-regresión-y-clasificación"><i class="fa fa-check"></i><b>4.6</b> Aprendizaje supervisado con regresión y clasificación</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-datos-de-entrada"><i class="fa fa-check"></i><b>4.6.1</b> Aprendizaje supervisado: datos de entrada</a></li>
-<li class="chapter" data-level="4.6.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#predictores"><i class="fa fa-check"></i><b>4.6.2</b> Predictores</a></li>
-<li class="chapter" data-level="4.6.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#variable-de-resultado"><i class="fa fa-check"></i><b>4.6.3</b> Variable de resultado</a></li>
-<li class="chapter" data-level="4.6.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#regresión-vs.-clasificación"><i class="fa fa-check"></i><b>4.6.4</b> Regresión vs. clasificación</a></li>
+<li class="chapter" data-level="4.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificar-estética-adicional-para-puntos"><i class="fa fa-check"></i><b>4.3</b> Especificar estética adicional para puntos</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#añadiendo-más-estética-a-la-trama"><i class="fa fa-check"></i><b>4.3.1</b> Añadiendo más estética a la trama</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#ajuste-del-color-del-punto"><i class="fa fa-check"></i><b>4.3.2</b> Ajuste del color del punto</a></li>
+<li class="chapter" data-level="4.3.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#ajustar-el-tamaño-del-punto"><i class="fa fa-check"></i><b>4.3.3</b> Ajustar el tamaño del punto</a></li>
+<li class="chapter" data-level="4.3.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#establecer-la-estética-global-transparencia"><i class="fa fa-check"></i><b>4.3.4</b> Establecer la estética global: transparencia</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-un-gráfico-de-líneas-con-ggplot"><i class="fa fa-check"></i><b>4.4</b> Crea un gráfico de líneas con ggplot</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-lineales"><i class="fa fa-check"></i><b>4.4.1</b> Introducción a los gráficos lineales</a></li>
+<li class="chapter" data-level="4.4.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crear-un-gráfico-lineal-simple"><i class="fa fa-check"></i><b>4.4.2</b> Crear un gráfico lineal simple</a></li>
+<li class="chapter" data-level="4.4.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#agregar-más-líneas"><i class="fa fa-check"></i><b>4.4.3</b> Agregar más líneas</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-tu-primer-gráfico-de-barras"><i class="fa fa-check"></i><b>4.5</b> Crea tu primer gráfico de barras</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-de-barras"><i class="fa fa-check"></i><b>4.5.1</b> Introducción a los gráficos de barras</a></li>
+<li class="chapter" data-level="4.5.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crear-un-gráfico-de-barras-simple"><i class="fa fa-check"></i><b>4.5.2</b> Crear un gráfico de barras simple</a></li>
+<li class="chapter" data-level="4.5.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#llenado-de-barras-de-color"><i class="fa fa-check"></i><b>4.5.3</b> Llenado de barras de color</a></li>
+<li class="chapter" data-level="4.5.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#gráficos-de-barras-apiladas"><i class="fa fa-check"></i><b>4.5.4</b> Gráficos de barras apiladas</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html"><i class="fa fa-check"></i><b>5</b> Introducción a Machine Learning</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#inteligencia-artificial"><i class="fa fa-check"></i><b>5.1</b> Inteligencia artificial</a></li>
+<li class="chapter" data-level="5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#machine-learning-aprendizaje-automático"><i class="fa fa-check"></i><b>5.2</b> Machine Learning (Aprendizaje automático)</a></li>
+<li class="chapter" data-level="5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-profundo-deep-learning"><i class="fa fa-check"></i><b>5.3</b> Aprendizaje profundo (Deep Learning)</a></li>
+<li class="chapter" data-level="5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#casos-de-uso-populares"><i class="fa fa-check"></i><b>5.4</b> Casos de uso populares</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-motores-de-búsqueda-y-sistemas-de-recomendación"><i class="fa fa-check"></i><b>5.4.1</b> Caso de uso: motores de búsqueda y sistemas de recomendación</a></li>
+<li class="chapter" data-level="5.4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-traducción-automática"><i class="fa fa-check"></i><b>5.4.2</b> Caso de uso: traducción automática</a></li>
+<li class="chapter" data-level="5.4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-identificación-de-música-y-reconocimiento-de-voz"><i class="fa fa-check"></i><b>5.4.3</b> Caso de uso: identificación de música y reconocimiento de voz</a></li>
+<li class="chapter" data-level="5.4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-coches-autónomos"><i class="fa fa-check"></i><b>5.4.4</b> Caso de uso: coches autónomos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#técnicas-de-machine-learning"><i class="fa fa-check"></i><b>5.5</b> Técnicas de Machine Learning</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado"><i class="fa fa-check"></i><b>5.5.1</b> Aprendizaje supervisado</a></li>
+<li class="chapter" data-level="5.5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-objetivo"><i class="fa fa-check"></i><b>5.5.2</b> Aprendizaje supervisado: objetivo</a></li>
+<li class="chapter" data-level="5.5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-no-supervisado"><i class="fa fa-check"></i><b>5.5.3</b> Aprendizaje no supervisado</a></li>
+<li class="chapter" data-level="5.5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-reforzado"><i class="fa fa-check"></i><b>5.5.4</b> Aprendizaje reforzado</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-con-regresión-y-clasificación"><i class="fa fa-check"></i><b>5.6</b> Aprendizaje supervisado con regresión y clasificación</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-datos-de-entrada"><i class="fa fa-check"></i><b>5.6.1</b> Aprendizaje supervisado: datos de entrada</a></li>
+<li class="chapter" data-level="5.6.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#predictores"><i class="fa fa-check"></i><b>5.6.2</b> Predictores</a></li>
+<li class="chapter" data-level="5.6.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#variable-de-resultado"><i class="fa fa-check"></i><b>5.6.3</b> Variable de resultado</a></li>
+<li class="chapter" data-level="5.6.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#regresión-vs.-clasificación"><i class="fa fa-check"></i><b>5.6.4</b> Regresión vs. clasificación</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -267,10 +325,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="marcos-de-datos-y-tibbles" class="section level1">
+<div id="marcos-de-datos-y-tibbles" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Marcos de datos y Tibbles</h1>
 <p>Cree estructuras de datos tabulares con marcos de datos y vea cómo se comparan con tibbles. Extraiga vectores de columna de marcos de datos para realizar cálculos. Obtenga información de metadatos como dimensiones. Seleccione las filas superior e inferior para obtener una descripción general rápida.</p>
-<div id="construye-un-marco-de-datos-a-partir-de-vectores" class="section level2">
+<div id="construye-un-marco-de-datos-a-partir-de-vectores" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Construye un marco de datos a partir de vectores</h2>
 <p>Los datos tabulares son el formato más común utilizado por los científicos de datos. En R, las tablas se representan mediante marcos de datos. Pueden inspeccionarse imprimiéndolos en la consola.</p>
 <ul>
@@ -283,11 +341,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>data.frame(___ = ___, 
            ___ = ___, 
            ...)</code></pre>
-<div id="introducción-a-los-marcos-de-datos" class="section level3">
+<div id="introducción-a-los-marcos-de-datos" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Introducción a los marcos de datos</h3>
 <p>En análisis y estadísticas, los datos tabulares son la estructura de datos más importante. Está presente en muchos formatos comunes como archivos de Excel, valores separados por comas (CSV) o bases de datos. R integra objetos de datos tabulares como ciudadanos de primera clase en el idioma a través de <em>marcos de datos</em>. Los marcos de datos permiten a los usuarios leer y manipular fácilmente datos tabulares dentro del lenguaje R.</p>
 <p>Echemos un vistazo a un objeto de marco de datos llamado <code>Davis</code>, del paquete <strong>carData</strong>, que incluye medidas de altura y peso para 200 hombres y mujeres:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="marcos-de-datos-y-tibbles.html#cb103-1"></a><span class="kw">tibble</span> (Davis)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="marcos-de-datos-y-tibbles.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span> (Davis)</span></code></pre></div>
 <pre><code>## # A tibble: 200 x 5
 ##    sex   weight height repwt repht
 ##    &lt;fct&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -306,18 +364,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Por ejemplo, la primera fila de la tabla especifica un hombre que pesa <code>77</code> kg y tiene una altura de <code>182</code> cm. Los pesos reportados están muy cerca de <code>77</code> kg y <code>180</code> cm, respectivamente.</p>
 <p>Las filas en un marco de datos se identifican además por los <em>nombres de fila</em> a la izquierda, que son simplemente los números de fila por defecto. En el caso del conjunto de datos de <code>Davis</code> anterior, los nombres de las filas van de 1 a 200.</p>
 </div>
-<div id="crear-marcos-de-datos" class="section level3">
+<div id="crear-marcos-de-datos" class="section level3" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Crear marcos de datos</h3>
 <pre><code>data.frame(___ = ___, 
            ___ = ___, 
            ...)</code></pre>
 <p>Los marcos de datos contienen datos tabulares en varias columnas o <em>atributos</em>. Cada columna está representada por un vector de diferentes <em>tipos de datos</em> como números o caracteres. La función <code>data.frame()</code> admite la construcción de objetos de marco de datos combinando diferentes vectores en una tabla. Para formar una tabla, se requiere que los vectores tengan la misma longitud. Un marco de datos también puede verse como una colección de vectores conectados entre sí para formar una tabla.</p>
 <p>Creemos nuestro primer marco de datos con cuatro personas diferentes, incluidos sus identificadores, nombres e indicadores si son mujeres o no. Cada uno de estos atributos es creado por un vector diferente de diferentes tipos de datos (numéricos, de caracteres y lógicos). Los atributos finalmente se combinan en una tabla usando la función <code>data.frame()</code>:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="marcos-de-datos-y-tibbles.html#cb106-1"></a><span class="kw">data.frame</span>(</span>
-<span id="cb106-2"><a href="marcos-de-datos-y-tibbles.html#cb106-2"></a>  <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb106-3"><a href="marcos-de-datos-y-tibbles.html#cb106-3"></a>  <span class="kw">c</span>(<span class="st">&quot;Louisa&quot;</span>, <span class="st">&quot;Jonathan&quot;</span>, <span class="st">&quot;Luigi&quot;</span>, <span class="st">&quot;Rachel&quot;</span>),</span>
-<span id="cb106-4"><a href="marcos-de-datos-y-tibbles.html#cb106-4"></a>  <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</span>
-<span id="cb106-5"><a href="marcos-de-datos-y-tibbles.html#cb106-5"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="marcos-de-datos-y-tibbles.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb106-2"><a href="marcos-de-datos-y-tibbles.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb106-3"><a href="marcos-de-datos-y-tibbles.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Louisa&quot;</span>, <span class="st">&quot;Jonathan&quot;</span>, <span class="st">&quot;Luigi&quot;</span>, <span class="st">&quot;Rachel&quot;</span>),</span>
+<span id="cb106-4"><a href="marcos-de-datos-y-tibbles.html#cb106-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb106-5"><a href="marcos-de-datos-y-tibbles.html#cb106-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##   c.1..2..3..4. c..Louisa....Jonathan....Luigi....Rachel..
 ## 1             1                                     Louisa
 ## 2             2                                   Jonathan
@@ -330,11 +388,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4                        TRUE</code></pre>
 <p>El marco de datos resultante almacena los valores de cada vector en una columna diferente. Tiene cuatro filas y tres columnas. Sin embargo, los nombres de las columnas impresas en la primera línea parecen incluir los valores de las columnas separados por puntos, lo cual es un esquema de nombres muy extraño.</p>
 <p>Los nombres de columna se pueden incluir en la construcción de <code>data.frame()</code> como nombres de argumentos que preceden a los valores de los vectores de columna. Para mejorar el nombre de la columna del marco de datos anterior, podemos escribir</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="marcos-de-datos-y-tibbles.html#cb108-1"></a><span class="kw">data.frame</span>(</span>
-<span id="cb108-2"><a href="marcos-de-datos-y-tibbles.html#cb108-2"></a>  <span class="dt">id =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb108-3"><a href="marcos-de-datos-y-tibbles.html#cb108-3"></a>  <span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Louisa&quot;</span>, <span class="st">&quot;Jonathan&quot;</span>, <span class="st">&quot;Luigi&quot;</span>, <span class="st">&quot;Rachel&quot;</span>),</span>
-<span id="cb108-4"><a href="marcos-de-datos-y-tibbles.html#cb108-4"></a>  <span class="dt">female =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</span>
-<span id="cb108-5"><a href="marcos-de-datos-y-tibbles.html#cb108-5"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="marcos-de-datos-y-tibbles.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb108-2"><a href="marcos-de-datos-y-tibbles.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb108-3"><a href="marcos-de-datos-y-tibbles.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Louisa&quot;</span>, <span class="st">&quot;Jonathan&quot;</span>, <span class="st">&quot;Luigi&quot;</span>, <span class="st">&quot;Rachel&quot;</span>),</span>
+<span id="cb108-4"><a href="marcos-de-datos-y-tibbles.html#cb108-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">female =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb108-5"><a href="marcos-de-datos-y-tibbles.html#cb108-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##   id     name female
 ## 1  1   Louisa   TRUE
 ## 2  2 Jonathan  FALSE
@@ -343,7 +401,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>El marco de datos resultante incluye los nombres de columna necesarios para ver el significado real de las diferentes columnas.</p>
 </div>
 </div>
-<div id="crea-y-convierte-tibbles" class="section level2">
+<div id="crea-y-convierte-tibbles" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Crea y convierte tibbles</h2>
 <p>Tibbles son la reimaginación moderna de marcos de datos y comparten muchos puntos en común con sus antepasados. La diferencia más visible es cómo se imprime el contenido de tibble en la consola. Tibbles son parte del tidyverse y se utilizan por su comportamiento más consistente en comparación con los marcos de datos.</p>
 <ul>
@@ -355,7 +413,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
        ___ = ___, 
        ...)
 as_tibble(___)</code></pre>
-<div id="introducción-a-tibbles" class="section level3">
+<div id="introducción-a-tibbles" class="section level3" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> Introducción a Tibbles</h3>
 <blockquote>
 <p>Una reinvención moderna del marco de datos
@@ -363,7 +421,7 @@ as_tibble(___)</code></pre>
 </blockquote>
 <p>Tibbles son en muchos aspectos similares a los marcos de datos. De hecho, se <em>heredan</em> de los marcos de datos, lo que significa que todas las funciones y características disponibles para los marcos de datos también funcionan para tibbles. Por tanto, cuando hablamos de <em>marcos de datos</em> también nos referimos a <em>tibbles</em>.</p>
 <p>Además de todo lo que ofrece un marco de datos, los tibbles tienen un comportamiento más consistente con una mejor usabilidad en muchos casos. Lo más importante es que cuando se imprime un objeto tibble en la consola, muestra automáticamente solo las primeras 10 filas y condensa columnas adicionales. Por el contrario, un marco de datos llena toda la pantalla de la consola con valores que pueden generar confusión. Echemos un vistazo al conjunto de datos <code>gapminder</code> del paquete <strong>gapminder</strong>:</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="marcos-de-datos-y-tibbles.html#cb111-1"></a>gapminder<span class="op">::</span>gapminder</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="marcos-de-datos-y-tibbles.html#cb111-1" aria-hidden="true" tabindex="-1"></a>gapminder<span class="sc">::</span>gapminder</span></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 6
 ##    country     continent  year lifeExp      pop gdpPercap
 ##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
@@ -381,7 +439,7 @@ as_tibble(___)</code></pre>
 <p>Inmediatamente vemos que el conjunto de datos <code>gapminder</code> es un tibble que consta de 1,704 filas y 6 columnas en la línea superior. En la segunda línea podemos ver los nombres de las columnas y sus correspondientes <em>tipos de datos</em> directamente debajo.</p>
 <p>Por ejemplo, la columna <code>country</code> tiene el tipo <code>&lt;fct&gt;</code> (que es la abreviatura de “factor”), <code>year</code> es un número entero <code>&lt;int&gt;</code> y la esperanza de vida <code>lifeExp</code> es un <code>&lt;dbl&gt;</code>, un número decimal.</p>
 </div>
-<div id="creando-tibbles" class="section level3">
+<div id="creando-tibbles" class="section level3" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Creando Tibbles</h3>
 <pre><code>tibble(___ = ___, 
        ___ = ___, 
@@ -389,12 +447,12 @@ as_tibble(___)</code></pre>
 as_tibble(___)</code></pre>
 <p>La creación de tibbles funciona exactamente igual que para los marcos de datos. Podemos usar la función <code>tibble()</code> del paquete <strong>tibble</strong> para crear un nuevo objeto tabular.</p>
 <p>Por ejemplo, un tibble que contenga datos de cuatro personas diferentes y tres columnas se puede crear así:</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="marcos-de-datos-y-tibbles.html#cb114-1"></a><span class="kw">library</span>(tibble)</span>
-<span id="cb114-2"><a href="marcos-de-datos-y-tibbles.html#cb114-2"></a><span class="kw">tibble</span>(</span>
-<span id="cb114-3"><a href="marcos-de-datos-y-tibbles.html#cb114-3"></a>  <span class="dt">id =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb114-4"><a href="marcos-de-datos-y-tibbles.html#cb114-4"></a>  <span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Louisa&quot;</span>, <span class="st">&quot;Jonathan&quot;</span>, <span class="st">&quot;Luigi&quot;</span>, <span class="st">&quot;Rachel&quot;</span>),</span>
-<span id="cb114-5"><a href="marcos-de-datos-y-tibbles.html#cb114-5"></a>  <span class="dt">female =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</span>
-<span id="cb114-6"><a href="marcos-de-datos-y-tibbles.html#cb114-6"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="marcos-de-datos-y-tibbles.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb114-2"><a href="marcos-de-datos-y-tibbles.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb114-3"><a href="marcos-de-datos-y-tibbles.html#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb114-4"><a href="marcos-de-datos-y-tibbles.html#cb114-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Louisa&quot;</span>, <span class="st">&quot;Jonathan&quot;</span>, <span class="st">&quot;Luigi&quot;</span>, <span class="st">&quot;Rachel&quot;</span>),</span>
+<span id="cb114-5"><a href="marcos-de-datos-y-tibbles.html#cb114-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">female =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb114-6"><a href="marcos-de-datos-y-tibbles.html#cb114-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##      id name     female
 ##   &lt;dbl&gt; &lt;chr&gt;    &lt;lgl&gt; 
@@ -403,11 +461,11 @@ as_tibble(___)</code></pre>
 ## 3     3 Luigi    FALSE 
 ## 4     4 Rachel   TRUE</code></pre>
 </div>
-<div id="conversión-de-marcos-de-datos-a-tibbles" class="section level3">
+<div id="conversión-de-marcos-de-datos-a-tibbles" class="section level3" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Conversión de marcos de datos a Tibbles</h3>
 <p>Si prefiere tibbles a marcos de datos por sus características adicionales, también se pueden convertir a partir de marcos de datos existentes con la función <code>as_tibble()</code>.</p>
 <p>Por ejemplo, el marco de datos de <code>Davis</code> del paquete <strong>carData</strong> se puede convertir a un tibble así:</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="marcos-de-datos-y-tibbles.html#cb116-1"></a><span class="kw">as_tibble</span>(Davis)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="marcos-de-datos-y-tibbles.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(Davis)</span></code></pre></div>
 <pre><code>## # A tibble: 200 x 5
 ##    sex   weight height repwt repht
 ##    &lt;fct&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -424,7 +482,7 @@ as_tibble(___)</code></pre>
 ## # … with 190 more rows</code></pre>
 </div>
 </div>
-<div id="extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando" class="section level2">
+<div id="extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Extraiga o reemplace columnas en un marco de datos usando $</h2>
 <p>Las columnas de un marco de datos se pueden extraer y manipular fácilmente con el operador <code>$</code>. Incluso se pueden agregar nuevas columnas asignando un vector.</p>
 <ul>
@@ -434,25 +492,25 @@ as_tibble(___)</code></pre>
 </ul>
 <pre><code>___$___
 ___$___  &lt;- ___</code></pre>
-<div id="extraer-columnas-con" class="section level3">
+<div id="extraer-columnas-con" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Extraer columnas con $</h3>
 <p>Los marcos de datos son tablas que resultan de la combinación de vectores de columna. Los usuarios pueden interactuar con los marcos de datos a través de numerosos operadores para extraer, agregar o recombinar valores. Para extraer columnas individuales de un marco de datos, R ofrece un operador muy específico: el dólar <code>$</code>. Devuelve el vector de columna como lo indica su nombre basado en un marco de datos que precede a <code>$</code>.</p>
 <p>Para ver el operador <code>$</code> en acción, extraigamos la población <code>pop</code> (en 1,000) de diferentes estados de los EE. UU. Según el conjunto de datos de los estados (de 1992) en el paquete <strong>carData</strong>:</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="marcos-de-datos-y-tibbles.html#cb119-1"></a>carData<span class="op">::</span>States<span class="op">$</span>pop</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="marcos-de-datos-y-tibbles.html#cb119-1" aria-hidden="true" tabindex="-1"></a>carData<span class="sc">::</span>States<span class="sc">$</span>pop</span></code></pre></div>
 <pre><code>##  [1]  4041   550  3665  2351 29760  3294  3287   666   607 12938  6478  1108
 ## [13]  1007 11431  5544  2777  2478  3685  4220  1228  4781  6016  9295  4375
 ## [25]  2573  5117   799  1578  1202  1109  7730  1515 17990  6629   639 10847
 ## [37]  3146  2842 11882  1003  3487   696  4877 16987  1723   563  6187  4867
 ## [49]  1793  4892   454</code></pre>
 <p>El comando extrae la columna de población como vector del marco de datos. A partir de este vector podemos calcular la <code>sum()</code> de la población total como:</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="marcos-de-datos-y-tibbles.html#cb121-1"></a><span class="kw">sum</span>(States<span class="op">$</span>pop)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="marcos-de-datos-y-tibbles.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(States<span class="sc">$</span>pop)</span></code></pre></div>
 <pre><code>## [1] 248709</code></pre>
 <p>De manera similar, el salario promedio (en $1,000) de los maestros se puede calcular como la <code>mean()</code> de la columna <code>pay</code>:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="marcos-de-datos-y-tibbles.html#cb123-1"></a><span class="kw">mean</span>(States<span class="op">$</span>pay)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="marcos-de-datos-y-tibbles.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(States<span class="sc">$</span>pay)</span></code></pre></div>
 <pre><code>## [1] 30.94118</code></pre>
 </div>
 </div>
-<div id="determinar-el-tamaño-de-un-marco-de-datos" class="section level2">
+<div id="determinar-el-tamaño-de-un-marco-de-datos" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Determinar el tamaño de un marco de datos</h2>
 <p>El tamaño de un marco de datos, como el número de filas o columnas, a menudo es necesario y se puede determinar de varias formas.</p>
 <ul>
@@ -464,34 +522,34 @@ ___$___  &lt;- ___</code></pre>
 ncol(___)
 dim(___)
 length(___)</code></pre>
-<div id="dimensiones-del-marco-de-datos" class="section level3">
+<div id="dimensiones-del-marco-de-datos" class="section level3" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Dimensiones del marco de datos</h3>
 <p>El número de filas y columnas en un marco de datos se puede adivinar a través de la salida impresa del marco de datos. Sin embargo, es mucho más fácil obtener esta información directamente a través de funciones. Además, es posible que desee utilizar esta información en algunas partes del código.</p>
 <p>Los marcos de datos tienen dos dimensiones. El número de filas se considera la primera dimensión. Por lo general, define el número de observaciones en un conjunto de datos. Para obtener el número de filas del marco de datos de <code>Davis</code> en el conjunto de datos <strong>carData</strong>, use la función <code>nrow()</code>:</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="marcos-de-datos-y-tibbles.html#cb126-1"></a><span class="kw">nrow</span>(Davis)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="marcos-de-datos-y-tibbles.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(Davis)</span></code></pre></div>
 <pre><code>## [1] 200</code></pre>
 <p>De manera similar, el número de columnas o <em>atributos</em> del marco de datos se puede recuperar con <code>ncol()</code>:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="marcos-de-datos-y-tibbles.html#cb128-1"></a><span class="kw">ncol</span>(Davis)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="marcos-de-datos-y-tibbles.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(Davis)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 </div>
-<div id="recuperar-las-dimensiones-del-marco-de-datos" class="section level3">
+<div id="recuperar-las-dimensiones-del-marco-de-datos" class="section level3" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Recuperar las dimensiones del marco de datos</h3>
 <p>Para recuperar el tamaño de todas las dimensiones de un marco de datos a la vez, puede usar la función <code>dim()</code>. <code>dim()</code> devuelve un vector con dos elementos, el primer elemento es el número de filas y el segundo elemento el número de columnas.</p>
 <p>Por ejemplo, las dimensiones del conjunto de datos de <code>Davis</code> se pueden recuperar como:</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="marcos-de-datos-y-tibbles.html#cb130-1"></a><span class="kw">dim</span>(Davis)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="marcos-de-datos-y-tibbles.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Davis)</span></code></pre></div>
 <pre><code>## [1] 200   5</code></pre>
 <p>Además de los marcos de datos, <code>dim()</code> también se puede utilizar para otros objetos R multidimensionales, como matrices. Sin embargo, cuando se usa con vectores <code>dim</code> solo devuelve <code>NULL</code>:</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="marcos-de-datos-y-tibbles.html#cb132-1"></a><span class="kw">dim</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="marcos-de-datos-y-tibbles.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>))</span></code></pre></div>
 <pre><code>## NULL</code></pre>
 <p>En cambio, la longitud de un vector se determina mediante <code>length()</code>:</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="marcos-de-datos-y-tibbles.html#cb134-1"></a><span class="kw">length</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="marcos-de-datos-y-tibbles.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>))</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>En el caso de un marco de datos, <code>length()</code> devuelve su número de columnas:</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="marcos-de-datos-y-tibbles.html#cb136-1"></a><span class="kw">length</span>(Davis)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="marcos-de-datos-y-tibbles.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(Davis)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 </div>
 </div>
-<div id="seleccionar-la-primera-o-la-última-fila-de-un-marco-de-datos" class="section level2">
+<div id="seleccionar-la-primera-o-la-última-fila-de-un-marco-de-datos" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> Seleccionar la primera o la última fila de un marco de datos</h2>
 <p>A menudo no necesitamos mirar todo el contenido de un marco de datos en la consola. En cambio, solo algunas partes son suficientes, como la parte superior o inferior recuperada a través de las funciones <code>head()</code> y <code>tail()</code>.</p>
 <ul>
@@ -501,11 +559,11 @@ length(___)</code></pre>
 </ul>
 <pre><code>head(___, n = ___)
 tail(___, n = ___)</code></pre>
-<div id="seleccionar-la-parte-superior-de-un-marco-de-datos" class="section level3">
+<div id="seleccionar-la-parte-superior-de-un-marco-de-datos" class="section level3" number="2.5.1">
 <h3><span class="header-section-number">2.5.1</span> Seleccionar la parte superior de un marco de datos</h3>
 <p>Los marcos de datos pueden abarcar una gran cantidad de filas y columnas. Según la salida impresa en la consola, puede ser difícil obtener una impresión inicial de los datos dentro del marco de datos. Este problema no es tanto un problema para tibbles que tienen una mejor salida de consola. Además, puede ser útil recuperar fácilmente las primeras filas en un comando sin indexación ni paquetes adicionales.</p>
 <p>El conjunto de datos <code>TitanicSurvival</code> contiene datos de 1309 pasajeros representados como filas. Una simple impresión del conjunto de datos imprimiría a todos los pasajeros, llenando toda la consola. En cambio, la función <code>head()</code> muestra solo las primeras 10 filas de un marco de datos, incluidos los nombres de sus columnas:</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="marcos-de-datos-y-tibbles.html#cb139-1"></a><span class="kw">head</span>(TitanicSurvival)</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="marcos-de-datos-y-tibbles.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TitanicSurvival)</span></code></pre></div>
 <pre><code>##                                 survived    sex     age passengerClass
 ## Allen, Miss. Elisabeth Walton        yes female 29.0000            1st
 ## Allison, Master. Hudson Trevor       yes   male  0.9167            1st
@@ -514,17 +572,17 @@ tail(___, n = ___)</code></pre>
 ## Allison, Mrs. Hudson J C (Bessi       no female 25.0000            1st
 ## Anderson, Mr. Harry                  yes   male 48.0000            1st</code></pre>
 <p>El número de columnas se puede ajustar mediante el parámetro <code>n</code>. Para extraer solo las primeras tres filas del conjunto de datos, puede escribir:</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="marcos-de-datos-y-tibbles.html#cb141-1"></a><span class="kw">head</span>(TitanicSurvival, <span class="dt">n =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="marcos-de-datos-y-tibbles.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TitanicSurvival, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##                                survived    sex     age passengerClass
 ## Allen, Miss. Elisabeth Walton       yes female 29.0000            1st
 ## Allison, Master. Hudson Trevor      yes   male  0.9167            1st
 ## Allison, Miss. Helen Loraine         no female  2.0000            1st</code></pre>
 </div>
-<div id="seleccionar-la-parte-inferior-de-un-marco-de-datos" class="section level3">
+<div id="seleccionar-la-parte-inferior-de-un-marco-de-datos" class="section level3" number="2.5.2">
 <h3><span class="header-section-number">2.5.2</span> Seleccionar la parte inferior de un marco de datos</h3>
 <p>La función <code>tail()</code> se puede utilizar para seleccionar las filas inferiores de un marco de datos. Similar a la función <code>head()</code>, también acepta un parámetro <code>n</code> para especificar el número de filas que se devolverán.</p>
 <p>Por ejemplo, para seleccionar las últimas cinco filas del conjunto de datos <code>TitanicSurvival</code>, puede escribir:</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="marcos-de-datos-y-tibbles.html#cb143-1"></a><span class="kw">tail</span>(TitanicSurvival, <span class="dt">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="marcos-de-datos-y-tibbles.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(TitanicSurvival, <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##                           survived    sex  age passengerClass
 ## Zabour, Miss. Hileni            no female 14.5            3rd
 ## Zabour, Miss. Thamine           no female   NA            3rd
@@ -532,7 +590,7 @@ tail(___, n = ___)</code></pre>
 ## Zakarian, Mr. Ortin             no   male 27.0            3rd
 ## Zimmerman, Mr. Leo              no   male 29.0            3rd</code></pre>
 <p>Las funciones de cabeza y cola también se pueden combinar para seleccionar un fragmento del conjunto de datos del medio. Para seleccionar las primeras cinco filas de las 500 filas inferiores, puede escribir:</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="marcos-de-datos-y-tibbles.html#cb145-1"></a><span class="kw">head</span>(<span class="kw">tail</span>(TitanicSurvival, <span class="dt">n =</span> <span class="dv">500</span>), <span class="dt">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="marcos-de-datos-y-tibbles.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">tail</span>(TitanicSurvival, <span class="at">n =</span> <span class="dv">500</span>), <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##                                 survived    sex age passengerClass
 ## Ford, Mr. Edward Watson               no   male  18            3rd
 ## Ford, Mr. William Neal                no   male  16            3rd

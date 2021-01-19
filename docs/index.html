@@ -24,7 +24,7 @@
 <meta name="author" content="Franklin Santos" />
 
 
-<meta name="date" content="2020-12-03" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 
 <link rel="next" href="intro.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,22 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +86,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,16 +135,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R Ciencias Agropecuarias</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R básico</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introducción-a-r"><i class="fa fa-check"></i><b>1.1</b> Introducción a R</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R básico</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introducción-a-r"><i class="fa fa-check"></i><b>1.1</b> Introducción a R</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#por-qué-usar-r"><i class="fa fa-check"></i><b>1.1.1</b> ¿Por qué usar R?</a></li>
 <li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#r-en-buena-compañía"><i class="fa fa-check"></i><b>1.1.2</b> R en buena compañía</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#bloques-de-construcción"><i class="fa fa-check"></i><b>1.2</b> Bloques de construcción</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#combinar-valores-en-un-vector"><i class="fa fa-check"></i><b>1.3</b> Combinar valores en un vector</a><ul>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#combinar-valores-en-un-vector"><i class="fa fa-check"></i><b>1.3</b> Combinar valores en un vector</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#introducción-a-los-vectores"><i class="fa fa-check"></i><b>1.3.1</b> Introducción a los vectores</a></li>
 <li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#tipos-de-vectores"><i class="fa fa-check"></i><b>1.3.2</b> Tipos de vectores</a></li>
 <li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#creando-una-secuencia-de-números"><i class="fa fa-check"></i><b>1.3.3</b> Creando una secuencia de números</a></li>
@@ -153,99 +156,154 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.5" data-path="intro.html"><a href="intro.html#creando-vectores-de-caracteres"><i class="fa fa-check"></i><b>1.3.5</b> Creando vectores de caracteres</a></li>
 <li class="chapter" data-level="1.3.6" data-path="intro.html"><a href="intro.html#creando-vectores-lógicos"><i class="fa fa-check"></i><b>1.3.6</b> Creando vectores lógicos</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#crea-variables-a-través-de-asignaciones"><i class="fa fa-check"></i><b>1.4</b> Crea variables a través de asignaciones</a><ul>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#crea-variables-a-través-de-asignaciones"><i class="fa fa-check"></i><b>1.4</b> Crea variables a través de asignaciones</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#asignando-variables"><i class="fa fa-check"></i><b>1.4.1</b> Asignando variables</a></li>
 <li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#reglas-de-nomenclatura"><i class="fa fa-check"></i><b>1.4.2</b> Reglas de nomenclatura</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#utilice-operadores-básicos"><i class="fa fa-check"></i><b>1.5</b> Utilice operadores básicos</a><ul>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#utilice-operadores-básicos"><i class="fa fa-check"></i><b>1.5</b> Utilice operadores básicos</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#usando-r-como-calculadora-de-bolsillo"><i class="fa fa-check"></i><b>1.5.1</b> Usando R como calculadora de bolsillo</a></li>
 <li class="chapter" data-level="1.5.2" data-path="intro.html"><a href="intro.html#aplicación-de-operadoras-aritméticas-en-vectores"><i class="fa fa-check"></i><b>1.5.2</b> Aplicación de operadoras aritméticas en vectores</a></li>
 <li class="chapter" data-level="1.5.3" data-path="intro.html"><a href="intro.html#usar-operadores-relacionales"><i class="fa fa-check"></i><b>1.5.3</b> Usar operadores relacionales</a></li>
 <li class="chapter" data-level="1.5.4" data-path="intro.html"><a href="intro.html#usando-operadores-lógicos"><i class="fa fa-check"></i><b>1.5.4</b> Usando operadores lógicos</a></li>
 <li class="chapter" data-level="1.5.5" data-path="intro.html"><a href="intro.html#usando-el-operador-in"><i class="fa fa-check"></i><b>1.5.5</b> Usando el operador %in%</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#llamar-al-código-r-existente-a-través-de-funciones"><i class="fa fa-check"></i><b>1.6</b> Llamar al código R existente a través de funciones</a><ul>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#llamar-al-código-r-existente-a-través-de-funciones"><i class="fa fa-check"></i><b>1.6</b> Llamar al código R existente a través de funciones</a>
+<ul>
 <li class="chapter" data-level="1.6.1" data-path="intro.html"><a href="intro.html#introducción-a-las-funciones."><i class="fa fa-check"></i><b>1.6.1</b> Introducción a las funciones.</a></li>
 <li class="chapter" data-level="1.6.2" data-path="intro.html"><a href="intro.html#personalización-de-funciones-a-través-de-parámetros"><i class="fa fa-check"></i><b>1.6.2</b> Personalización de funciones a través de parámetros</a></li>
 <li class="chapter" data-level="1.6.3" data-path="intro.html"><a href="intro.html#usar-la-función-sample"><i class="fa fa-check"></i><b>1.6.3</b> Usar la función <code>sample()</code></a></li>
 <li class="chapter" data-level="1.6.4" data-path="intro.html"><a href="intro.html#utilice-la-función-seq"><i class="fa fa-check"></i><b>1.6.4</b> Utilice la función <code>seq()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#utilice-funciones-y-datos-existentes-a-través-de-paquetes"><i class="fa fa-check"></i><b>1.7</b> Utilice funciones y datos existentes a través de paquetes</a><ul>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#utilice-funciones-y-datos-existentes-a-través-de-paquetes"><i class="fa fa-check"></i><b>1.7</b> Utilice funciones y datos existentes a través de paquetes</a>
+<ul>
 <li class="chapter" data-level="1.7.1" data-path="intro.html"><a href="intro.html#introducción-a-paquetes"><i class="fa fa-check"></i><b>1.7.1</b> Introducción a paquetes</a></li>
 <li class="chapter" data-level="1.7.2" data-path="intro.html"><a href="intro.html#llamar-un-paquete"><i class="fa fa-check"></i><b>1.7.2</b> Llamar un paquete</a></li>
 </ul></li>
 <li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#formato-de-introducción"><i class="fa fa-check"></i><b>1.8</b> Formato de introducción</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html"><i class="fa fa-check"></i><b>2</b> Marcos de datos y Tibbles</a><ul>
-<li class="chapter" data-level="2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#construye-un-marco-de-datos-a-partir-de-vectores"><i class="fa fa-check"></i><b>2.1</b> Construye un marco de datos a partir de vectores</a><ul>
+<li class="chapter" data-level="2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html"><i class="fa fa-check"></i><b>2</b> Marcos de datos y Tibbles</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#construye-un-marco-de-datos-a-partir-de-vectores"><i class="fa fa-check"></i><b>2.1</b> Construye un marco de datos a partir de vectores</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#introducción-a-los-marcos-de-datos"><i class="fa fa-check"></i><b>2.1.1</b> Introducción a los marcos de datos</a></li>
 <li class="chapter" data-level="2.1.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crear-marcos-de-datos"><i class="fa fa-check"></i><b>2.1.2</b> Crear marcos de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crea-y-convierte-tibbles"><i class="fa fa-check"></i><b>2.2</b> Crea y convierte tibbles</a><ul>
+<li class="chapter" data-level="2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#crea-y-convierte-tibbles"><i class="fa fa-check"></i><b>2.2</b> Crea y convierte tibbles</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#introducción-a-tibbles"><i class="fa fa-check"></i><b>2.2.1</b> Introducción a Tibbles</a></li>
 <li class="chapter" data-level="2.2.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#creando-tibbles"><i class="fa fa-check"></i><b>2.2.2</b> Creando Tibbles</a></li>
 <li class="chapter" data-level="2.2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#conversión-de-marcos-de-datos-a-tibbles"><i class="fa fa-check"></i><b>2.2.3</b> Conversión de marcos de datos a Tibbles</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando"><i class="fa fa-check"></i><b>2.3</b> Extraiga o reemplace columnas en un marco de datos usando $</a><ul>
+<li class="chapter" data-level="2.3" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraiga-o-reemplace-columnas-en-un-marco-de-datos-usando"><i class="fa fa-check"></i><b>2.3</b> Extraiga o reemplace columnas en un marco de datos usando $</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#extraer-columnas-con"><i class="fa fa-check"></i><b>2.3.1</b> Extraer columnas con $</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#determinar-el-tamaño-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.4</b> Determinar el tamaño de un marco de datos</a><ul>
+<li class="chapter" data-level="2.4" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#determinar-el-tamaño-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.4</b> Determinar el tamaño de un marco de datos</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#dimensiones-del-marco-de-datos"><i class="fa fa-check"></i><b>2.4.1</b> Dimensiones del marco de datos</a></li>
 <li class="chapter" data-level="2.4.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#recuperar-las-dimensiones-del-marco-de-datos"><i class="fa fa-check"></i><b>2.4.2</b> Recuperar las dimensiones del marco de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-primera-o-la-última-fila-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5</b> Seleccionar la primera o la última fila de un marco de datos</a><ul>
+<li class="chapter" data-level="2.5" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-primera-o-la-última-fila-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5</b> Seleccionar la primera o la última fila de un marco de datos</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-parte-superior-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5.1</b> Seleccionar la parte superior de un marco de datos</a></li>
 <li class="chapter" data-level="2.5.2" data-path="marcos-de-datos-y-tibbles.html"><a href="marcos-de-datos-y-tibbles.html#seleccionar-la-parte-inferior-de-un-marco-de-datos"><i class="fa fa-check"></i><b>2.5.2</b> Seleccionar la parte inferior de un marco de datos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformación de datos con dplyr</a><ul>
-<li class="chapter" data-level="3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#introducción-a-dplyr"><i class="fa fa-check"></i><b>3.1</b> Introducción a dplyr</a><ul>
+<li class="chapter" data-level="3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformación de datos con dplyr</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#introducción-a-dplyr"><i class="fa fa-check"></i><b>3.1</b> Introducción a dplyr</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#qué-es-dplyr"><i class="fa fa-check"></i><b>3.1.1</b> ¿Qué es dplyr?</a></li>
 <li class="chapter" data-level="3.1.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#marco-de-funciones"><i class="fa fa-check"></i><b>3.1.2</b> Marco de funciones</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionar-columnas-de-un-marco-de-datos"><i class="fa fa-check"></i><b>3.2</b> Seleccionar columnas de un marco de datos</a><ul>
+<li class="chapter" data-level="3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionar-columnas-de-un-marco-de-datos"><i class="fa fa-check"></i><b>3.2</b> Seleccionar columnas de un marco de datos</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#seleccionando-por-nombre"><i class="fa fa-check"></i><b>3.2.1</b> Seleccionando por nombre</a></li>
 <li class="chapter" data-level="3.2.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#renombrar-nombres-de-columnas"><i class="fa fa-check"></i><b>3.2.2</b> Renombrar nombres de columnas</a></li>
 <li class="chapter" data-level="3.2.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#selección-por-rango-de-nombre"><i class="fa fa-check"></i><b>3.2.3</b> Selección por rango de nombre</a></li>
 <li class="chapter" data-level="3.2.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#select-por-índices"><i class="fa fa-check"></i><b>3.2.4</b> Select() por índices</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#filtrar-filas-de-marcos-de-datos"><i class="fa fa-check"></i><b>3.3</b> Filtrar filas de marcos de datos</a><ul>
+<li class="chapter" data-level="3.3" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#filtrar-filas-de-marcos-de-datos"><i class="fa fa-check"></i><b>3.3</b> Filtrar filas de marcos de datos</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#función-filter"><i class="fa fa-check"></i><b>3.3.1</b> Función filter()</a></li>
 <li class="chapter" data-level="3.3.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#múltiples-expresiones-de-filtro"><i class="fa fa-check"></i><b>3.3.2</b> Múltiples expresiones de filtro</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ordenar-marcos-de-datos-por-columnas"><i class="fa fa-check"></i><b>3.4</b> Ordenar marcos de datos por columnas</a><ul>
+<li class="chapter" data-level="3.4" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ordenar-marcos-de-datos-por-columnas"><i class="fa fa-check"></i><b>3.4</b> Ordenar marcos de datos por columnas</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#la-función-arrange-con-una-sola-columna"><i class="fa fa-check"></i><b>3.4.1</b> La función arrange() con una sola columna</a></li>
 <li class="chapter" data-level="3.4.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#la-función-arrange-con-múltiples-columnas"><i class="fa fa-check"></i><b>3.4.2</b> La función arrange() con múltiples columnas</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#crear-una-tubería-de-transformación-de-datos"><i class="fa fa-check"></i><b>3.5</b> Crear una tubería de transformación de datos</a><ul>
+<li class="chapter" data-level="3.5" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#crear-una-tubería-de-transformación-de-datos"><i class="fa fa-check"></i><b>3.5</b> Crear una tubería de transformación de datos</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#usando-el-operador"><i class="fa fa-check"></i><b>3.5.1</b> Usando el operador %&gt;%</a></li>
 <li class="chapter" data-level="3.5.2" data-path="transformación-de-datos-con-dplyr.html"><a href="transformación-de-datos-con-dplyr.html#ejercicios"><i class="fa fa-check"></i><b>3.5.2</b> Ejercicios:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html"><i class="fa fa-check"></i><b>4</b> Introducción a Machine Learning</a><ul>
-<li class="chapter" data-level="4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#inteligencia-artificial"><i class="fa fa-check"></i><b>4.1</b> Inteligencia artificial</a></li>
-<li class="chapter" data-level="4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#machine-learning-aprendizaje-automático"><i class="fa fa-check"></i><b>4.2</b> Machine Learning (Aprendizaje automático)</a></li>
-<li class="chapter" data-level="4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-profundo-deep-learning"><i class="fa fa-check"></i><b>4.3</b> Aprendizaje profundo (Deep Learning)</a></li>
-<li class="chapter" data-level="4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#casos-de-uso-populares"><i class="fa fa-check"></i><b>4.4</b> Casos de uso populares</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-motores-de-búsqueda-y-sistemas-de-recomendación"><i class="fa fa-check"></i><b>4.4.1</b> Caso de uso: motores de búsqueda y sistemas de recomendación</a></li>
-<li class="chapter" data-level="4.4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-traducción-automática"><i class="fa fa-check"></i><b>4.4.2</b> Caso de uso: traducción automática</a></li>
-<li class="chapter" data-level="4.4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-identificación-de-música-y-reconocimiento-de-voz"><i class="fa fa-check"></i><b>4.4.3</b> Caso de uso: identificación de música y reconocimiento de voz</a></li>
-<li class="chapter" data-level="4.4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-coches-autónomos"><i class="fa fa-check"></i><b>4.4.4</b> Caso de uso: coches autónomos</a></li>
+<li class="chapter" data-level="4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html"><i class="fa fa-check"></i><b>4</b> Visualización de datos con ggplot2</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#por-qué-es-importante-la-visualización-de-datos"><i class="fa fa-check"></i><b>4.1</b> Por qué es importante la visualización de datos</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-la-visualización-de-datos"><i class="fa fa-check"></i><b>4.1.1</b> Introducción a la visualización de datos</a></li>
+<li class="chapter" data-level="4.1.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#tipos-de-gráficas-disponibles"><i class="fa fa-check"></i><b>4.1.2</b> Tipos de gráficas disponibles</a></li>
+<li class="chapter" data-level="4.1.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#presentamos-ggplot2"><i class="fa fa-check"></i><b>4.1.3</b> Presentamos: ggplot2</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#técnicas-de-machine-learning"><i class="fa fa-check"></i><b>4.5</b> Técnicas de Machine Learning</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado"><i class="fa fa-check"></i><b>4.5.1</b> Aprendizaje supervisado</a></li>
-<li class="chapter" data-level="4.5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-objetivo"><i class="fa fa-check"></i><b>4.5.2</b> Aprendizaje supervisado: objetivo</a></li>
-<li class="chapter" data-level="4.5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-no-supervisado"><i class="fa fa-check"></i><b>4.5.3</b> Aprendizaje no supervisado</a></li>
-<li class="chapter" data-level="4.5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-reforzado"><i class="fa fa-check"></i><b>4.5.4</b> Aprendizaje reforzado</a></li>
+<li class="chapter" data-level="4.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-un-diagrama-de-dispersión-con-ggplot"><i class="fa fa-check"></i><b>4.2</b> Crea un diagrama de dispersión con ggplot</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-de-dispersión"><i class="fa fa-check"></i><b>4.2.1</b> Introducción a los gráficos de dispersión</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificar-un-conjunto-de-datos"><i class="fa fa-check"></i><b>4.2.2</b> Especificar un conjunto de datos</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificando-una-capa-geométrica"><i class="fa fa-check"></i><b>4.2.3</b> Especificando una capa geométrica</a></li>
+<li class="chapter" data-level="4.2.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#creando-mapeos-estéticos"><i class="fa fa-check"></i><b>4.2.4</b> Creando mapeos estéticos</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-con-regresión-y-clasificación"><i class="fa fa-check"></i><b>4.6</b> Aprendizaje supervisado con regresión y clasificación</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-datos-de-entrada"><i class="fa fa-check"></i><b>4.6.1</b> Aprendizaje supervisado: datos de entrada</a></li>
-<li class="chapter" data-level="4.6.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#predictores"><i class="fa fa-check"></i><b>4.6.2</b> Predictores</a></li>
-<li class="chapter" data-level="4.6.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#variable-de-resultado"><i class="fa fa-check"></i><b>4.6.3</b> Variable de resultado</a></li>
-<li class="chapter" data-level="4.6.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#regresión-vs.-clasificación"><i class="fa fa-check"></i><b>4.6.4</b> Regresión vs. clasificación</a></li>
+<li class="chapter" data-level="4.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#especificar-estética-adicional-para-puntos"><i class="fa fa-check"></i><b>4.3</b> Especificar estética adicional para puntos</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#añadiendo-más-estética-a-la-trama"><i class="fa fa-check"></i><b>4.3.1</b> Añadiendo más estética a la trama</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#ajuste-del-color-del-punto"><i class="fa fa-check"></i><b>4.3.2</b> Ajuste del color del punto</a></li>
+<li class="chapter" data-level="4.3.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#ajustar-el-tamaño-del-punto"><i class="fa fa-check"></i><b>4.3.3</b> Ajustar el tamaño del punto</a></li>
+<li class="chapter" data-level="4.3.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#establecer-la-estética-global-transparencia"><i class="fa fa-check"></i><b>4.3.4</b> Establecer la estética global: transparencia</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-un-gráfico-de-líneas-con-ggplot"><i class="fa fa-check"></i><b>4.4</b> Crea un gráfico de líneas con ggplot</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-lineales"><i class="fa fa-check"></i><b>4.4.1</b> Introducción a los gráficos lineales</a></li>
+<li class="chapter" data-level="4.4.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crear-un-gráfico-lineal-simple"><i class="fa fa-check"></i><b>4.4.2</b> Crear un gráfico lineal simple</a></li>
+<li class="chapter" data-level="4.4.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#agregar-más-líneas"><i class="fa fa-check"></i><b>4.4.3</b> Agregar más líneas</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crea-tu-primer-gráfico-de-barras"><i class="fa fa-check"></i><b>4.5</b> Crea tu primer gráfico de barras</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#introducción-a-los-gráficos-de-barras"><i class="fa fa-check"></i><b>4.5.1</b> Introducción a los gráficos de barras</a></li>
+<li class="chapter" data-level="4.5.2" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#crear-un-gráfico-de-barras-simple"><i class="fa fa-check"></i><b>4.5.2</b> Crear un gráfico de barras simple</a></li>
+<li class="chapter" data-level="4.5.3" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#llenado-de-barras-de-color"><i class="fa fa-check"></i><b>4.5.3</b> Llenado de barras de color</a></li>
+<li class="chapter" data-level="4.5.4" data-path="visualización-de-datos-con-ggplot2.html"><a href="visualización-de-datos-con-ggplot2.html#gráficos-de-barras-apiladas"><i class="fa fa-check"></i><b>4.5.4</b> Gráficos de barras apiladas</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html"><i class="fa fa-check"></i><b>5</b> Introducción a Machine Learning</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#inteligencia-artificial"><i class="fa fa-check"></i><b>5.1</b> Inteligencia artificial</a></li>
+<li class="chapter" data-level="5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#machine-learning-aprendizaje-automático"><i class="fa fa-check"></i><b>5.2</b> Machine Learning (Aprendizaje automático)</a></li>
+<li class="chapter" data-level="5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-profundo-deep-learning"><i class="fa fa-check"></i><b>5.3</b> Aprendizaje profundo (Deep Learning)</a></li>
+<li class="chapter" data-level="5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#casos-de-uso-populares"><i class="fa fa-check"></i><b>5.4</b> Casos de uso populares</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-motores-de-búsqueda-y-sistemas-de-recomendación"><i class="fa fa-check"></i><b>5.4.1</b> Caso de uso: motores de búsqueda y sistemas de recomendación</a></li>
+<li class="chapter" data-level="5.4.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-traducción-automática"><i class="fa fa-check"></i><b>5.4.2</b> Caso de uso: traducción automática</a></li>
+<li class="chapter" data-level="5.4.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-identificación-de-música-y-reconocimiento-de-voz"><i class="fa fa-check"></i><b>5.4.3</b> Caso de uso: identificación de música y reconocimiento de voz</a></li>
+<li class="chapter" data-level="5.4.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#caso-de-uso-coches-autónomos"><i class="fa fa-check"></i><b>5.4.4</b> Caso de uso: coches autónomos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#técnicas-de-machine-learning"><i class="fa fa-check"></i><b>5.5</b> Técnicas de Machine Learning</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado"><i class="fa fa-check"></i><b>5.5.1</b> Aprendizaje supervisado</a></li>
+<li class="chapter" data-level="5.5.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-objetivo"><i class="fa fa-check"></i><b>5.5.2</b> Aprendizaje supervisado: objetivo</a></li>
+<li class="chapter" data-level="5.5.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-no-supervisado"><i class="fa fa-check"></i><b>5.5.3</b> Aprendizaje no supervisado</a></li>
+<li class="chapter" data-level="5.5.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-reforzado"><i class="fa fa-check"></i><b>5.5.4</b> Aprendizaje reforzado</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-con-regresión-y-clasificación"><i class="fa fa-check"></i><b>5.6</b> Aprendizaje supervisado con regresión y clasificación</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#aprendizaje-supervisado-datos-de-entrada"><i class="fa fa-check"></i><b>5.6.1</b> Aprendizaje supervisado: datos de entrada</a></li>
+<li class="chapter" data-level="5.6.2" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#predictores"><i class="fa fa-check"></i><b>5.6.2</b> Predictores</a></li>
+<li class="chapter" data-level="5.6.3" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#variable-de-resultado"><i class="fa fa-check"></i><b>5.6.3</b> Variable de resultado</a></li>
+<li class="chapter" data-level="5.6.4" data-path="introducción-a-machine-learning.html"><a href="introducción-a-machine-learning.html#regresión-vs.-clasificación"><i class="fa fa-check"></i><b>5.6.4</b> Regresión vs. clasificación</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -270,20 +328,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">R en las Ciencias Agropecuarias</h1>
 <p class="author"><em>Franklin Santos</em></p>
-<p class="date"><em>2020-12-03</em></p>
+<p class="date"><em>2021-01-19</em></p>
 </div>
 <div id="bienvenido" class="section level1 unnumbered">
 <h1>Bienvenido</h1>
 <p><a href="https://www.franklinsantos.com"><img src="cover.jpg" width="250" height="328" align="right" alt="Cover image" /></a></p>
 <p>Bienvenido a <strong>R aplicada en las Ciencias Agropecuarias</strong>. El contenido del libro presenta ejemplos de análisis exploratorio de datos, estadística inferencial y modelos de regresión. Generalmente, se expone las metodologías mas usuales en un reporte de trabajos de investigación y/o tesis.</p>
 <p>Este libro es para aquellos que tienen poca o ninguna experiencia previa en programación en R o cualquier otro lenguaje de programación. Su objetivo es desarrollar los conceptos básicos y enseñarle las capacidades de R. Con la lectura y práctica, habrá adquirido una nueva habilidad valiosa para explorar conjuntos de datos y crear visualizaciones impresionantes.</p>
-<div id="prerequisites" class="section level2">
+<div id="prerequisites" class="section level2" number="0.1">
 <h2><span class="header-section-number">0.1</span> Prerequisites</h2>
 <p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
 <p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or the development version</span></span>
+<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
 <p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
 <p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
 
